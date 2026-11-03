@@ -59,7 +59,7 @@ static constexpr float PADDING_NARROW_GRID_COUNT = 1.0f;
 
 static constexpr float INFO_TEXT_MARQUEE_DELAY = 1.2f;
 
-static constexpr int32_t g_categoryCount = 4;
+static constexpr int32_t g_categoryCount = 5;
 static int32_t g_categoryIndex;
 static ImVec2 g_categoryAnimMin;
 static ImVec2 g_categoryAnimMax;
@@ -414,6 +414,7 @@ static void DrawContainer(ImVec2 min, ImVec2 max, bool drawRightOutline)
     drawList->PushClipRect({ min.x + gridSize * 2.0f, min.y + gridSize * 2.0f }, { max.x - gridSize * 2.0f + 1.0f, max.y - gridSize * 2.0f + 1.0f });
 }
 
+static std::string ap_string = "ARCHIPELAGO";
 static std::string& GetCategory(int index)
 {
     // TODO: Don't use raw numbers here!
@@ -423,6 +424,7 @@ static std::string& GetCategory(int index)
         case 1: return Localise("Options_Category_Input");
         case 2: return Localise("Options_Category_Audio");
         case 3: return Localise("Options_Category_Video");
+        case 4: return ap_string;
     }
 
     return g_localeMissing;
@@ -1284,6 +1286,9 @@ static void DrawConfigOptions()
             DrawConfigOption(rowCount++, yOffset, &Config::UIAlignmentMode, true);
 
             break;
+        }
+        case 4: { // ARCHPIELAGO
+        	// TODO :: AP OPTIONS
         }
     }
 

@@ -192,6 +192,10 @@ set(UNLEASHED_RECOMP_MOD_CXX_SOURCES
     "mod/mod_loader.cpp"
 )
 
+set(UNLEASHED_RECOMP_ARCHIPELAGO_CXX_SOURCES
+    "archipelago/archipelago.cpp"
+)
+
 set(UNLEASHED_RECOMP_THIRDPARTY_SOURCES
     "${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/imgui/backends/imgui_impl_sdl2.cpp"
     "${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/imgui/imgui.cpp"
@@ -243,6 +247,8 @@ set(UNLEASHED_RECOMP_CXX_SOURCES
     ${UNLEASHED_RECOMP_USER_CXX_SOURCES}
     ${UNLEASHED_RECOMP_MOD_CXX_SOURCES}
     ${UNLEASHED_RECOMP_THIRDPARTY_SOURCES}
+
+    ${UNLEASHED_RECOMP_ARCHIPELAGO_CXX_SOURCES}
 )
 
 include("version.cmake")
@@ -401,6 +407,7 @@ target_link_libraries(UnleashedRecomp PRIVATE
     xxHash::xxhash
     CURL::libcurl
     plume
+    APCpp
 )
 
 target_include_directories(UnleashedRecomp PRIVATE

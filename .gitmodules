@@ -58,3 +58,6 @@
 [submodule "thirdparty/plume"]
 	path = thirdparty/plume
 	url = https://github.com/renderbag/plume.git
+[submodule "thirdparty/APCpp"]
+	path = thirdparty/APCpp
+	url = https://github.com/N00byKing/APCpp.git

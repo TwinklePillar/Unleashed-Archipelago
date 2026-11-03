@@ -1153,3 +1153,9 @@ registers = ["f1"]
 name = "CEvilSonicContext_CStateWall_LeaveRotationMidAsmHook"
 address = 0x82406774
 registers = ["f1"]
+
+# Moon Medals
+[[midasm_hook]]
+name = "SWA_AP_MedalCountMidAsmHook"
+address = 0x8251AC28
+registers = ["r3", "r10", "r11"]

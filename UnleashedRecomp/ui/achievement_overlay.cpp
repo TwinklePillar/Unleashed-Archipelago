@@ -12,6 +12,8 @@
 #include <decompressor.h>
 #include <patches/inspire_patches.h>
 
+#include <archipelago/archipelago.h>
+
 constexpr double OVERLAY_CONTAINER_COMMON_MOTION_START = 0;
 constexpr double OVERLAY_CONTAINER_COMMON_MOTION_END = 11;
 constexpr double OVERLAY_CONTAINER_INTRO_FADE_START = 5;
@@ -114,6 +116,9 @@ static bool CanDequeueAchievement()
     return false;
 }
 
+bool g_isArchiAchievement{};
+std::string g_archiAchieveHeader{};
+
 void AchievementOverlay::Draw()
 {
     if (!AchievementOverlay::s_isVisible && CanDequeueAchievement())
@@ -121,7 +126,24 @@ void AchievementOverlay::Draw()
         s_isVisible = true;
         g_isClosing = false;
         g_appearTime = ImGui::GetTime();
-        g_achievement = g_xdbfWrapper.GetAchievement((EXDBFLanguage)Config::Language.Value, s_queue.front());
+        if (s_queue.front() == AP_MESSAGE_ACH) {
+            auto apMessage = ArchipelagoManager::messageQueue.front();
+            g_achievement = Achievement{
+                .ID=AP_MESSAGE_ACH,
+                .Name=apMessage.message,
+                .UnlockedDesc="",
+                .LockedDesc="",
+                .pImageBuffer=0,
+                .ImageBufferSize=0,
+                .Score=0,
+            };
+            g_archiAchieveHeader = apMessage.header;
+            g_isArchiAchievement = true;
+            ArchipelagoManager::messageQueue.pop();
+        } else {
+            g_achievement = g_xdbfWrapper.GetAchievement((EXDBFLanguage)Config::Language.Value, s_queue.front());
+            g_isArchiAchievement = false;
+        }
         s_queue.pop();
         
         if (Config::Language == ELanguage::English)
@@ -146,6 +168,9 @@ void AchievementOverlay::Draw()
     auto& res = ImGui::GetIO().DisplaySize;
 
     auto strAchievementUnlocked = Localise("Achievements_Unlock").c_str();
+    if (g_isArchiAchievement) {
+        strAchievementUnlocked = g_archiAchieveHeader.c_str();
+    }
     auto strAchievementName = g_achievement.Name.c_str();
 
     // Calculate text sizes.
@@ -173,7 +198,7 @@ void AchievementOverlay::Draw()
         if (!g_isClosing)
         {
             // Draw achievement icon.
-            drawList->AddImage
+            if (!g_isArchiAchievement) drawList->AddImage
             (
                 g_xdbfTextureCache[g_achievement.ID],                                                   // user_texture_id
                 { /* X */ min.x + imageMarginX, /* Y */ min.y + imageMarginY },                         // p_min

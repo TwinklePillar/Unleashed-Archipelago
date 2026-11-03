@@ -30,6 +30,8 @@ add_subdirectory("${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/SDL")
 add_subdirectory("${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/SDL_mixer")
 add_subdirectory("${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/plume")
 
+add_subdirectory("${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/APCpp")
+
 if (APPLE)
     add_subdirectory("${UNLEASHED_RECOMP_THIRDPARTY_ROOT}/MoltenVK")
 endif()

@@ -11,6 +11,8 @@
 #include <user/paths.h>
 #include <user/registry.h>
 
+#include <archipelago/archipelago.h>
+
 void App::Restart(std::vector<std::string> restartArgs)
 {
     os::process::StartProcess(os::process::GetExecutablePath(), restartArgs, os::process::GetWorkingDirectory());
@@ -75,6 +77,7 @@ PPC_FUNC(sub_822C1130)
 
     AudioPatches::Update(App::s_deltaTime);
     InspirePatches::Update();
+    ArchipelagoManager::Update(App::s_deltaTime);
 
     // Apply subtitles option.
     if (auto pApplicationDocument = SWA::CApplicationDocument::GetInstance())
@@ -94,4 +97,3 @@ PPC_FUNC(sub_822C1130)
 
     __imp__sub_822C1130(ctx, base);
 }
-

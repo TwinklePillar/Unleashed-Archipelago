@@ -11,6 +11,8 @@
 #include <app.h>
 #include <exports.h>
 
+#include <archipelago/archipelago.h>
+
 static bool g_installMessageOpen = false;
 static bool g_installMessageFaderBegun = false;
 static int g_installMessageResult = -1;
@@ -61,6 +63,7 @@ PPC_FUNC(sub_825882B8)
 
     auto pContext = pTitleStateMenu->GetContextBase<SWA::CTitleStateMenu::CTitleStateMenuContext>();
     auto isNewGameIndex = pContext->m_pTitleMenu->m_CursorIndex == 0;
+    auto isContinueIndex = pContext->m_pTitleMenu->m_CursorIndex == 1;
     auto isOptionsIndex = pContext->m_pTitleMenu->m_CursorIndex == 2;
     auto isInstallIndex = pContext->m_pTitleMenu->m_CursorIndex == 3;
 
@@ -68,6 +71,10 @@ PPC_FUNC(sub_825882B8)
     if (App::s_isSaveDataCorrupt && pContext->m_pTitleMenu->m_CursorIndex == 1)
         pContext->m_pTitleMenu->m_CursorIndex = 0;
 
+    if (isAccepted && (isNewGameIndex || isContinueIndex)) {
+    	ArchipelagoManager::ConnectToArchipelago();
+    }
+    
     if (isNewGameIndex && isAccepted)
     {
         if (pContext->m_pTitleMenu->m_IsDeleteCheckMessageOpen &&

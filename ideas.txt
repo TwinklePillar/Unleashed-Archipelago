@@ -1,0 +1,67 @@
+Level IDs
+    Apotos Hub (Day): 60010
+    Apotos Hub (Night): 61010
+    Apotos Entrance Field: 60020
+    Windmill Isle Day Act 1: 60090
+    Windmill Isle Day Act 2: 60040
+    Windmill Isle Day Act 3: 60050
+    Windmill Isle Night Act 1: 61040
+    Windmill Isle Night Act 2: 61050
+    
+    Mazuri Hub (Day): 10010
+    Mazuri Hub (Night): 11010
+    Mazuri Entrance Field: 10020
+    Savannah Citadel Day Act 1: 10040
+    Savannah Citadel Day Act 2: 10050
+    Savannah Citadel Day Act 3: 10070
+    Savannah Citadel Night Act 1: 11040
+    Savannah Citadel Night Act 2: 11050
+    
+    Spagonia Hub (Day): 50010
+    Spagonia Hub (Night): 51010
+    Spagonia Entrance Field: 50020
+    Rooftop Run Day Act 1: 50040
+    Rooftop Run Day Act 2: 50050
+    Rooftop Run Day Act 3: 50060
+    Rooftop Run Night Act 1: 51040
+    
+    Holoska Hub (Day): 90010
+    Holoska Hub (Night): 91010
+    Holoska Entrance Field: 90020
+    Cool Edge Day Act 1: 90040
+    Cool Edge Day Act 2: 90050
+    Cool Edge Night Act 1: 91040
+    
+    Chun-nan Hub (Day): 30010
+    Chun-nan Hub (Night): 31010
+    Chun-nan Entrance Field: 30020
+    Dragon Road Day Act 1: 30040
+    Dragon Road Day Act 2: 30070
+    Dragon Road Day Act 3: 30110
+    Dragon Road Night Act 1: 31040
+    Dragon Road Night Act 2: 31050
+    
+    Shamar Hub (Day): 80010
+    Shamar Hub (Night): 81010
+    Shamar Entrance Field: 80020
+    Arid Sands Day Act 1: 80040
+    Arid Sands Day Act 2: 80070
+    Arid Sands Night Act 1: 81040
+    
+    Empire City Hub (Day): 70010
+    Empire City Hub (Night): 71010
+    Empire City Entrance Field: 70020
+    Skyscraper Scamper Day Act 1: 70040
+    Skyscraper Scamper Day Act 2: 70050
+    Skyscraper Scamper Night Act 1: 71040
+    
+    Adabat Hub (Day): 20010
+    Adabat Hub (Night): 21010
+    Adabat Entrance Field: 20020
+    Jungle Joyride Day Act 1: 20040
+    Jungle Joyride Day Act 2: 20060
+    Jungle Joyride Day Act 3: 20110
+    Jungle Joyride Night Act 1: 21040
+    Jungle Joyride Night Act 2: 21050
+    
+    Eggmanland Hub: 40010
