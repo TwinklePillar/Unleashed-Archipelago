@@ -6,15 +6,14 @@ class ProgressionMode(Choice):
 	"""
 	How should the game progress?
 
-	Story: You play through the story like in vanilla
 	Hub Rando: Each hub is put into the item pool
 	"""
 	display_name = "Progression Mode"
 
-	option_story = 0
+#	option_story = 0
 	option_hub_rando = 1
 
-	default = option_story
+	default = option_hub_rando
 
 class ActShuffle(Toggle):
 	"""

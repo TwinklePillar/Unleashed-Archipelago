@@ -3,6 +3,8 @@
 #define AP_MESSAGE_ACH 12407
 #define AP_ITEM_MAX 512
 
+namespace SWAAP {
+
 struct ArchipelagoMessage {
     std::string header;
     std::string message;
@@ -16,7 +18,7 @@ enum APMessageType {
 };
 
 class ArchipelagoManager {
-	private:
+	public:
 		static void ItemClearCallback();
 		static void ItemRecvCallback(int64_t item, bool notify);
 		static void LocationCheckCallback(int64_t location);
@@ -27,8 +29,6 @@ class ArchipelagoManager {
 
 		static int version;
 		static int progressionMode;
-	
-    public:
 		static int64_t itemState[AP_ITEM_MAX];
 		static std::map<const char*, const char*> actOrder;
         static inline std::queue<ArchipelagoMessage> messageQueue;
@@ -37,3 +37,5 @@ class ArchipelagoManager {
         static void ConnectToArchipelago();
         static void DisconnectFromArchipelago();
 };
+
+}

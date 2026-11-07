@@ -35,10 +35,10 @@
 	"stages": [
 		{"name": "Apotos Hub", "type": "hub", "file": "", "checks": [], "sub": [
 			{"stage": "Windmill Isle Day Act 1", "evil": 0, "level": 1, "req": []},
-			{"stage": "Windmill Isle Day Act 2", "evil": 0, "level": 1, "req": ["Windmill Isle Day Act 1"]},
-			{"stage": "Windmill Isle Day Act 3", "evil": 0, "level": 3, "req": ["Windmill Isle Day Act 1"]},
+			{"stage": "Windmill Isle Day Act 2", "evil": 0, "level": 1, "req": []},
+			{"stage": "Windmill Isle Day Act 3", "evil": 0, "level": 3, "req": []},
 			{"stage": "Windmill Isle Night Act 1", "evil": 1, "level": 1, "req": []},
-			{"stage": "Windmill Isle Night Act 2", "evil": 1, "level": 3, "req": ["Windmill Isle Night Act 1"]}
+			{"stage": "Windmill Isle Night Act 2", "evil": 1, "level": 3, "req": []}
 		]},
 		{"name": "Windmill Isle Day Act 1", "type": "stage", "file": "MykonosDayTutorial", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 60090000, "req": []}
@@ -58,11 +58,11 @@
 		
 		{"name": "Mazuri Hub", "type": "hub", "file": "", "checks": [], "sub": [
 			{"stage": "Savannah Citadel Day Act 1", "evil": 0, "level": 1, "req": []},
-			{"stage": "Savannah Citadel Day Act 2", "evil": 0, "level": 3, "req": ["Savannah Citadel Day Act 1"]},
-			{"stage": "Savannah Citadel Day Act 3", "evil": 0, "level": 3, "req": ["Savannah Citadel Day Act 1"]},
+			{"stage": "Savannah Citadel Day Act 2", "evil": 0, "level": 3, "req": []},
+			{"stage": "Savannah Citadel Day Act 3", "evil": 0, "level": 3, "req": []},
 			{"stage": "Savannah Citadel Night Act 1", "evil": 1, "level": 1, "req": []},
-			{"stage": "Savannah Citadel Night Act 2", "evil": 1, "level": 3, "req": ["Savannah Citadel Night Act 1"]},
-			{"stage": "Egg Beetle", "evil": 0, "level": 1, "req": ["Savannah Citadel Day Act 1"]}
+			{"stage": "Savannah Citadel Night Act 2", "evil": 1, "level": 3, "req": []},
+			{"stage": "Egg Beetle", "evil": 0, "level": 1, "req": []}
 		]},
 		{"name": "Savannah Citadel Day Act 1", "type": "stage", "file": "AfricaDayAction", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 10040000, "req": []}
@@ -87,10 +87,10 @@
 		    {"name": "Wall Jump Shoes", "sanity": "base", "id": 32773, "req": ["Stomping Shoes"]}
 		], "sub": [
 			{"stage": "Rooftop Run Day Act 1", "evil": 0, "level": 3, "req": ["Wall Jump Shoes"]},
-			{"stage": "Rooftop Run Day Act 2", "evil": 0, "level": 4, "req": ["Rooftop Run Day Act 1"]},
-			{"stage": "Rooftop Run Day Act 3", "evil": 0, "level": 4, "req": ["Rooftop Run Day Act 1", "Wall Jump Shoes"]},
+			{"stage": "Rooftop Run Day Act 2", "evil": 0, "level": 4, "req": []},
+			{"stage": "Rooftop Run Day Act 3", "evil": 0, "level": 4, "req": ["Wall Jump Shoes"]},
 			{"stage": "Rooftop Run Night Act 1", "evil": 1, "level": 2, "req": []},
-			{"stage": "Egg Devil Ray", "evil": 0, "level": 3, "req": ["Rooftop Run Day Act 1"]}
+			{"stage": "Egg Devil Ray", "evil": 0, "level": 3, "req": []}
 		]},
 		{"name": "Rooftop Run Day Act 1", "type": "stage", "file": "EUDayAction", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 50040000, "req": ["Wall Jump Shoes"]}
@@ -112,9 +112,9 @@
 		    {"name": "Stomping Shoes", "sanity": "base", "id": 32772, "req": []}
 		], "sub": [
 			{"stage": "Cool Edge Day Act 1", "evil": 0, "level": 2, "req": ["Stomping Shoes"]},
-			{"stage": "Cool Edge Day Act 2", "evil": 0, "level": 4, "req": ["Cool Edge Day Act 1"]},
+			{"stage": "Cool Edge Day Act 2", "evil": 0, "level": 4, "req": []},
 			{"stage": "Cool Edge Night Act 1", "evil": 1, "level": 4, "req": []},
-			{"stage": "Dark Moray", "evil": 1, "level": 4, "req": ["Cool Edge Night Act 1"]}
+			{"stage": "Dark Moray", "evil": 1, "level": 4, "req": []}
 		]},
 		{"name": "Cool Edge Day Act 1", "type": "stage", "file": "SnowDayAction", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 90040000, "req": ["Stomping Shoes"]}
@@ -133,11 +133,11 @@
 		    {"name": "Air Boost Shoes", "sanity": "base", "id": 32774, "req": ["Wall Jump Shoes"]}
 		], "sub": [
 			{"stage": "Dragon Road Day Act 1", "evil": 0, "level": 4, "req": ["Wall Jump Shoes", "Air Boost Shoes"]},
-			{"stage": "Dragon Road Day Act 2", "evil": 0, "level": 4, "req": ["Dragon Road Day Act 1"]},
-			{"stage": "Dragon Road Day Act 3", "evil": 0, "level": 5, "req": ["Dragon Road Day Act 1"]},
+			{"stage": "Dragon Road Day Act 2", "evil": 0, "level": 4, "req": []},
+			{"stage": "Dragon Road Day Act 3", "evil": 0, "level": 5, "req": []},
 			{"stage": "Dragon Road Night Act 1", "evil": 1, "level": 2, "req": []},
-			{"stage": "Dragon Road Night Act 2", "evil": 1, "level": 3, "req": ["Dragon Road Night Act 1"]},
-			{"stage": "Dark Gaia Phoenix", "evil": 1, "level": 2, "req": ["Dragon Road Night Act 1"]}
+			{"stage": "Dragon Road Night Act 2", "evil": 1, "level": 3, "req": []},
+			{"stage": "Dark Gaia Phoenix", "evil": 1, "level": 2, "req": []}
 		]},
 		{"name": "Dragon Road Day Act 1", "type": "stage", "file": "ChinaDayAction", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 30040000, "req": []}
@@ -162,9 +162,9 @@
 		    {"name": "Light Dash Shoes", "sanity": "base", "id": 32775, "req": []}
 		], "sub": [
 			{"stage": "Arid Sands Day Act 1", "evil": 0, "level": 4, "req": ["Light Dash Shoes"]},
-			{"stage": "Arid Sands Day Act 2", "evil": 0, "level": 4, "req": ["Arid Sands Day Act 1"]},
+			{"stage": "Arid Sands Day Act 2", "evil": 0, "level": 4, "req": []},
 			{"stage": "Arid Sands Night Act 1", "evil": 1, "level": 6, "req": []},
-			{"stage": "Dark Guardian", "evil": 1, "level": 6, "req": ["Arid Sands Night Act 1"]}
+			{"stage": "Dark Guardian", "evil": 1, "level": 6, "req": []}
 		]},
 		{"name": "Arid Sands Day Act 1", "type": "stage", "file": "PetraDayAction", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 80040000, "req": ["Wall Jump Shoes"]}
@@ -181,7 +181,7 @@
 
 		{"name": "Empire City Hub", "type": "hub", "file": "", "checks": [], "sub": [
 			{"stage": "Skyscraper Scamper Day Act 1", "evil": 0, "level": 5, "req": []},
-			{"stage": "Skyscraper Scamper Day Act 2", "evil": 0, "level": 5, "req": ["Skyscraper Scamper Day Act 1", "Air Boost Shoes"]},
+			{"stage": "Skyscraper Scamper Day Act 2", "evil": 0, "level": 5, "req": ["Air Boost Shoes"]},
 			{"stage": "Skyscraper Scamper Night Act 1", "evil": 1, "level": 5, "req": []}
 		]},
 		{"name": "Skyscraper Scamper Day Act 1", "type": "stage", "file": "NYDayAction", "checks": [
@@ -196,11 +196,11 @@
 
 		{"name": "Adabat Hub", "type": "hub", "file": "", "checks": [], "sub": [
 			{"stage": "Jungle Joyride Day Act 1", "evil": 0, "level": 7, "req": []},
-			{"stage": "Jungle Joyride Day Act 2", "evil": 0, "level": 7, "req": ["Jungle Joyride Day Act 1"]},
-			{"stage": "Jungle Joyride Day Act 3", "evil": 0, "level": 7, "req": ["Jungle Joyride Day Act 1"]},
+			{"stage": "Jungle Joyride Day Act 2", "evil": 0, "level": 5, "req": []},
+			{"stage": "Jungle Joyride Day Act 3", "evil": 0, "level": 4, "req": []},
 			{"stage": "Jungle Joyride Night Act 1", "evil": 1, "level": 5, "req": []},
-			{"stage": "Jungle Joyride Night Act 2", "evil": 1, "level": 5, "req": ["Jungle Joyride Night Act 1"]},
-			{"stage": "Egg Lancer", "evil": 0, "level": 7, "req": ["Jungle Joyride Day Act 1"]}
+			{"stage": "Jungle Joyride Night Act 2", "evil": 1, "level": 5, "req": []},
+			{"stage": "Egg Lancer", "evil": 0, "level": 7, "req": []}
 		]},
 		{"name": "Jungle Joyride Day Act 1", "type": "stage", "file": "BeachDayAction", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 20040000, "req": ["Stomping Shoes", "Wall Jump Shoes"]}
@@ -222,9 +222,9 @@
 		]},
 		
 		{"name": "Eggmanland Hub", "type": "hub", "file": "", "checks": [], "sub": [
-		    {"stage": "Eggmanland", "evil": 0, "level": 7, "req": []},
-			{"stage": "Egg Dragoon", "evil": 1, "level": 6, "req": ["Eggmanland"]},
-			{"stage": "Dark Gaia", "evil": 0, "level": 7, "req": ["Egg Dragoon"]}
+		    {"stage": "Eggmanland", "evil": 0, "level": 1, "req": []},
+			{"stage": "Egg Dragoon", "evil": 1, "level": 1, "req": []},
+			{"stage": "Dark Gaia", "evil": 0, "level": 1, "req": []}
 		]},
 		{"name": "Eggmanland", "type": "unshuffled_stage", "file": "", "checks": [
 		    {"name": "Completion", "sanity": "base", "id": 40040000, "req": ["Stomping Shoes"]}

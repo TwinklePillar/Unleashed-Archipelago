@@ -127,7 +127,7 @@ void AchievementOverlay::Draw()
         g_isClosing = false;
         g_appearTime = ImGui::GetTime();
         if (s_queue.front() == AP_MESSAGE_ACH) {
-            auto apMessage = ArchipelagoManager::messageQueue.front();
+            auto apMessage = SWAAP::ArchipelagoManager::messageQueue.front();
             g_achievement = Achievement{
                 .ID=AP_MESSAGE_ACH,
                 .Name=apMessage.message,
@@ -139,7 +139,7 @@ void AchievementOverlay::Draw()
             };
             g_archiAchieveHeader = apMessage.header;
             g_isArchiAchievement = true;
-            ArchipelagoManager::messageQueue.pop();
+            SWAAP::ArchipelagoManager::messageQueue.pop();
         } else {
             g_achievement = g_xdbfWrapper.GetAchievement((EXDBFLanguage)Config::Language.Value, s_queue.front());
             g_isArchiAchievement = false;

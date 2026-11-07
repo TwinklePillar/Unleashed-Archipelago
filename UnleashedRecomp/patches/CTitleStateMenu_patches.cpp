@@ -72,7 +72,7 @@ PPC_FUNC(sub_825882B8)
         pContext->m_pTitleMenu->m_CursorIndex = 0;
 
     if (isAccepted && (isNewGameIndex || isContinueIndex)) {
-    	ArchipelagoManager::ConnectToArchipelago();
+    	SWAAP::ArchipelagoManager::ConnectToArchipelago();
     }
     
     if (isNewGameIndex && isAccepted)

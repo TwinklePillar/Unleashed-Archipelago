@@ -115,11 +115,10 @@ class LocationState:
 			world.create_entrance(menu_region, world.get_region("Shamar Hub"), Has(HUB_UNLOCK_SHAMAR))
 			world.create_entrance(menu_region, world.get_region("Empire City Hub"), Has(HUB_UNLOCK_EMPIRE_CITY))
 			world.create_entrance(menu_region, world.get_region("Adabat Hub"), Has(HUB_UNLOCK_ADABAT))
-			world.create_entrance(menu_region, world.get_region("Eggmanland Hub"), Has(HUB_UNLOCK_EGGMANLAND))
-		
-		world.set_rule(world.get_entrance("Eggmanland Hub -> Dark Gaia"),
-			HasAll(BLUE_CHAOS_EMERALD, RED_CHAOS_EMERALD, PURPLE_CHAOS_EMERALD, CYAN_CHAOS_EMERALD, GREEN_CHAOS_EMERALD, YELLOW_CHAOS_EMERALD, WHITE_CHAOS_EMERALD)
-		)
+			world.create_entrance(menu_region, world.get_region("Eggmanland Hub"), Has(HUB_UNLOCK_EGGMANLAND) &
+				HasAll(BLUE_CHAOS_EMERALD, RED_CHAOS_EMERALD, PURPLE_CHAOS_EMERALD, CYAN_CHAOS_EMERALD, GREEN_CHAOS_EMERALD, YELLOW_CHAOS_EMERALD, WHITE_CHAOS_EMERALD) &
+				Has(PROGRESSIVE_SUN_LEVEL, 6) & Has(PROGRESSIVE_MOON_LEVEL, 5)
+			)
 		world.get_location("Dark Gaia - Completion").place_locked_item(world.create_item(THE_WORLD_REPAIRED))
 		menu_region.add_event(
 			"Defeat Dark Gaia", THE_WORLD_REPAIRED,

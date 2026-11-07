@@ -77,7 +77,7 @@ PPC_FUNC(sub_822C1130)
 
     AudioPatches::Update(App::s_deltaTime);
     InspirePatches::Update();
-    ArchipelagoManager::Update(App::s_deltaTime);
+    SWAAP::ArchipelagoManager::Update(App::s_deltaTime);
 
     // Apply subtitles option.
     if (auto pApplicationDocument = SWA::CApplicationDocument::GetInstance())

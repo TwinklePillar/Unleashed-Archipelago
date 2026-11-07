@@ -51,7 +51,7 @@ class ItemState:
 				precollect.append(i)
 		
 		if world.progression_mode == 1:
-			free_hub = world.random.choice((HUB_UNLOCK_APOTOS, HUB_UNLOCK_MAZURI))
+			free_hub = HUB_UNLOCK_APOTOS
 			for i in (
 				HUB_UNLOCK_APOTOS,
 				HUB_UNLOCK_MAZURI,
