@@ -9,15 +9,16 @@ class SWALocation(Location):
 class LocationState:
 	def __init__(self):
 		self.er_regions = []
-		self.sanities = ["base"]
+		self.sanities = ["complete", "shoe"]
 		self.regen = False
-		self.act_order = {}
+		self.act_levels = {}
 
 	def setup_regions(self, world):
 		menu_region = Region("Menu", world.player, world.multiworld)
 		world.multiworld.regions.append(menu_region)
 
 		hubs = []
+		free_hub = ()
 		sphere_zero_stages = []
 		all_stages = []
 		all_stages_unshuffled = []
@@ -35,38 +36,51 @@ class LocationState:
 							rule = rule & Has(req)
 						else:
 							rule = rule & Has(f"{req} Complete")
-					print(rule)
 					world.set_rule(world.get_location(check_name), rule)
 					if check["name"] == "Completion" and len(check["req"]) == 0:
 						sphere_zero_stages.append(stage["name"])
 			
 			if stage["type"] == "hub":
 				hubs.append((stage, stage_region))
+				if stage["name"] == "Apotos Hub" and world.free_hub == HUB_UNLOCK_APOTOS: free_hub = (stage, stage_region)
+				if stage["name"] == "Mazuri Hub" and world.free_hub == HUB_UNLOCK_MAZURI: free_hub = (stage, stage_region)
+				if stage["name"] == "Spagonia Hub" and world.free_hub == HUB_UNLOCK_SPAGONIA: free_hub = (stage, stage_region)
+				if stage["name"] == "Chun-Nan Hub" and world.free_hub == HUB_UNLOCK_CHUNNAN: free_hub = (stage, stage_region)
+				if stage["name"] == "Holoska Hub" and world.free_hub == HUB_UNLOCK_HOLOSKA: free_hub = (stage, stage_region)
+				if stage["name"] == "Shamar Hub" and world.free_hub == HUB_UNLOCK_SHAMAR: free_hub = (stage, stage_region)
+				if stage["name"] == "Empire City Hub" and world.free_hub == HUB_UNLOCK_EMPIRE_CITY: free_hub = (stage, stage_region)
+				if stage["name"] == "Adabat Hub" and world.free_hub == HUB_UNLOCK_ADABAT: free_hub = (stage, stage_region)
 				continue
 			if stage["type"] == "stage":
 				all_stages.append(stage["name"])
 				all_stages_unshuffled.append(stage["name"])
 			else:
 				unshuffled_stages.append(stage["name"])
-		
-		if not self.regen:
-			if world.act_shuffle:
-				world.random.shuffle(sphere_zero_stages)
-				for i in sphere_zero_stages[:2]:
-					all_stages.remove(i)
-				world.random.shuffle(all_stages)
-				all_stages = sphere_zero_stages[:2] + all_stages
 
-			for stage in apshared["stages"]:
-				if stage["name"] in all_stages:
-					self.act_order[str(all_stages_unshuffled.index(stage["name"]))] = all_stages.index(stage["name"])
-		else:
-			for key in self.act_order.keys():
-				all_stages[self.act_order[key]] = all_stages_unshuffled[int(key)]
+		level_weights = [0, 4, 4, 3, 3, 2, 2, 1]
+		levels = []
+		for i in range(len(level_weights)):
+			for j in range(level_weights[i]):
+				levels.append(i)
+		if not self.regen:
+			if world.random_act_levels:
+				free_stages = []
+				for sub in free_hub[0]["sub"]:
+					free_stages.append(sub["stage"])
+				world.random.shuffle(free_stages)
+				free_stages = free_stages[:2]
+				for i in range(len(all_stages_unshuffled)):
+					if all_stages_unshuffled[i] in free_stages:
+						self.act_levels[str(i)] = 1
+					else:
+						self.act_levels[str(i)] = world.random.choice(levels)
+			else:
+				for i in range(len(all_stages_unshuffled)):
+					self.act_levels[str(i)] = -1
 		
-		world.spoiler_text += f"Act Order for {world.multiworld.player_name[world.player]}:\n"
+		world.spoiler_text += f"Act Levels for {world.multiworld.player_name[world.player]}:\n"
 		for i in range(len(all_stages)):
-			world.spoiler_text += f"\t{all_stages_unshuffled[i]} -> {all_stages[i]}\n"
+			world.spoiler_text += f"\t{all_stages_unshuffled[i]} -> {self.act_levels[str(i)]} ({'Moon' if 'Night' in all_stages_unshuffled[i] else 'Sun'})\n"
 		
 		for stage in unshuffled_stages:
 			all_stages.append(stage)
@@ -83,9 +97,15 @@ class LocationState:
 				)
 				hub[1].connect(stage_region)
 				enter = world.get_entrance(f"{hub[1].name} -> {stage_region.name}")
-				if sub["level"] > 1:
-					if sub["evil"]: rule = Has(PROGRESSIVE_MOON_LEVEL, sub["level"]-1)
-					else: rule = Has(PROGRESSIVE_SUN_LEVEL, sub["level"]-1)
+				index = str(all_stages_unshuffled.index(sub["stage"]))
+				if index in self.act_levels:
+					level = self.act_levels[index]
+				else:
+					level = -1
+				if (level == -1): level = sub["level"]
+				if level > 1:
+					if sub["evil"]: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
+					else: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
 				else:
 					rule = True_()
 				for req in sub["req"]:

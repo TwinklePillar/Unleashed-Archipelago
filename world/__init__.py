@@ -5,7 +5,17 @@ from .items import ItemState
 from .locations import LocationState
 from .options import SWAOptions
 
-from .apshared import apshared
+from .apshared import (
+	apshared,
+	HUB_UNLOCK_APOTOS,
+	HUB_UNLOCK_MAZURI,
+	HUB_UNLOCK_SPAGONIA,
+	HUB_UNLOCK_HOLOSKA,
+	HUB_UNLOCK_CHUNNAN,
+	HUB_UNLOCK_SHAMAR,
+	HUB_UNLOCK_EMPIRE_CITY,
+	HUB_UNLOCK_ADABAT
+)
 from .apshared import location_name_to_id as lname_to_id
 from .apshared import item_name_to_id as iname_to_id
 
@@ -27,8 +37,8 @@ class SWAWorld(World):
 	def generate_early(self):
 		self.spoiler_text = ""
 		self.progression_mode = self.options.progression_mode.value
-		self.act_shuffle = self.options.act_shuffle.value
-		self.item_state.no_medal_requirements = self.options.no_medal_requirements.value
+		self.random_act_levels = self.options.random_act_levels.value
+#		self.item_state.no_medal_requirements = self.options.no_medal_requirements.value
 		self.item_state.chaos_emeralds = self.options.chaos_emeralds.value
 		
 		self.location_state.regen = False
@@ -37,9 +47,19 @@ class SWAWorld(World):
 			slot_data = re_gen_passthrough[self.game]
 			self.progression_mode = slot_data["progression_mode"]
 			self.location_state.sanities = slot_data["sanities"]
-			self.location_state.act_order = slot_data["act_order"]
+			self.location_state.act_levels = slot_data["act_levels"]
 			self.location_state.regen = True
 			return
+
+		self.free_hub = self.random.choice((
+			HUB_UNLOCK_APOTOS,
+			HUB_UNLOCK_MAZURI,
+			HUB_UNLOCK_SPAGONIA,
+			HUB_UNLOCK_HOLOSKA,
+			HUB_UNLOCK_CHUNNAN,
+			HUB_UNLOCK_SHAMAR,
+			HUB_UNLOCK_ADABAT
+		))
 
 	def create_regions(self):
 		self.location_state.setup_regions(self)
@@ -61,7 +81,7 @@ class SWAWorld(World):
 			"version": apshared["version"],
 			"sanities": self.location_state.sanities,
 			"progression_mode": self.progression_mode,
-			"act_order": self.location_state.act_order
+			"act_levels": self.location_state.act_levels
 		}
 
 	@staticmethod

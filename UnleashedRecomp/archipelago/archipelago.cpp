@@ -3,7 +3,6 @@
 #include <filesystem>
 #include <format>
 #include <Archipelago.h>
-#include <iostream>
 #include <cstdio>
 
 #include <ui/achievement_overlay.h>
@@ -12,9 +11,7 @@
 #include <user/paths.h>
 #include <ui/message_window.h>
 
-#include "SWA/System/GameDocument.h"
 #include "apshared.h"
-#include "kernel/memory.h"
 
 namespace SWAAP {
 
@@ -62,8 +59,9 @@ class FlagManager {
 
 int ArchipelagoManager::version;
 int ArchipelagoManager::progressionMode;
-std::map<const char*, const char*> ArchipelagoManager::actOrder;
-int64_t ArchipelagoManager::itemState[AP_ITEM_MAX];
+std::map<std::string, int> ArchipelagoManager::actLevels;
+int ArchipelagoManager::itemState[AP_ITEM_MAX];
+bool ArchipelagoManager::hasInit;
 
 static SaveData g_lastSaveData{};
 static double elapsed = -1;
@@ -71,6 +69,13 @@ static auto lastFlags = std::map<const char*, uint32_t>();
 
 static auto excludedIndices = std::set<int>();
 static auto indexStat = std::filesystem::file_time_type();
+
+static void debugMsg(std::string buf) {
+	if (std::filesystem::exists(GetUserPath() / "indices.txt") && ArchipelagoManager::hasInit) {
+		AP_Say(buf);
+		ArchipelagoManager::DisplayMessage(APMessageType::MEMORY_DEBUG, buf);
+	}
+}
 
 static void watchFlags(hh::vector<FlagManager::RegisteredFlag> flags) {
 	for (auto cur = flags.begin(); cur < flags.end(); cur++) {
@@ -84,8 +89,7 @@ static void watchFlags(hh::vector<FlagManager::RegisteredFlag> flags) {
 				}
 				char buf[256] = {0};
 				snprintf(buf, 256, "(FLAG) %s: %u -> %u", cur->flag->name.get(), oldV, newV);
-				AP_Say(buf);
-				ArchipelagoManager::DisplayMessage(APMessageType::MEMORY_DEBUG, buf);
+				debugMsg(buf);
 				lastFlags[cur->flag->name.get()] = cur->flag->value;
 			}
 		} else lastFlags.emplace(cur->flag->name.get(), cur->flag->value);
@@ -126,6 +130,12 @@ static void setListFlag(const char* name, bool value) {
 }
 
 static void setupFlags(void) {
+	setIntFlag("iFlag_TownSecNo", 270);
+	setIntFlag("iFlag_ProfInfo_State", 101);
+	setIntFlag("iFlag_Tails", 9);
+	setIntFlag("iFlag_Rin", 2);
+	setListFlag("eFlag_ReturnPlace", 2);
+	
 	FlagManager* fm = FlagManager::GetInstance();
 	for (auto cur = fm->bFlag.begin(); cur < fm->bFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
@@ -135,12 +145,32 @@ static void setupFlags(void) {
 		if (!strncmp(flagName, "bFlag_IsVisit", 13)) {
 			cur->flag->value = false;
 		}
+		if (!strncmp(flagName, "bFlag_Event", 11)) {
+			cur->flag->value = true;
+		}
+		if (!strncmp(flagName, "bFlag_IsStageOpen", 17)) {
+			cur->flag->value = true;
+		}
+		if (!strncmp(flagName, "bFlag_BossOpen", 14)) {
+			cur->flag->value = true;
+		}
+		if (!strncmp(flagName, "bFlag_IsStageRescue", 19)) {
+			cur->flag->value = false;
+		}
 	}
+	setBoolFlag("bFlag_IsVisitWorldMap", true);
+}
+
+static void resetWatchers() {
+	lastFlags.clear();
+	auto appdoc = SWA::CApplicationDocument::GetInstance();
+	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
+	memcpy(&g_lastSaveData, save, sizeof(SaveData));
 }
 
 void ArchipelagoManager::Update(double dt) {
 	auto dataPath = GetUserPath() / "indices.txt";
-	if (std::filesystem::exists(dataPath)) {
+	if (std::filesystem::exists(dataPath) && hasInit) {
 		elapsed += dt;
 		if (elapsed > 1) {
 			elapsed -= 1;
@@ -162,19 +192,23 @@ void ArchipelagoManager::Update(double dt) {
 	
 	auto appdoc = SWA::CApplicationDocument::GetInstance();
 	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
-	if (g_lastSaveData.records[0].StageID != 0xEABA) {
-		memcpy(&g_lastSaveData, save, sizeof(SaveData));
-	}
+//	printf("AppDoc @ %p\n", appdoc);
+//	printf("AppDoc Member @ %p\n", appdoc->m_pMember.get());
+//	printf("GameParameter @ %p\n", appdoc->m_pMember->m_spGameParameter.get());
+//	printf("Save Data @ %p\n", save);
 	
-//	FlagManager* flags = FlagManager::GetInstance();
-//	watchFlags(flags->eFlag);
-//	watchFlags(flags->iFlag);
-//	watchFlags(flags->bFlag);
+	if (std::filesystem::exists(dataPath) && hasInit) {
+		FlagManager* flags = FlagManager::GetInstance();
+		watchFlags(flags->eFlag);
+		watchFlags(flags->iFlag);
+		watchFlags(flags->bFlag);
+	}
 	
 	for (int i = 0; i < 512; i++) {
 		auto lastStage = g_lastSaveData.records[i];
 		auto curStage = save->records[i];
-	//	if (lastStage.StageID != curStage.StageID) DisplayMessage(APMessageType::MEMORY_DEBUG, std::format<int>("New Stage: {0}", curStage.StageID));
+		if (lastStage.Time == 0) continue;
+		if (lastStage.StageID != curStage.StageID) debugMsg(std::format<int>("New Stage: {0}", curStage.StageID));
 		if (lastStage.MoonBits != curStage.MoonBits) {
 			int changedBit = 0;
 			uint32_t lastBit = lastStage.MoonBits;
@@ -187,7 +221,8 @@ void ArchipelagoManager::Update(double dt) {
 				lastBit >>= 1;
 				curBit >>= 1;
 			}
-	//		DisplayMessage(APMessageType::SENT_ITEM, std::format<int>("Moon Medal {0}:{1}", curStage.StageID, changedBit));
+			debugMsg( std::format<int>("Moon Medal {0}:{1}", curStage.StageID, changedBit));
+			AP_SendItem(curStage.StageID * 1000 + 20 + changedBit);
 		}
 		if (lastStage.SunBits != curStage.SunBits) {
 			int changedBit = 0;
@@ -201,7 +236,8 @@ void ArchipelagoManager::Update(double dt) {
 				lastBit >>= 1;
 				curBit >>= 1;
 			}
-	//		DisplayMessage(APMessageType::SENT_ITEM, std::format<int>("Sun Medal {0}:{1}", curStage.StageID, changedBit));
+			debugMsg(std::format<int>("Sun Medal {0}:{1}", curStage.StageID, changedBit));
+			AP_SendItem(curStage.StageID * 1000 + 60 + changedBit);
 		}
 		if (lastStage.Time != curStage.Time) {
 			AP_SendItem(curStage.StageID * 1000);
@@ -226,14 +262,15 @@ void ArchipelagoManager::Update(double dt) {
 		AP_SendItem(32775);
 	}
 
-	for (int i = 0; i < sizeof(SaveData); i++) {
-		if (excludedIndices.contains(i)) continue;
-		uint8_t prev = ((uint8_t*)&g_lastSaveData)[i];
-		uint8_t cur = prev;//((uint8_t*)save)[i];
-		if (prev != cur) {
-			auto str = std::format("(SAVE) {0}: {1} -> {2}", i, prev, cur);
-			AP_Say(str);
-			DisplayMessage(APMessageType::MEMORY_DEBUG, str);
+	if (std::filesystem::exists(dataPath) && hasInit) {
+		for (int i = 0; i < sizeof(SaveData); i++) {
+			if (excludedIndices.contains(i)) continue;
+			uint8_t prev = ((uint8_t*)&g_lastSaveData)[i];
+			uint8_t cur = ((uint8_t*)save)[i];
+			if (prev != cur) {
+				auto str = std::format("(SAVE) {0}: {1} -> {2}", i, prev, cur);
+				debugMsg(str);
+			}
 		}
 	}
 	
@@ -288,6 +325,14 @@ void ArchipelagoManager::LocationCheckCallback(int64_t location) {
 }
 
 void ArchipelagoManager::SetAPVersionCallback(int version) {
+	if (version < SWA_AP_MIN_VERSION || version > SWA_AP_VERSION) {
+		int result;
+		char buf[256] = {0};
+		snprintf(buf, 256, "Incompatible APWorld Detected! Expected %i-%i, got %i! Disconnecting", SWA_AP_MIN_VERSION, SWA_AP_VERSION, version);
+		MessageWindow::Open(buf, &result);
+		DisconnectFromArchipelago();
+	}
+	
 	ArchipelagoManager::version = version;
 	printf("Version: %i\n", version);
 }
@@ -300,24 +345,19 @@ void ArchipelagoManager::SetProgressionModeCallback(int progression) {
 void ArchipelagoManager::SetActOrderCallback(std::map<int, int> actorder) {
 	int max = 0;
 	for (auto it = actorder.begin(); it != actorder.end(); it++) {
-		actOrder.emplace(VANILLA_ACT_ORDER[it->second], VANILLA_ACT_ORDER[it->first]);
-		printf("%s -> %s\n", VANILLA_ACT_ORDER[it->second], VANILLA_ACT_ORDER[it->first]);
+		actLevels.emplace(VANILLA_ACT_ORDER[it->first], it->second);
+		printf("%s -> %i\n", VANILLA_ACT_ORDER[it->first], it->second);
 	}
 }
 
 void ArchipelagoManager::DisconnectFromArchipelago() {
 	AP_Shutdown();
+	hasInit = false;
 }
 
 void ArchipelagoManager::ConnectToArchipelago() {
-	auto appdoc = SWA::CApplicationDocument::GetInstance();
-	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
-	printf("AppDoc @ %p\n", appdoc);
-	printf("AppDoc Member @ %p\n", appdoc->m_pMember.get());
-	printf("GameParameter @ %p\n", appdoc->m_pMember->m_spGameParameter.get());
-	printf("Save Data @ %p\n", save);
+	if (hasInit) return;
 	ItemClearCallback();
-	setupFlags();
 	
 	auto ini = IniFile();
 	auto path = GetUserPath() / "connection.ini";
@@ -344,9 +384,10 @@ void ArchipelagoManager::ConnectToArchipelago() {
 
 	AP_RegisterSlotDataIntCallback("version", SetAPVersionCallback);
 	AP_RegisterSlotDataIntCallback("progression_mode", SetProgressionModeCallback);
-	AP_RegisterSlotDataMapIntIntCallback("act_order", SetActOrderCallback);
+	AP_RegisterSlotDataMapIntIntCallback("act_levels", SetActOrderCallback);
 
 	AP_Start();
+	hasInit = true;
 }
 
 }
@@ -438,10 +479,112 @@ void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
 	}
 }
 
+// Entrance Activation
+
+PPC_FUNC_IMPL(__imp__sub_8273EFC0);
+PPC_FUNC(sub_8273EFC0) {
+	int areaType = PPC_LOAD_U32(ctx.r3.u32 + 244);
+	int doorType = PPC_LOAD_U32(ctx.r3.u32 + 268);
+	char* stageType = (char*)MmGetHostAddress(PPC_LOAD_U32(ctx.r3.u32 + 260));
+
+	/*
+	#Town_EggManBase/CommonOBJ.set.xml:138:    <StageType>ActD_Extra_02</StageType>
+	#Town_EuropeanCityETF/CommonOBJ.set.xml:1997:    <StageType>ActD_Extra_01</StageType>
+	#Town_EggManBase/CommonOBJ.set.xml:160:    <StageType>boss_darkgaia</StageType>
+	#Town_EggManBase/CommonOBJ.set.xml:182:    <StageType>boss_eggmanland</StageType>
+	#Town_EggManBase/CommonOBJ.set.xml:204:    <StageType>Act_EggManLand</StageType>
+	*/
+	
+	std::string apStage = "";
+	switch (areaType) {
+		case 0: // Apotos
+			if (!strcmp(stageType, "day_tutorial")) apStage = "Windmill Isle Day Act 1";
+			if (!strcmp(stageType, "day1")) apStage = "Windmill Isle Day Act 2";
+			if (!strcmp(stageType, "ActD_SubMykonos_01")) apStage = "Windmill Isle Day Act 3";
+			if (!strcmp(stageType, "night1")) apStage = "Windmill Isle Night Act 1";
+			if (!strcmp(stageType, "ActN_SubMykonos_01")) apStage = "Windmill Isle Night Act 2";
+			break;
+		case 1: // Spagonia
+			if (!strcmp(stageType, "day1")) apStage = "Rooftop Run Day Act 1";
+			if (!strcmp(stageType, "ActD_SubEU_01")) apStage = "Rooftop Run Day Act 2";
+			if (!strcmp(stageType, "ActD_SubEU_02")) apStage = "Rooftop Run Day Act 3";
+			if (!strcmp(stageType, "night1")) apStage = "Rooftop Run Night Act 1";
+			if (!strcmp(stageType, "dayBoss")) apStage = "Egg Devil Ray";
+			break;
+		case 2: // Chun-Nan
+			if (!strcmp(stageType, "day1")) apStage = "Dragon Road Day Act 1";
+			if (!strcmp(stageType, "ActD_SubChina_03")) apStage = "Dragon Road Day Act 2";
+			if (!strcmp(stageType, "ActD_SubChina_04")) apStage = "Dragon Road Day Act 3";
+			if (!strcmp(stageType, "night1")) apStage = "Dragon Road Night Act 1";
+			if (!strcmp(stageType, "ActN_SubChina_01")) apStage = "Dragon Road Night Act 2";
+			if (!strcmp(stageType, "nightBoss")) apStage = "Dark Gaia Phoenix";
+			break;
+		case 3: // Mazuri
+			if (!strcmp(stageType, "day1")) apStage = "Savannah Citadel Day Act 1";
+			if (!strcmp(stageType, "ActD_SubAfrica_01")) apStage = "Savannah Citadel Day Act 2";
+			if (!strcmp(stageType, "ActD_SubAfrica_03")) apStage = "Savannah Citadel Day Act 3";
+			if (!strcmp(stageType, "night1")) apStage = "Savannah Citadel Night Act 1";
+			if (!strcmp(stageType, "ActN_SubAfrica_01")) apStage = "Savannah Citadel Night Act 2";
+			if (!strcmp(stageType, "dayBoss")) apStage = "Egg Beetle";
+			break;
+		case 4: // Holoska
+			if (!strcmp(stageType, "day1")) apStage = "Cool Edge Day Act 1";
+			if (!strcmp(stageType, "ActD_SubSnow_01")) apStage = "Cool Edge Day Act 2";
+			if (!strcmp(stageType, "night1")) apStage = "Cool Edge Night Act 1";
+			if (!strcmp(stageType, "nightBoss")) apStage = "Dark Moray";
+			break;
+		case 5: // Shamar
+			if (!strcmp(stageType, "day1")) apStage = "Arid Sands Day Act 1";
+			if (!strcmp(stageType, "ActD_SubPetra_03")) apStage = "Arid Sands Day Act 2";
+			if (!strcmp(stageType, "night1")) apStage = "Arid Sands Night Act 1";
+			if (!strcmp(stageType, "nightBoss")) apStage = "Dark Guardian";
+			break;
+		case 6: // Adabat
+			if (!strcmp(stageType, "day1")) apStage = "Jungle Joyride Day Act 1";
+			if (!strcmp(stageType, "ActD_SubBeach_02")) apStage = "Jungle Joyride Day Act 2";
+			if (!strcmp(stageType, "ActD_SubBeach_04")) apStage = "Jungle Joyride Day Act 3";
+			if (!strcmp(stageType, "night1")) apStage = "Jungle Joyride Night Act 1";
+			if (!strcmp(stageType, "ActN_SubBeach_01")) apStage = "Jungle Joyride Night Act 2";
+			if (!strcmp(stageType, "dayBoss")) apStage = "Egg Lancer";
+			break;
+		case 7: // Empire City
+			if (!strcmp(stageType, "day1")) apStage = "Skyscraper Scamper Day Act 1";
+			if (!strcmp(stageType, "ActD_SubNY_01")) apStage = "Skyscraper Scamper Day Act 2";
+			if (!strcmp(stageType, "night1")) apStage = "Skyscraper Scamper Night Act 1";
+			break;
+		case 8: // Eggmanland
+			break;
+	}
+
+	if (SWAAP::ArchipelagoManager::actLevels.contains(apStage)) {
+		int newLevel = SWAAP::ArchipelagoManager::actLevels[apStage];
+		if (newLevel != -1) PPC_STORE_U32(ctx.r3.u32 + 276, newLevel);
+	}
+
+	int needMedalNum = PPC_LOAD_U32(ctx.r3.u32 + 276);
+	printf("r3: %08x\n", ctx.r3.u32);
+	printf("\tAreaType: %i\n", areaType);
+	printf("\tDoorType: %i\n", doorType);
+	printf("\tNeedMedalNum: %i\n", needMedalNum);
+	printf("\tStageType: %s\n", stageType);
+	__imp__sub_8273EFC0(ctx, base);
+}
+
+// Saving flags I think, don't remember
+
 PPC_FUNC_IMPL(__imp__sub_825042B0);
 PPC_FUNC(sub_825042B0) {
 	SWAAP::setupFlags();
 	__imp__sub_825042B0(ctx, base);
+}
+
+// On new game
+
+PPC_FUNC_IMPL(__imp__sub_82585550);
+PPC_FUNC(sub_82585550) {
+	__imp__sub_82585550(ctx, base);
+	SWAAP::setupFlags();
+	SWAAP::resetWatchers();
 }
 
 // Flag Reference: sub_825042B0

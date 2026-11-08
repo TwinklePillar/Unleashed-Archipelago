@@ -51,7 +51,6 @@ class ItemState:
 				precollect.append(i)
 		
 		if world.progression_mode == 1:
-			free_hub = HUB_UNLOCK_APOTOS
 			for i in (
 				HUB_UNLOCK_APOTOS,
 				HUB_UNLOCK_MAZURI,
@@ -63,7 +62,7 @@ class ItemState:
 				HUB_UNLOCK_ADABAT,
 				HUB_UNLOCK_EGGMANLAND
 			):
-				if i == free_hub: precollect.append(i)
+				if i == world.free_hub: precollect.append(i)
 				else: itempool.append(world.create_item(i))
 
 		num_unfilled = len(world.multiworld.get_unfilled_locations(world.player))

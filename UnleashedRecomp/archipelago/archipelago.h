@@ -19,6 +19,8 @@ enum APMessageType {
 
 class ArchipelagoManager {
 	public:
+		static bool hasInit;
+		
 		static void ItemClearCallback();
 		static void ItemRecvCallback(int64_t item, bool notify);
 		static void LocationCheckCallback(int64_t location);
@@ -29,8 +31,8 @@ class ArchipelagoManager {
 
 		static int version;
 		static int progressionMode;
-		static int64_t itemState[AP_ITEM_MAX];
-		static std::map<const char*, const char*> actOrder;
+		static int itemState[AP_ITEM_MAX];
+		static std::map<std::string, int> actLevels;
         static inline std::queue<ArchipelagoMessage> messageQueue;
         static void Update(double dt);
         static void DisplayMessage(APMessageType type, std::string message);
