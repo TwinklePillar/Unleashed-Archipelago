@@ -123,6 +123,8 @@ class LocationState:
 				if level > 1:
 					if sub["evil"]: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
 					else: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
+				else:
+					rule = True_()
 				if world.act_items:
 					rule = rule & Has(f"Act Unlock: {sub['stage']}")
 				else:

@@ -492,6 +492,10 @@ PPC_FUNC_IMPL(__imp__sub_8273EFC0);
 PPC_FUNC(sub_8273EFC0) {
 	int areaType = PPC_LOAD_U32(ctx.r3.u32 + 244);
 	int doorType = PPC_LOAD_U32(ctx.r3.u32 + 268);
+	if (doorType == 3) {
+		__imp__sub_8273EFC0(ctx, base);
+		return;
+	}
 	char* stageType = (char*)MmGetHostAddress(PPC_LOAD_U32(ctx.r3.u32 + 260));
 
 	/*

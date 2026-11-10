@@ -52,6 +52,16 @@ class SWAWorld(World):
 		if self.options.medalsanity:
 			self.location_state.sanities += ["sun", "moon"]
 		
+		self.free_hub = self.random.choice((
+			HUB_UNLOCK_APOTOS,
+			HUB_UNLOCK_MAZURI,
+			HUB_UNLOCK_SPAGONIA,
+			HUB_UNLOCK_HOLOSKA,
+			HUB_UNLOCK_CHUNNAN,
+			HUB_UNLOCK_SHAMAR,
+			HUB_UNLOCK_ADABAT
+		))
+		
 		self.location_state.regen = False
 		re_gen_passthrough = getattr(self.multiworld, "re_gen_passthrough", {})
 		if re_gen_passthrough and self.game in re_gen_passthrough:
@@ -65,15 +75,6 @@ class SWAWorld(World):
 			self.location_state.regen = True
 			return
 
-		self.free_hub = self.random.choice((
-			HUB_UNLOCK_APOTOS,
-			HUB_UNLOCK_MAZURI,
-			HUB_UNLOCK_SPAGONIA,
-			HUB_UNLOCK_HOLOSKA,
-			HUB_UNLOCK_CHUNNAN,
-			HUB_UNLOCK_SHAMAR,
-			HUB_UNLOCK_ADABAT
-		))
 
 	def create_regions(self):
 		self.location_state.setup_regions(self)

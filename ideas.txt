@@ -3,9 +3,17 @@ Alpha:
 	Act Shuffle
 	Death Link
 	Filler/Traps
+		Rings
+		EXP
+		Claws
+		Reverse Trap
+		Slow Trap
+		Fast Trap
+		Hourglass Trap
 	Medal/Collectible Sanities
 	Medal/Level Toggle
 	"Sent Item" prompt
+	Better location detection
 
 Level IDs
     Apotos Hub (Day): 60010
