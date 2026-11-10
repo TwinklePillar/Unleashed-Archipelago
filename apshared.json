@@ -7,43 +7,43 @@
 		{"name": "Progressive Sun Level", "item_classif": "progression"},
 		{"name": "Progressive Moon Level", "item_classif": "progression"},
 
-		{"name": "Stomping Shoes", "item_classif": "progression"},
-		{"name": "Wall Jump Shoes", "item_classif": "progression"},
-		{"name": "Air Boost Shoes", "item_classif": "progression"},
-		{"name": "Light Dash Shoes", "item_classif": "progression"},
+		{"name": "Stomping Shoes", "item_classif": "progression", "group": "Shoes"},
+		{"name": "Wall Jump Shoes", "item_classif": "progression", "group": "Shoes"},
+		{"name": "Air Boost Shoes", "item_classif": "progression", "group": "Shoes"},
+		{"name": "Light Dash Shoes", "item_classif": "progression", "group": "Shoes"},
 
-		{"name": "Blue Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		{"name": "Red Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		{"name": "Purple Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		{"name": "Cyan Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		{"name": "Green Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		{"name": "Yellow Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		{"name": "White Chaos Emerald", "item_classif": "progression_skip_balancing"},
-		
-		{"name": "Hub Unlock: Apotos", "item_classif": "progression"},
-		{"name": "Hub Unlock: Mazuri", "item_classif": "progression"},
-		{"name": "Hub Unlock: Spagonia", "item_classif": "progression"},
-		{"name": "Hub Unlock: Holoska", "item_classif": "progression"},
-		{"name": "Hub Unlock: Chun-Nan", "item_classif": "progression"},
-		{"name": "Hub Unlock: Shamar", "item_classif": "progression"},
-		{"name": "Hub Unlock: Empire City", "item_classif": "progression"},
-		{"name": "Hub Unlock: Adabat", "item_classif": "progression"},
-		{"name": "Hub Unlock: Eggmanland", "item_classif": "progression"},
+		{"name": "Blue Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
+		{"name": "Red Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
+		{"name": "Purple Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
+		{"name": "Cyan Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
+		{"name": "Green Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
+		{"name": "Yellow Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
+		{"name": "White Chaos Emerald", "item_classif": "progression_skip_balancing", "group": "Emeralds"},
 
-		{"name": "Extra Life", "item_classif": "filler"}
+		{"name": "Extra Life", "item_classif": "filler", "group": "Junk"}
 	],
 	"stages": [
-		{"name": "Apotos Hub", "type": "hub", "file": "", "checks": [], "sub": [
+		{"name": "Apotos Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 60010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 60010021, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 61010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 61010061, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 60020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 60020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 60020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 60020061, "req": []}
+		], "sub": [
 			{"stage": "Windmill Isle Day Act 1", "evil": 0, "level": 1, "req": []},
 			{"stage": "Windmill Isle Day Act 2", "evil": 0, "level": 1, "req": []},
 			{"stage": "Windmill Isle Day Act 3", "evil": 0, "level": 3, "req": []},
 			{"stage": "Windmill Isle Night Act 1", "evil": 1, "level": 1, "req": []},
 			{"stage": "Windmill Isle Night Act 2", "evil": 1, "level": 3, "req": []}
 		]},
-		{"name": "Windmill Isle Day Act 1", "type": "stage", "file": "MykonosDayTutorial", "checks": [
+		{"name": "Windmill Isle Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 60090000, "req": []}
 		]},
-		{"name": "Windmill Isle Day Act 2", "type": "stage", "file": "MykonosDayAction", "checks": [
+		{"name": "Windmill Isle Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 60040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 60040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 60040021, "req": []},
@@ -51,18 +51,18 @@
 			{"name": "Moon Medal #4", "sanity": "moon", "id": 60040023, "req": []},
 			{"name": "Moon Medal #5", "sanity": "moon", "id": 60040024, "req": []},
 			{"name": "Moon Medal #6", "sanity": "moon", "id": 60040025, "req": []},
-			{"name": "Moon Medal #6", "sanity": "moon", "id": 60040026, "req": []},
+			{"name": "Moon Medal #7", "sanity": "moon", "id": 60040026, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 60040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "sun", "id": 60040061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 60040062, "req": []}
 		]},
-		{"name": "Windmill Isle Day Act 3", "type": "stage", "file": "MykonosDayActionSub01", "checks": [
+		{"name": "Windmill Isle Day Act 3", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 60050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 60050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 60050021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 60050060, "req": []}
 		]},
-		{"name": "Windmill Isle Night Act 1", "type": "stage", "file": "MykonosNightAction", "checks": [
+		{"name": "Windmill Isle Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 61040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 61040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 61040021, "req": []},
@@ -81,7 +81,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 61040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 61040069, "req": []}
 		]},
-		{"name": "Windmill Isle Night Act 2", "type": "stage", "file": "MykonosNightActionSub01", "checks": [
+		{"name": "Windmill Isle Night Act 2", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 61050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 61050020, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 61050060, "req": []},
@@ -90,7 +90,17 @@
 			{"name": "Sun Medal #4", "sanity": "sun", "id": 61050063, "req": []}
 		]},
 		
-		{"name": "Mazuri Hub", "type": "hub", "file": "", "checks": [], "sub": [
+		{"name": "Mazuri Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 10010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 10010021, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 11010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 11010061, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 10020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 10020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 10020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 10020061, "req": []}
+		], "sub": [
 			{"stage": "Savannah Citadel Day Act 1", "evil": 0, "level": 1, "req": []},
 			{"stage": "Savannah Citadel Day Act 2", "evil": 0, "level": 3, "req": []},
 			{"stage": "Savannah Citadel Day Act 3", "evil": 0, "level": 3, "req": []},
@@ -98,7 +108,7 @@
 			{"stage": "Savannah Citadel Night Act 2", "evil": 1, "level": 3, "req": []},
 			{"stage": "Egg Beetle", "evil": 0, "level": 1, "req": []}
 		]},
-		{"name": "Savannah Citadel Day Act 1", "type": "stage", "file": "AfricaDayAction", "checks": [
+		{"name": "Savannah Citadel Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 10040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 10040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 10040021, "req": []},
@@ -106,24 +116,24 @@
 			{"name": "Moon Medal #4", "sanity": "moon", "id": 10040023, "req": []},
 			{"name": "Moon Medal #5", "sanity": "moon", "id": 10040024, "req": []},
 			{"name": "Moon Medal #6", "sanity": "moon", "id": 10040025, "req": []},
-			{"name": "Moon Medal #6", "sanity": "moon", "id": 10040026, "req": []},
+			{"name": "Moon Medal #7", "sanity": "moon", "id": 10040026, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 10040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "sun", "id": 10040061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 10040062, "req": []}
 		]},
-		{"name": "Savannah Citadel Day Act 2", "type": "stage", "file": "AfricaDayActionSub01", "checks": [
+		{"name": "Savannah Citadel Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 10050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 10050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 10050021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 10050060, "req": []}
 		]},
-		{"name": "Savannah Citadel Day Act 3", "type": "stage", "file": "AfricaDayActionSub03", "checks": [
+		{"name": "Savannah Citadel Day Act 3", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 10070000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 10070020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 10070021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 10070060, "req": []}
 		]},
-		{"name": "Savannah Citadel Night Act 1", "type": "stage", "file": "AfricaNightAction", "checks": [
+		{"name": "Savannah Citadel Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 11040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 11040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 11040021, "req": []},
@@ -142,7 +152,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 11040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 11040069, "req": []}
 		]},
-		{"name": "Savannah Citadel Night Act 2", "type": "stage", "file": "AfricaNightActionSub01", "checks": [
+		{"name": "Savannah Citadel Night Act 2", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 11050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 11050020, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 11050060, "req": []},
@@ -150,7 +160,7 @@
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 11050062, "req": []},
 			{"name": "Sun Medal #4", "sanity": "sun", "id": 11050063, "req": []}
 		]},
-		{"name": "Egg Beetle", "type": "stage", "file": "AfricaDayBoss", "checks": [
+		{"name": "Egg Beetle", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 10080000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 10080020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 10080021, "req": []},
@@ -159,25 +169,38 @@
 			{"name": "Sun Medal #2", "sanity": "sun", "id": 10080061, "req": []}
 		]},
 		
-		{"name": "Spagonia Hub", "type": "hub", "file": "", "checks": [
-		    {"name": "Wall Jump Shoes", "sanity": "shoe", "id": 32773, "req": ["Stomping Shoes"]}
+		{"name": "Spagonia Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 50010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 50010021, "req": []},
+			{"name": "Town Moon Medal #3", "sanity": "moon", "evil": 0, "id": 50010022, "req": []},
+			{"name": "Town Moon Medal #4", "sanity": "moon", "evil": 0, "id": 50010023, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 51010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 51010061, "req": []},
+			{"name": "Town Sun Medal #3", "sanity": "sun", "evil": 1, "id": 51010062, "req": []},
+			{"name": "Town Sun Medal #4", "sanity": "sun", "evil": 1, "id": 51010063, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 50020020, "req": ["Stomping Shoes"]},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 50020021, "req": ["Stomping Shoes"]},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 50020060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 50020061, "req": ["Stomping Shoes"]},
+		    {"name": "Wall Jump Shoes", "sanity": "shoe", "id": 32773, "evil": 0, "req": ["Stomping Shoes"]}
 		], "sub": [
 			{"stage": "Rooftop Run Day Act 1", "evil": 0, "level": 3, "req": ["Wall Jump Shoes"]},
-			{"stage": "Rooftop Run Day Act 2", "evil": 0, "level": 4, "req": []},
+			{"stage": "Rooftop Run Day Act 2", "evil": 0, "level": 4, "req": ["Stomping Shoes"]},
 			{"stage": "Rooftop Run Day Act 3", "evil": 0, "level": 4, "req": ["Wall Jump Shoes"]},
 			{"stage": "Rooftop Run Night Act 1", "evil": 1, "level": 2, "req": []},
 			{"stage": "Egg Devil Ray", "evil": 0, "level": 1, "req": []}
 		]},
-		{"name": "Rooftop Run Day Act 1", "type": "stage", "file": "EUDayAction", "checks": [
+		{"name": "Rooftop Run Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 50040000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Rooftop Run Day Act 2", "type": "stage", "file": "EUDayActionSub01", "checks": [
+		{"name": "Rooftop Run Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 50050000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Rooftop Run Day Act 3", "type": "stage", "file": "EUDayActionSub02", "checks": [
+		{"name": "Rooftop Run Day Act 3", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 50060000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Rooftop Run Night Act 1", "type": "stage", "file": "EUNightAction", "checks": [
+		{"name": "Rooftop Run Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 51040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 51040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 51040021, "req": []},
@@ -196,7 +219,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 51040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 51040069, "req": []}
 		]},
-		{"name": "Egg Devil Ray", "type": "stage", "file": "EUDayBoss", "checks": [
+		{"name": "Egg Devil Ray", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 50080000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 50080020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 50080021, "req": []},
@@ -205,24 +228,33 @@
 			{"name": "Sun Medal #2", "sanity": "sun", "id": 50080061, "req": []}
 		]},
 		
-		{"name": "Holoska Hub", "type": "hub", "file": "", "checks": [
-		    {"name": "Stomping Shoes", "sanity": "shoe", "id": 32772, "req": []}
+		{"name": "Holoska Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 90010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 90010021, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 91010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 91010061, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 90020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 90020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 90020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 90020061, "req": []},
+		    {"name": "Stomping Shoes", "sanity": "shoe", "id": 32772, "evil": 0, "req": []}
 		], "sub": [
 			{"stage": "Cool Edge Day Act 1", "evil": 0, "level": 2, "req": ["Stomping Shoes"]},
 			{"stage": "Cool Edge Day Act 2", "evil": 0, "level": 4, "req": []},
 			{"stage": "Cool Edge Night Act 1", "evil": 1, "level": 4, "req": []},
 			{"stage": "Dark Moray", "evil": 1, "level": 1, "req": []}
 		]},
-		{"name": "Cool Edge Day Act 1", "type": "stage", "file": "SnowDayAction", "checks": [
+		{"name": "Cool Edge Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 90040000, "req": ["Stomping Shoes"]}
 		]},
-		{"name": "Cool Edge Day Act 2", "type": "stage", "file": "SnowDayActionSub01", "checks": [
+		{"name": "Cool Edge Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 90050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 90050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 90050021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 90050060, "req": []}
 		]},
-		{"name": "Cool Edge Night Act 1", "type": "stage", "file": "SnowNightAction", "checks": [
+		{"name": "Cool Edge Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 91040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 91040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 91040021, "req": []},
@@ -241,7 +273,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 91040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 91040069, "req": []}
 		]},
-		{"name": "Dark Moray", "type": "stage", "file": "SnowNightBoss", "checks": [
+		{"name": "Dark Moray", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 91080000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 91080020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 91080021, "req": []},
@@ -250,8 +282,17 @@
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 91080062, "req": []}
 		]},
 
-		{"name": "Chun-Nan Hub", "type": "hub", "file": "", "checks": [
-		    {"name": "Air Boost Shoes", "sanity": "shoe", "id": 32774, "req": ["Wall Jump Shoes"]}
+		{"name": "Chun-Nan Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 30010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 30010021, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 31010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 31010061, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 30020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 30020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 30020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 30020061, "req": []},
+		    {"name": "Air Boost Shoes", "sanity": "shoe", "id": 32774, "evil": 0, "req": ["Wall Jump Shoes"]}
 		], "sub": [
 			{"stage": "Dragon Road Day Act 1", "evil": 0, "level": 4, "req": ["Wall Jump Shoes", "Air Boost Shoes"]},
 			{"stage": "Dragon Road Day Act 2", "evil": 0, "level": 3, "req": []},
@@ -260,7 +301,7 @@
 			{"stage": "Dragon Road Night Act 2", "evil": 1, "level": 3, "req": []},
 			{"stage": "Dark Gaia Phoenix", "evil": 1, "level": 1, "req": []}
 		]},
-		{"name": "Dragon Road Day Act 1", "type": "stage", "file": "ChinaDayAction", "checks": [
+		{"name": "Dragon Road Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 30040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 30040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 30040021, "req": []},
@@ -268,21 +309,21 @@
 			{"name": "Moon Medal #4", "sanity": "moon", "id": 30040023, "req": []},
 			{"name": "Moon Medal #5", "sanity": "moon", "id": 30040024, "req": []},
 			{"name": "Moon Medal #6", "sanity": "moon", "id": 30040025, "req": []},
-			{"name": "Moon Medal #6", "sanity": "moon", "id": 30040026, "req": []},
+			{"name": "Moon Medal #7", "sanity": "moon", "id": 30040026, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 30040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "sun", "id": 30040061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 30040062, "req": []}
 		]},
-		{"name": "Dragon Road Day Act 2", "type": "stage", "file": "ChinaDayActionSub03", "checks": [
+		{"name": "Dragon Road Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 30070000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Dragon Road Day Act 3", "type": "stage", "file": "ChinaDayActionSub04", "checks": [
+		{"name": "Dragon Road Day Act 3", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 30110000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 30110020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 30110021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 30110060, "req": []}
 		]},
-		{"name": "Dragon Road Night Act 1", "type": "stage", "file": "ChinaNightAction", "checks": [
+		{"name": "Dragon Road Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 31040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 31040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 31040021, "req": []},
@@ -301,7 +342,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 31040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 31040069, "req": []}
 		]},
-		{"name": "Dragon Road Night Act 2", "type": "stage", "file": "ChinaNightActionSub01", "checks": [
+		{"name": "Dragon Road Night Act 2", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 31050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 31050020, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 31050060, "req": []},
@@ -309,7 +350,7 @@
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 31050062, "req": []},
 			{"name": "Sun Medal #4", "sanity": "sun", "id": 31050063, "req": []}
 		]},
-		{"name": "Dark Gaia Phoenix", "type": "stage", "file": "ChinaNightBoss", "checks": [
+		{"name": "Dark Gaia Phoenix", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 31080000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 31080020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 31080021, "req": []},
@@ -318,24 +359,37 @@
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 31080062, "req": []}
 		]},
 
-		{"name": "Shamar Hub", "type": "hub", "file": "", "checks": [
-		    {"name": "Light Dash Shoes", "sanity": "shoe", "id": 32775, "req": []}
+		{"name": "Shamar Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 80010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 80010021, "req": []},
+			{"name": "Town Moon Medal #3", "sanity": "moon", "evil": 0, "id": 80010022, "req": []},
+			{"name": "Town Moon Medal #4", "sanity": "moon", "evil": 0, "id": 80010023, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 81010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 81010061, "req": []},
+			{"name": "Town Sun Medal #3", "sanity": "sun", "evil": 1, "id": 81010062, "req": []},
+			{"name": "Town Sun Medal #4", "sanity": "sun", "evil": 1, "id": 81010063, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 80020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 80020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 80020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 80020061, "req": []},
+		    {"name": "Light Dash Shoes", "sanity": "shoe", "id": 32775, "evil": 0, "req": []}
 		], "sub": [
 			{"stage": "Arid Sands Day Act 1", "evil": 0, "level": 4, "req": ["Light Dash Shoes"]},
 			{"stage": "Arid Sands Day Act 2", "evil": 0, "level": 4, "req": []},
 			{"stage": "Arid Sands Night Act 1", "evil": 1, "level": 6, "req": []},
 			{"stage": "Dark Guardian", "evil": 1, "level": 1, "req": []}
 		]},
-		{"name": "Arid Sands Day Act 1", "type": "stage", "file": "PetraDayAction", "checks": [
+		{"name": "Arid Sands Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 80040000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Arid Sands Day Act 2", "type": "stage", "file": "PetraDayActionSub03", "checks": [
+		{"name": "Arid Sands Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 80070000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 80070020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 80070021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 80070060, "req": []}
 		]},
-		{"name": "Arid Sands Night Act 1", "type": "stage", "file": "PetraNightAction", "checks": [
+		{"name": "Arid Sands Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 81040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 81040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 81040021, "req": []},
@@ -354,7 +408,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 81040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 81040069, "req": []}
 		]},
-		{"name": "Dark Guardian", "type": "stage", "file": "ChinaNightBoss", "checks": [
+		{"name": "Dark Guardian", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 81080000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 81080020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 81080021, "req": []},
@@ -363,21 +417,31 @@
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 81080062, "req": []}
 		]},
 
-		{"name": "Empire City Hub", "type": "hub", "file": "", "checks": [], "sub": [
+		{"name": "Empire City Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 70010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 70010021, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 71010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 71010061, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 70020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 70020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 70020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 70020061, "req": []}
+		], "sub": [
 			{"stage": "Skyscraper Scamper Day Act 1", "evil": 0, "level": 5, "req": []},
 			{"stage": "Skyscraper Scamper Day Act 2", "evil": 0, "level": 5, "req": ["Air Boost Shoes"]},
 			{"stage": "Skyscraper Scamper Night Act 1", "evil": 1, "level": 5, "req": []}
 		]},
-		{"name": "Skyscraper Scamper Day Act 1", "type": "stage", "file": "NYDayAction", "checks": [
+		{"name": "Skyscraper Scamper Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 70040000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Skyscraper Scamper Day Act 2", "type": "stage", "file": "NYDayActionSub01", "checks": [
+		{"name": "Skyscraper Scamper Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 70050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 70050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 70050021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 70050060, "req": []}
 		]},
-		{"name": "Skyscraper Scamper Night Act 1", "type": "stage", "file": "NYNightAction", "checks": [
+		{"name": "Skyscraper Scamper Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 71040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 71040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 71040021, "req": []},
@@ -397,7 +461,17 @@
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 71040069, "req": []}
 		]},
 
-		{"name": "Adabat Hub", "type": "hub", "file": "", "checks": [], "sub": [
+		{"name": "Adabat Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Town Moon Medal #1", "sanity": "moon", "evil": 0, "id": 20010020, "req": []},
+			{"name": "Town Moon Medal #2", "sanity": "moon", "evil": 0, "id": 20010021, "req": []},
+			{"name": "Town Sun Medal #1", "sanity": "sun", "evil": 1, "id": 21010060, "req": []},
+			{"name": "Town Sun Medal #2", "sanity": "sun", "evil": 1, "id": 21010061, "req": []},
+
+			{"name": "ETF Moon Medal #1", "sanity": "moon", "id": 20020020, "req": []},
+			{"name": "ETF Moon Medal #2", "sanity": "moon", "id": 20020021, "req": []},
+			{"name": "ETF Sun Medal #1", "sanity": "sun", "id": 20020060, "req": []},
+			{"name": "ETF Sun Medal #2", "sanity": "sun", "id": 20020061, "req": []}
+		], "sub": [
 			{"stage": "Jungle Joyride Day Act 1", "evil": 0, "level": 7, "req": []},
 			{"stage": "Jungle Joyride Day Act 2", "evil": 0, "level": 5, "req": []},
 			{"stage": "Jungle Joyride Day Act 3", "evil": 0, "level": 4, "req": []},
@@ -405,19 +479,19 @@
 			{"stage": "Jungle Joyride Night Act 2", "evil": 1, "level": 5, "req": []},
 			{"stage": "Egg Lancer", "evil": 0, "level": 1, "req": []}
 		]},
-		{"name": "Jungle Joyride Day Act 1", "type": "stage", "file": "BeachDayAction", "checks": [
+		{"name": "Jungle Joyride Day Act 1", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 20040000, "req": ["Stomping Shoes", "Wall Jump Shoes"]}
 		]},
-		{"name": "Jungle Joyride Day Act 2", "type": "stage", "file": "BeachDayActionSub02", "checks": [
+		{"name": "Jungle Joyride Day Act 2", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 20060000, "req": ["Wall Jump Shoes"]}
 		]},
-		{"name": "Jungle Joyride Day Act 3", "type": "stage", "file": "BeachDayActionSub04", "checks": [
+		{"name": "Jungle Joyride Day Act 3", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 20110000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 20110020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 20110021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 20110060, "req": []}
 		]},
-		{"name": "Jungle Joyride Night Act 1", "type": "stage", "file": "BeachNightAction", "checks": [
+		{"name": "Jungle Joyride Night Act 1", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 21040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 21040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 21040021, "req": []},
@@ -436,7 +510,7 @@
 			{"name": "Sun Medal #9", "sanity": "sun", "id": 21040068, "req": []},
 			{"name": "Sun Medal #10", "sanity": "sun", "id": 21040069, "req": []}
 		]},
-		{"name": "Jungle Joyride Night Act 2", "type": "stage", "file": "BeachNightActionSub01", "checks": [
+		{"name": "Jungle Joyride Night Act 2", "type": "stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 21050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 21050020, "req": []},
 			{"name": "Sun Medal #1", "sanity": "sun", "id": 21050060, "req": []},
@@ -444,7 +518,7 @@
 			{"name": "Sun Medal #3", "sanity": "sun", "id": 21050062, "req": []},
 			{"name": "Sun Medal #4", "sanity": "sun", "id": 21050063, "req": []}
 		]},
-		{"name": "Egg Lancer", "type": "stage", "file": "BeachDayBoss", "checks": [
+		{"name": "Egg Lancer", "type": "stage", "evil": 0, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 20080000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "moon", "id": 20080020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "moon", "id": 20080021, "req": []},
@@ -453,18 +527,18 @@
 			{"name": "Sun Medal #2", "sanity": "sun", "id": 20080061, "req": []}
 		]},
 		
-		{"name": "Eggmanland Hub", "type": "hub", "file": "", "checks": [], "sub": [
+		{"name": "Eggmanland Hub", "type": "hub", "evil": -1, "checks": [], "sub": [
 		    {"stage": "Eggmanland", "evil": 0, "level": 1, "req": []},
 			{"stage": "Egg Dragoon", "evil": 1, "level": 1, "req": []},
 			{"stage": "Dark Gaia", "evil": 0, "level": 1, "req": []}
 		]},
-		{"name": "Eggmanland", "type": "unshuffled_stage", "file": "", "checks": [
+		{"name": "Eggmanland", "type": "unshuffled_stage", "evil": -1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 40040000, "req": ["Stomping Shoes"]}
 		]},
-		{"name": "Egg Dragoon", "type": "unshuffled_stage", "file": "", "checks": [
+		{"name": "Egg Dragoon", "type": "unshuffled_stage", "evil": 1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 40080000, "req": []}
 		]},
-		{"name": "Dark Gaia", "type": "unshuffled_stage", "file": "", "checks": [
+		{"name": "Dark Gaia", "type": "unshuffled_stage", "evil": -1, "checks": [
 		    {"name": "Completion", "sanity": "complete", "id": 40140000, "req": []}
 		]}
 	]

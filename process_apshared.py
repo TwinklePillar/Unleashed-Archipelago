@@ -2,20 +2,52 @@ import json
 
 location_name_to_id = {}
 item_name_to_id = {}
+item_name_groups = {}
+location_name_groups = {}
 
 with open("apshared.json", "r") as sharedjson:
 	shared = json.load(sharedjson)
 
+hub_base = 400
+act_base = 410
+
+for stage in shared["stages"]:
+	if stage["type"] == "hub":
+		shared["items"].append({"name": f"Hub Unlock: {stage['name'][:-4]}", "item_classif": "progression", "group": "Hubs", "id": hub_base})
+		hub_base += 1
+
+	if stage["type"] in ("stage", "unshuffled_stage"):
+		shared["items"].append({"name": f"Act Unlock: {stage['name']}", "item_classif": "progression", "group": "Acts", "id": act_base})
+		act_base += 1
+	
+	for check in stage["checks"]:
+		check_name = f"{stage['name']} - {check['name']}"
+		stage_sanity = f"{stage['name']} {check['sanity']}"
+		location_name_to_id[check_name] = check["id"]
+		if not stage["name"] in location_name_groups:
+			location_name_groups[stage["name"]] = []
+		if not check["sanity"] in location_name_groups:
+			location_name_groups[check["sanity"]] = []
+		if not stage_sanity in location_name_groups:
+			location_name_groups[stage_sanity] = []
+		location_name_groups[stage["name"]].append(check_name)
+		location_name_groups[check["sanity"]].append(check_name)
+		location_name_groups[stage_sanity].append(check_name)
+		
+		if not "evil" in check:
+			check["evil"] = -1
+
 current_item_id = 1
 
 for item in shared["items"]:
-    item["id"] = current_item_id
-    item_name_to_id[item["name"]] = current_item_id
-    current_item_id += 1
-
-for stage in shared["stages"]:
-    for check in stage["checks"]:
-        location_name_to_id[f"{stage['name']} - {check['name']}"] = check["id"]
+	if not "id" in item:
+		item["id"] = current_item_id
+		current_item_id += 1
+	item_name_to_id[item["name"]] = item["id"]
+	if "group" in item:
+		if not item["group"] in item_name_groups:
+			item_name_groups[item["group"]] = []
+		item_name_groups[item["group"]].append(item["name"])
 
 with open("world/apshared.py", "w") as appy:
 	appy.write("from BaseClasses import ItemClassification\n")
@@ -34,6 +66,10 @@ with open("world/apshared.py", "w") as appy:
 	appy.write(json.dumps(location_name_to_id))
 	appy.write("\nitem_name_to_id = ")
 	appy.write(json.dumps(item_name_to_id))
+	appy.write(f"\nlocation_name_groups = ")
+	appy.write(json.dumps(location_name_groups))
+	appy.write("\nitem_name_groups = ")
+	appy.write(json.dumps(item_name_groups))
 	for item in shared["items"]:
 		appy.write(f"\n{item['name'].replace(' ', '_').replace('.', '').replace('-', '').replace(':', '').upper()} = '{item['name']}'")
 

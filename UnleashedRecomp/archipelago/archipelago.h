@@ -27,10 +27,12 @@ class ArchipelagoManager {
 		
 		static void SetAPVersionCallback(int version);
 		static void SetProgressionModeCallback(int progression);
+		static void SetActItemsCallback(int ai);
 		static void SetActOrderCallback(std::map<int, int> actorder);
 
 		static int version;
 		static int progressionMode;
+		static int actItems;
 		static int itemState[AP_ITEM_MAX];
 		static std::map<std::string, int> actLevels;
         static inline std::queue<ArchipelagoMessage> messageQueue;

@@ -1,3 +1,12 @@
+Alpha:
+	DLC Toggle
+	Act Shuffle
+	Death Link
+	Filler/Traps
+	Medal/Collectible Sanities
+	Medal/Level Toggle
+	"Sent Item" prompt
+
 Level IDs
     Apotos Hub (Day): 60010
     Apotos Hub (Night): 61010

@@ -59,6 +59,7 @@ class FlagManager {
 
 int ArchipelagoManager::version;
 int ArchipelagoManager::progressionMode;
+int ArchipelagoManager::actItems;
 std::map<std::string, int> ArchipelagoManager::actLevels;
 int ArchipelagoManager::itemState[AP_ITEM_MAX];
 bool ArchipelagoManager::hasInit;
@@ -305,6 +306,7 @@ void ArchipelagoManager::ItemClearCallback() {
 
 void ArchipelagoManager::ItemRecvCallback(int64_t item, bool notify) {
 	itemState[item] += 1;
+	printf("Receiving Item %s (%i, #%i)\n", ITEM_TO_NAME[item], (int)item, itemState[item]);
 	if (notify) {
 		DisplayMessage(RECV_ITEM, ITEM_TO_NAME[item]);
 
@@ -350,6 +352,10 @@ void ArchipelagoManager::SetActOrderCallback(std::map<int, int> actorder) {
 	}
 }
 
+void ArchipelagoManager::SetActItemsCallback(int ai) {
+	actItems = ai;
+}
+
 void ArchipelagoManager::DisconnectFromArchipelago() {
 	AP_Shutdown();
 	hasInit = false;
@@ -384,6 +390,7 @@ void ArchipelagoManager::ConnectToArchipelago() {
 
 	AP_RegisterSlotDataIntCallback("version", SetAPVersionCallback);
 	AP_RegisterSlotDataIntCallback("progression_mode", SetProgressionModeCallback);
+	AP_RegisterSlotDataIntCallback("act_items", SetActItemsCallback);
 	AP_RegisterSlotDataMapIntIntCallback("act_levels", SetActOrderCallback);
 
 	AP_Start();
@@ -494,8 +501,10 @@ PPC_FUNC(sub_8273EFC0) {
 	#Town_EggManBase/CommonOBJ.set.xml:182:    <StageType>boss_eggmanland</StageType>
 	#Town_EggManBase/CommonOBJ.set.xml:204:    <StageType>Act_EggManLand</StageType>
 	*/
-	
+
+	bool stageAllowed = true;
 	std::string apStage = "";
+	int isBoss = 0;
 	switch (areaType) {
 		case 0: // Apotos
 			if (!strcmp(stageType, "day_tutorial")) apStage = "Windmill Isle Day Act 1";
@@ -509,7 +518,7 @@ PPC_FUNC(sub_8273EFC0) {
 			if (!strcmp(stageType, "ActD_SubEU_01")) apStage = "Rooftop Run Day Act 2";
 			if (!strcmp(stageType, "ActD_SubEU_02")) apStage = "Rooftop Run Day Act 3";
 			if (!strcmp(stageType, "night1")) apStage = "Rooftop Run Night Act 1";
-			if (!strcmp(stageType, "dayBoss")) apStage = "Egg Devil Ray";
+			if (!strcmp(stageType, "dayBoss")) {apStage = "Egg Devil Ray"; isBoss = 2;}
 			break;
 		case 2: // Chun-Nan
 			if (!strcmp(stageType, "day1")) apStage = "Dragon Road Day Act 1";
@@ -517,7 +526,7 @@ PPC_FUNC(sub_8273EFC0) {
 			if (!strcmp(stageType, "ActD_SubChina_04")) apStage = "Dragon Road Day Act 3";
 			if (!strcmp(stageType, "night1")) apStage = "Dragon Road Night Act 1";
 			if (!strcmp(stageType, "ActN_SubChina_01")) apStage = "Dragon Road Night Act 2";
-			if (!strcmp(stageType, "nightBoss")) apStage = "Dark Gaia Phoenix";
+			if (!strcmp(stageType, "nightBoss")) {apStage = "Dark Gaia Phoenix"; isBoss = 3;}
 			break;
 		case 3: // Mazuri
 			if (!strcmp(stageType, "day1")) apStage = "Savannah Citadel Day Act 1";
@@ -525,19 +534,19 @@ PPC_FUNC(sub_8273EFC0) {
 			if (!strcmp(stageType, "ActD_SubAfrica_03")) apStage = "Savannah Citadel Day Act 3";
 			if (!strcmp(stageType, "night1")) apStage = "Savannah Citadel Night Act 1";
 			if (!strcmp(stageType, "ActN_SubAfrica_01")) apStage = "Savannah Citadel Night Act 2";
-			if (!strcmp(stageType, "dayBoss")) apStage = "Egg Beetle";
+			if (!strcmp(stageType, "dayBoss")) {apStage = "Egg Beetle"; isBoss = 2;}
 			break;
 		case 4: // Holoska
 			if (!strcmp(stageType, "day1")) apStage = "Cool Edge Day Act 1";
 			if (!strcmp(stageType, "ActD_SubSnow_01")) apStage = "Cool Edge Day Act 2";
 			if (!strcmp(stageType, "night1")) apStage = "Cool Edge Night Act 1";
-			if (!strcmp(stageType, "nightBoss")) apStage = "Dark Moray";
+			if (!strcmp(stageType, "nightBoss")) {apStage = "Dark Moray"; isBoss = 3;}
 			break;
 		case 5: // Shamar
 			if (!strcmp(stageType, "day1")) apStage = "Arid Sands Day Act 1";
 			if (!strcmp(stageType, "ActD_SubPetra_03")) apStage = "Arid Sands Day Act 2";
 			if (!strcmp(stageType, "night1")) apStage = "Arid Sands Night Act 1";
-			if (!strcmp(stageType, "nightBoss")) apStage = "Dark Guardian";
+			if (!strcmp(stageType, "nightBoss")) {apStage = "Dark Guardian"; isBoss = 3;}
 			break;
 		case 6: // Adabat
 			if (!strcmp(stageType, "day1")) apStage = "Jungle Joyride Day Act 1";
@@ -545,7 +554,7 @@ PPC_FUNC(sub_8273EFC0) {
 			if (!strcmp(stageType, "ActD_SubBeach_04")) apStage = "Jungle Joyride Day Act 3";
 			if (!strcmp(stageType, "night1")) apStage = "Jungle Joyride Night Act 1";
 			if (!strcmp(stageType, "ActN_SubBeach_01")) apStage = "Jungle Joyride Night Act 2";
-			if (!strcmp(stageType, "dayBoss")) apStage = "Egg Lancer";
+			if (!strcmp(stageType, "dayBoss")) {apStage = "Egg Lancer"; isBoss = 2;}
 			break;
 		case 7: // Empire City
 			if (!strcmp(stageType, "day1")) apStage = "Skyscraper Scamper Day Act 1";
@@ -556,9 +565,19 @@ PPC_FUNC(sub_8273EFC0) {
 			break;
 	}
 
+	if (SWAAP::ArchipelagoManager::actItems) {
+		for (int i = 0; i < AP_ITEM_MAX; i++) {
+			if (ITEM_TO_NAME[i] && !strcmp(ITEM_TO_NAME[i]+12, apStage.c_str())) {
+				if (SWAAP::ArchipelagoManager::itemState[i] == 0) stageAllowed = false;
+				break;
+			}
+		}
+	}
+	
 	if (SWAAP::ArchipelagoManager::actLevels.contains(apStage)) {
 		int newLevel = SWAAP::ArchipelagoManager::actLevels[apStage];
 		if (newLevel != -1) PPC_STORE_U32(ctx.r3.u32 + 276, newLevel);
+		else if (isBoss) PPC_STORE_U32(ctx.r3.u32 + 276, 1);
 	}
 
 	int needMedalNum = PPC_LOAD_U32(ctx.r3.u32 + 276);
@@ -567,6 +586,11 @@ PPC_FUNC(sub_8273EFC0) {
 	printf("\tDoorType: %i\n", doorType);
 	printf("\tNeedMedalNum: %i\n", needMedalNum);
 	printf("\tStageType: %s\n", stageType);
+
+	if (isBoss == 2) PPC_STORE_U32(ctx.r3.u32 + 268, 0);
+	if (isBoss == 3) PPC_STORE_U32(ctx.r3.u32 + 268, 1);
+	if (!stageAllowed) return;
+	
 	__imp__sub_8273EFC0(ctx, base);
 }
 
@@ -585,6 +609,16 @@ PPC_FUNC(sub_82585550) {
 	__imp__sub_82585550(ctx, base);
 	SWAAP::setupFlags();
 	SWAAP::resetWatchers();
+}
+
+// Stage Return Data (size: 80)
+// offset 0: vtable (820C5BDC)
+// offset 28: AreaType
+
+PPC_FUNC_IMPL(__imp__sub_82B5B520);
+PPC_FUNC(sub_82B5B520) {
+	__imp__sub_82B5B520(ctx, base);
+	printf("Stage Return Location: %08x\n", ctx.r3.u32);
 }
 
 // Flag Reference: sub_825042B0

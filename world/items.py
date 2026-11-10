@@ -25,16 +25,15 @@ class ItemState:
 		return SWAItem(item, self.item_class[item], item_name_to_id[item], world.player)
 
 	def get_filler_item(self, world):
-		return EXTRA_LIFE
+		return world.random.choice(item_name_groups["Junk"])
 	
 	def setup_items(self, world):
 		itempool = []
 		precollect = []
-		
-		itempool.append(world.create_item(STOMPING_SHOES))
-		itempool.append(world.create_item(WALL_JUMP_SHOES))
-		itempool.append(world.create_item(AIR_BOOST_SHOES))
-		itempool.append(world.create_item(LIGHT_DASH_SHOES))
+
+		if world.location_state.include_day:
+			for i in item_name_groups["Shoes"]:
+				itempool.append(world.create_item(i))
 		
 		for i in range(6):
 			if self.no_medal_requirements:
@@ -44,27 +43,21 @@ class ItemState:
 				itempool.append(world.create_item(PROGRESSIVE_SUN_LEVEL))
 				itempool.append(world.create_item(PROGRESSIVE_MOON_LEVEL))
 
-		for i in (BLUE_CHAOS_EMERALD, RED_CHAOS_EMERALD, PURPLE_CHAOS_EMERALD, CYAN_CHAOS_EMERALD, GREEN_CHAOS_EMERALD, YELLOW_CHAOS_EMERALD, WHITE_CHAOS_EMERALD):
+		for i in item_name_groups["Emeralds"]:
 			if self.chaos_emeralds:
 				itempool.append(world.create_item(i))
 			else:
 				precollect.append(i)
 		
 		if world.progression_mode == 1:
-			for i in (
-				HUB_UNLOCK_APOTOS,
-				HUB_UNLOCK_MAZURI,
-				HUB_UNLOCK_SPAGONIA,
-				HUB_UNLOCK_HOLOSKA,
-				HUB_UNLOCK_CHUNNAN,
-				HUB_UNLOCK_SHAMAR,
-				HUB_UNLOCK_EMPIRE_CITY,
-				HUB_UNLOCK_ADABAT,
-				HUB_UNLOCK_EGGMANLAND
-			):
+			for i in item_name_groups["Hubs"]:
 				if i == world.free_hub: precollect.append(i)
 				else: itempool.append(world.create_item(i))
-
+		
+		if world.act_items:
+			for i in item_name_groups["Acts"]:
+				itempool.append(world.create_item(i))
+		
 		num_unfilled = len(world.multiworld.get_unfilled_locations(world.player))
 		num_filler = num_unfilled - len(itempool)
 		for i in range(num_filler):
