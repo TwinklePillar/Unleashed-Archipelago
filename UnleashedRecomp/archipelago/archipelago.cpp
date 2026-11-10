@@ -589,7 +589,10 @@ PPC_FUNC(sub_8273EFC0) {
 
 	if (isBoss == 2) PPC_STORE_U32(ctx.r3.u32 + 268, 0);
 	if (isBoss == 3) PPC_STORE_U32(ctx.r3.u32 + 268, 1);
-	if (!stageAllowed) return;
+	if (!stageAllowed) {
+		PPC_STORE_U32(ctx.r3.u32 + 268, 2);
+		return;
+	}
 	
 	__imp__sub_8273EFC0(ctx, base);
 }
@@ -615,10 +618,10 @@ PPC_FUNC(sub_82585550) {
 // offset 0: vtable (820C5BDC)
 // offset 28: AreaType
 
-PPC_FUNC_IMPL(__imp__sub_82B5B520);
-PPC_FUNC(sub_82B5B520) {
-	__imp__sub_82B5B520(ctx, base);
-	printf("Stage Return Location: %08x\n", ctx.r3.u32);
-}
+//PPC_FUNC_IMPL(__imp__sub_82B5B520);
+//PPC_FUNC(sub_82B5B520) {
+//	__imp__sub_82B5B520(ctx, base);
+//	printf("Stage Return Location: %08x\n", ctx.r3.u32);
+//}
 
 // Flag Reference: sub_825042B0
