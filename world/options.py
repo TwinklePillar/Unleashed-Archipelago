@@ -63,6 +63,12 @@ class MedalSanity(Toggle):
 	"""
 	display_name = "MedalSanity"
 
+class MediaSanity(Toggle):
+	"""
+	Should the records, tapes, and books be locations?
+	"""
+	display_name = "MediaSanity"
+
 @dataclass
 class SWAOptions(PerGameCommonOptions):
 	progression_mode: ProgressionMode
@@ -73,3 +79,4 @@ class SWAOptions(PerGameCommonOptions):
 	random_act_levels: RandomizeMedalRequirements
 	chaos_emeralds: ChaosEmeralds
 	medalsanity: MedalSanity
+	mediasanity: MediaSanity

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MicroSequence>
+  <SequenceUnit>
+    <type>ChangeStage</type>
+    <param>
+      <StageType>Labo</StageType>
+      <CountryName>EU</CountryName>
+      <ArchiveName>Town_EULabo</ArchiveName>
+      <SettingName>Stage</SettingName>
+      <IsEvil>false</IsEvil>
+    </param>
+  </SequenceUnit>
+  <SequenceUnit>
+    <type>SetPresence</type>
+    <param>
+      <Area>EUDay</Area>
+      <State>Labo</State>
+    </param>
+  </SequenceUnit>
+</MicroSequence>

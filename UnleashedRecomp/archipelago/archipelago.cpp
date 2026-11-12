@@ -12,6 +12,7 @@
 #include <ui/message_window.h>
 
 #include "apshared.h"
+#include "kernel/memory.h"
 
 namespace SWAAP {
 
@@ -40,20 +41,25 @@ void ArchipelagoManager::DebugLog(std::string buf) {
 
 static void watchFlags(hh::vector<FlagManager::RegisteredFlag> flags) {
 	for (auto cur = flags.begin(); cur < flags.end(); cur++) {
+		uint32_t value = 0;
+		switch (*cur->flag->name.get()) {
+			case 'e': value = cur->flag->eFlag.value; break;
+			case 'b': value = cur->flag->bFlag.value; break;
+			case 'i': value = cur->flag->iFlag.value; break;
+		}
+		if (*cur->flag->name.get() == 'e') {
+		//	printf("%s: %p\n", cur->flag->name.get(), cur->flag.get());
+		}
 		if (lastFlags.contains(cur->flag->name.get())) {
-			if (cur->flag->value != lastFlags[cur->flag->name.get()]) {
+			if (value != lastFlags[cur->flag->name.get()]) {
 				uint32_t oldV = lastFlags[cur->flag->name];
-				uint32_t newV = cur->flag->value;
-				if (*cur->flag->name.get() != 'b') {
-					oldV = be<uint32_t>::byteswap(oldV);
-					newV = be<uint32_t>::byteswap(newV);
-				}
+				uint32_t newV = value;
 				char buf[256] = {0};
 				snprintf(buf, 256, "(FLAG) %s: %u -> %u", cur->flag->name.get(), oldV, newV);
 				SWAAP::ArchipelagoManager::DebugLog(buf);
-				lastFlags[cur->flag->name.get()] = cur->flag->value;
+				lastFlags[cur->flag->name.get()] = value;
 			}
-		} else lastFlags.emplace(cur->flag->name.get(), cur->flag->value);
+		} else lastFlags.emplace(cur->flag->name.get(), value);
 	}
 }
 
@@ -62,7 +68,7 @@ static void setBoolFlag(const char* name, bool value) {
 	for (auto cur = fm->bFlag.begin(); cur < fm->bFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
 		if (strcmp(flagName, name) == 0) {
-			cur->flag->value = value;
+			cur->flag->bFlag.value = value;
 			break;
 		}
 	}
@@ -73,18 +79,18 @@ static void setIntFlag(const char* name, int value) {
 	for (auto cur = fm->iFlag.begin(); cur < fm->iFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
 		if (strcmp(flagName, name) == 0) {
-			cur->flag->value = be<uint32_t>::byteswap(value);
+			cur->flag->iFlag.value = value;
 			break;
 		}
 	}
 }
 
-static void setListFlag(const char* name, bool value) {
+static void setListFlag(const char* name, int value) {
 	FlagManager* fm = FlagManager::GetInstance();
 	for (auto cur = fm->eFlag.begin(); cur < fm->eFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
 		if (strcmp(flagName, name) == 0) {
-			cur->flag->value = be<uint32_t>::byteswap(value);
+			cur->flag->eFlag.value = value;
 			break;
 		}
 	}
@@ -96,28 +102,28 @@ static void setupFlags(void) {
 	setIntFlag("iFlag_Tails", 9);
 	setIntFlag("iFlag_Rin", 2);
 	setIntFlag("iFlag_Sunafkin", 50);
-	setListFlag("eFlag_ReturnPlace", 2);
+//	setListFlag("eFlag_ReturnPlace", 2);
 	
 	FlagManager* fm = FlagManager::GetInstance();
 	for (auto cur = fm->bFlag.begin(); cur < fm->bFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
 		if (!strncmp(flagName, "bFlag_StgClear", 14)) {
-			cur->flag->value = true;
+			cur->flag->bFlag.value = true;
 		}
 		if (!strncmp(flagName, "bFlag_IsVisit", 13)) {
-			cur->flag->value = false;
+			cur->flag->bFlag.value = false;
 		}
 		if (!strncmp(flagName, "bFlag_Event", 11)) {
-			cur->flag->value = true;
+			cur->flag->bFlag.value = true;
 		}
 		if (!strncmp(flagName, "bFlag_IsStageOpen", 17)) {
-			cur->flag->value = true;
+			cur->flag->bFlag.value = true;
 		}
 		if (!strncmp(flagName, "bFlag_BossOpen", 14)) {
-			cur->flag->value = true;
+			cur->flag->bFlag.value = true;
 		}
 		if (!strncmp(flagName, "bFlag_IsStageRescue", 19)) {
-			cur->flag->value = false;
+			cur->flag->bFlag.value = false;
 		}
 	}
 	setBoolFlag("bFlag_IsVisitWorldMap", true);
@@ -215,10 +221,14 @@ void ArchipelagoManager::ItemClearCallback() {
 }
 
 static void addRings(int amt) {
+	auto appdoc = SWA::CApplicationDocument::GetInstance();
+	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
+	save->moneyRing = save->moneyRing + amt;
+	save->totalRing = save->totalRing + amt;
 	if (CPlayerSpeedContext::GetInstance()) {
 		CPlayerSpeedContext::GetInstance()->m_Rings = CPlayerSpeedContext::GetInstance()->m_Rings + amt;
 		CPlayerSpeedContext::GetInstance()->m_ringEnergy = CPlayerSpeedContext::GetInstance()->m_ringEnergy + 1.3 * amt;
-	} else {
+	} else if (SWAAP::ArchipelagoManager::evilContext) {
 		SWAAP::ArchipelagoManager::evilContext->m_Rings = SWAAP::ArchipelagoManager::evilContext->m_Rings + amt;
 	}
 }
@@ -407,6 +417,34 @@ void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
 		if (!(hasEmeralds && getMedalCount(PROGRESSIVE_SUN_LEVEL) >= 120 && getMedalCount(PROGRESSIVE_MOON_LEVEL) >= 80)) {
 			r29.s32 = -1;
 			r30.s32 = -1;
+		}
+	}
+
+	/*
+		<name>eFlag_Sunafkin_Country
+			<item>PetraCapital</item>
+			<item>Mykonos</item>
+			<item>China</item>
+			<item>Snow</item>
+			<item>EuropeanCity</item>
+			<item>SouthEastAsia</item>
+			<item>NYCity</item>
+			<item>Africa</item>
+			<item>EggManBase</item>
+		</name>
+		uS_g
+	*/
+	if (r30.u32 != -1) {
+		switch (countryToItem[r30.u32]) {
+			case HUB_UNLOCK_APOTOS: SWAAP::setListFlag("eFlag_Sunafkin_Country", 1); break;
+			case HUB_UNLOCK_SPAGONIA: SWAAP::setListFlag("eFlag_Sunafkin_Country", 4); break;
+			case HUB_UNLOCK_CHUNNAN: SWAAP::setListFlag("eFlag_Sunafkin_Country", 2); break;
+			case HUB_UNLOCK_MAZURI: SWAAP::setListFlag("eFlag_Sunafkin_Country", 7); break;
+			case HUB_UNLOCK_HOLOSKA: SWAAP::setListFlag("eFlag_Sunafkin_Country", 3); break;
+			case HUB_UNLOCK_SHAMAR: SWAAP::setListFlag("eFlag_Sunafkin_Country", 0); break;
+			case HUB_UNLOCK_ADABAT: SWAAP::setListFlag("eFlag_Sunafkin_Country", 5); break;
+			case HUB_UNLOCK_EMPIRE_CITY: SWAAP::setListFlag("eFlag_Sunafkin_Country", 6); break;
+			case HUB_UNLOCK_EGGMANLAND: SWAAP::setListFlag("eFlag_Sunafkin_Country", 8); break;
 		}
 	}
 }

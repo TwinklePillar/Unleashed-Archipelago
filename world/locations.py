@@ -19,7 +19,17 @@ class LocationState:
 	def setup_regions(self, world):
 		menu_region = Region("Menu", world.player, world.multiworld)
 		world.multiworld.regions.append(menu_region)
-
+		
+		souvenir_region = Region("Souvenir", world.player, world.multiworld)
+		world.multiworld.regions.append(souvenir_region)
+		for k in apshared["souvenirs"].keys():
+			souvenir = apshared["souvenirs"][k]
+			count = int(k)
+			check_name = f"Souvenir - {souvenir['name']}"
+			souvenir_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
+			world.set_rule(world.get_location(check_name), Has("Progressive Souvenir", count))
+		world.create_entrance(menu_region, souvenir_region, Has("Level Completion"))
+		
 		hubs = []
 		free_hub = ()
 		sphere_zero_stages = []
@@ -93,15 +103,18 @@ class LocationState:
 				for i in range(len(all_stages_unshuffled)):
 					self.act_levels[str(i)] = -1
 		
-		world.spoiler_text += f"Act Levels for {world.multiworld.player_name[world.player]}:\n"
-		for i in range(len(all_stages)):
-			world.spoiler_text += f"\t{all_stages_unshuffled[i]} -> {self.act_levels[str(i)]} ({'Moon' if 'Night' in all_stages_unshuffled[i] else 'Sun'})\n"
-		
 		for stage in unshuffled_stages:
 			all_stages.append(stage)
 			all_stages_unshuffled.append(stage)
 		
 		for hub in hubs:
+			for i in range(5):
+				hub[1].add_event(
+					f"{hub[0]['name']} - Progressive Souvenir #{i+1}", "Progressive Souvenir",
+					location_type=SWALocation, item_type=SWAItem,
+					rule=True_(), show_in_spoiler=False
+				)
+			
 			for sub in hub[0]["sub"]:
 				if sub["evil"] == 0 and not self.include_day: continue
 				if sub["evil"] == 1 and not self.include_night: continue
@@ -112,6 +125,11 @@ class LocationState:
 					location_type=SWALocation, item_type=SWAItem,
 					rule=CanReachLocation(f"{shuffled_stage} - Completion"), show_in_spoiler=False
 				)
+				stage_region.add_event(
+					f"{sub['stage']} Level Completion", "Level Completion",
+					location_type=SWALocation, item_type=SWAItem,
+					rule=CanReachLocation(f"{shuffled_stage} - Completion"), show_in_spoiler=False
+				)
 				hub[1].connect(stage_region)
 				enter = world.get_entrance(f"{hub[1].name} -> {stage_region.name}")
 				index = str(all_stages_unshuffled.index(sub["stage"]))
@@ -119,7 +137,9 @@ class LocationState:
 					level = self.act_levels[index]
 				else:
 					level = -1
-				if (level == -1): level = sub["level"]
+				if (level == -1):
+					level = sub["level"]
+					self.act_levels[index] = level
 				if level > 1:
 					if sub["evil"] == 1: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
 					elif sub["evil"] == 0: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
@@ -128,8 +148,6 @@ class LocationState:
 					rule = True_()
 				if world.act_items:
 					rule = rule & Has(f"Act Unlock: {sub['stage']}")
-				else:
-					rule = True_()
 				for req in sub["req"]:
 					if req in item_name_to_id.keys():
 						rule = rule & Has(req)
@@ -137,6 +155,11 @@ class LocationState:
 						rule = rule & Has(f"{req} Complete")
 				print(rule)
 				world.set_rule(enter, rule)
+		
+		world.spoiler_text += f"Act Levels for {world.multiworld.player_name[world.player]}:\n"
+		for i in range(len(all_stages)):
+			if all_stages[i] in unshuffled_stages: continue
+			world.spoiler_text += f"\t{all_stages_unshuffled[i]} -> {self.act_levels[str(i)]} ({'Moon' if 'Night' in all_stages_unshuffled[i] else 'Sun'})\n"
 		
 		if world.progression_mode == 1:
 			world.create_entrance(menu_region, world.get_region("Apotos Hub"), Has(HUB_UNLOCK_APOTOS))

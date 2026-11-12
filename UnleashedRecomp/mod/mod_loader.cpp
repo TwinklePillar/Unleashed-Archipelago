@@ -27,6 +27,8 @@ struct Mod
 
 static std::vector<Mod> g_mods;
 
+#include <iostream>
+
 std::filesystem::path ModLoader::ResolvePath(std::string_view path)
 {
     std::string_view root;
@@ -91,8 +93,16 @@ std::vector<std::filesystem::path>* ModLoader::GetIncludeDirectories(size_t modI
     return modIndex < g_mods.size() ? &g_mods[modIndex].includeDirs : nullptr;
 }
 
+static void InitAPMod() {
+	Mod apMod;
+	apMod.type = ModType::HMM;
+	apMod.includeDirs.emplace_back(g_executableRoot / "SWAAP/Assets");
+	g_mods.emplace_back(apMod);
+}
+
 void ModLoader::Init()
 {
+	InitAPMod();
     const std::filesystem::path& userPath = GetUserPath();
 
     IniFile configIni;
@@ -831,6 +841,7 @@ PPC_FUNC(sub_82E0B500)
                         appendArFilePath /= "+";
                         appendArFilePath += arFilePath.filename();
                     }
+                   	std::cout << "Found Mod Path: " << appendArFilePath << std::endl;
 
                     loadArchives(appendArFilePath);
                 }

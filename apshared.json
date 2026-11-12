@@ -28,6 +28,20 @@
 		{"name": "20 Rings", "item_classif": "filler", "group": "Junk", "const_name": "RINGS_20"},
 		{"name": "50 Rings", "item_classif": "filler", "group": "Junk", "const_name": "RINGS_50"}
 	],
+	"souvenirs": {
+		"3": {"name": "Sun Medal #1", "id": 50030060, "sanity": "Sun Medals"},
+		"6": {"name": "Moon Medal #1", "id": 50030020, "sanity": "Moon Medals"},
+		"7": {"name": "Sun Medal #2", "id": 50030061, "sanity": "Sun Medals"},
+		"11": {"name": "Moon Medal #2", "id": 50030021, "sanity": "Moon Medals"},
+		"16": {"name": "Sun Medal #3", "id": 50030062, "sanity": "Sun Medals"},
+		"18": {"name": "Sun Medal #4", "id": 50030063, "sanity": "Sun Medals"},
+		"27": {"name": "Moon Medal #3", "id": 50030022, "sanity": "Moon Medals"},
+		"30": {"name": "Sun Medal #5", "id": 50030064, "sanity": "Sun Medals"},
+		"32": {"name": "Moon Medal #4", "id": 50030023, "sanity": "Moon Medals"},
+		"36": {"name": "Moon Medal #5", "id": 50030024, "sanity": "Moon Medals"},
+		"40": {"name": "Moon Medal #6", "id": 50030025, "sanity": "Moon Medals"},
+		"42": {"name": "Sun Medal #6", "id": 50030065, "sanity": "Sun Medals"}
+	},
 	"stages": [
 		{"name": "Apotos Hub", "type": "hub", "evil": -1, "checks": [
 			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 60010020, "req": []},
@@ -89,7 +103,7 @@
 		]},
 		{"name": "Windmill Isle Night Act 2", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 61050000, "req": []},
-			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 61050020, "req": []},
+			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 61050021, "req": []},
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 61050060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 61050061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 61050062, "req": []},
@@ -334,7 +348,7 @@
 			{"stage": "Dragon Road Day Act 2", "evil": 0, "level": 3, "req": []},
 			{"stage": "Dragon Road Day Act 3", "evil": 0, "level": 5, "req": []},
 			{"stage": "Dragon Road Night Act 1", "evil": 1, "level": 2, "req": []},
-			{"stage": "Dragon Road Night Act 2", "evil": 1, "level": 3, "req": []},
+			{"stage": "Dragon Road Night Act 2", "evil": 1, "level": 4, "req": []},
 			{"stage": "Dark Gaia Phoenix", "evil": 1, "level": 1, "req": []}
 		]},
 		{"name": "Dragon Road Day Act 1", "type": "stage", "evil": 0, "checks": [

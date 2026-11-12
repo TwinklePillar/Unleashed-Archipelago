@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TownManTimeTable>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="=">0</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalk">
+      <param>debug</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="=">40</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">1</value>
+      </element>
+    </Flag>
+    <TownID>EuropeanCity</TownID>
+    <PosID>s40d_Navi</PosID>
+    <Behavior type="StandTalkEndFlag">
+      <param>s40d_Navi</param>
+      <param>iFlag_Tails</param>
+      <param>2</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="=">40</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">2</value>
+      </element>
+    </Flag>
+    <TownID>EuropeanCity</TownID>
+    <PosID>s40d_Wait</PosID>
+    <Behavior type="StandTalk">
+      <param>s40d_Wait</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="=">40</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">3</value>
+      </element>
+    </Flag>
+    <TownID>EuropeanCity</TownID>
+    <PosID>s40d_Wait</PosID>
+    <Behavior type="StandTalk">
+      <param>s40d_GoToAfr</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="=">80</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">4</value>
+      </element>
+    </Flag>
+    <TownID>Africa</TownID>
+    <PosID>s80d_Navi</PosID>
+    <Behavior type="StandTalkEndFlag">
+      <param>s80d_Navi</param>
+      <param>iFlag_Tails</param>
+      <param>5</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="=">80</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">6</value>
+      </element>
+    </Flag>
+    <TownID>EuropeanCity</TownID>
+    <PosID>Camera_01</PosID>
+    <Behavior type="StandTalkEndFlag">
+      <param>Camera_01</param>
+      <param>iFlag_Tails</param>
+      <param>7</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="&gt;=">80</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_TownSecNo</expression>
+        <value operator="&lt;=">90</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">8</value>
+      </element>
+    </Flag>
+    <TownID>EuropeanCity</TownID>
+    <PosID>Camera_02</PosID>
+    <Behavior type="StandTalkEndFlag">
+      <param>Camera_02</param>
+      <param>iFlag_Tails</param>
+      <param>9</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">101</value>
+      </element>
+    </Flag>
+    <TownID>PetraLabo</TownID>
+    <PosID>GoToEx2</PosID>
+    <Behavior type="StandTalk">
+      <param>debug</param>
+    </Behavior>
+  </TimeSet>
+</TownManTimeTable>

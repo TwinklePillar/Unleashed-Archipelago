@@ -19,16 +19,32 @@ namespace SWAAP {
 		bool walljump;
 		bool airboost;
 		bool lightdash;
-		SWA_INSERT_PADDING(0x5D4);
+		SWA_INSERT_PADDING(0x5A0);
+		be<uint32_t> moneyRing;
+		SWA_INSERT_PADDING(0x30);
 		be<uint32_t> experience;
+		SWA_INSERT_PADDING(4);
+		be<uint32_t> totalRing;
 		SWA_INSERT_PADDING(0x19C);
 	};
 	
 	class FlagManager {
 		public:
-		struct Flag {
+		union Flag {
 			xpointer<const char> name;
-			uint32_t value;
+			struct {
+				xpointer<const char> name;
+				bool value;
+			} bFlag;
+			struct {
+				xpointer<const char> name;
+				be<uint32_t> value;
+			} iFlag;
+			struct {
+				xpointer<const char> name;
+				hh::vector<xpointer<char>> named;
+				be<uint32_t> value;
+			} eFlag;
 		};
 	
 		struct RegisteredFlag {

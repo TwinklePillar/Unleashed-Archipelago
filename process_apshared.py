@@ -37,6 +37,18 @@ for stage in shared["stages"]:
 		if not "evil" in check:
 			check["evil"] = -1
 
+for souvenir in shared["souvenirs"].values():
+	check_name = f"Souvenir - {souvenir['name']}"
+	stage_sanity = f"Souvenir {check['sanity']}"
+	location_name_to_id[check_name] = souvenir["id"]
+	if not "Souvenir" in location_name_groups:
+		location_name_groups["Souvenir"] = []
+	if not stage_sanity in location_name_groups:
+		location_name_groups[stage_sanity] = []
+	location_name_groups["Souvenir"].append(check_name)
+	location_name_groups[souvenir["sanity"]].append(check_name)
+	location_name_groups[stage_sanity].append(check_name)
+
 current_item_id = 1
 
 for item in shared["items"]:

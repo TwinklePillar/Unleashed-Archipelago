@@ -51,6 +51,8 @@ class SWAWorld(World):
 		
 		if self.options.medalsanity:
 			self.location_state.sanities += ["Sun Medals", "Moon Medals"]
+		if self.options.mediasanity:
+			self.location_state.sanities += ["Records", "Tapes", "Books"]
 		
 		self.free_hub = self.random.choice((
 			HUB_UNLOCK_APOTOS,

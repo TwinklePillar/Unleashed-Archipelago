@@ -1,0 +1,701 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TownManTimeTable>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">00</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_00d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">10</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_Snow_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_10d_AfterClrSnwD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>11</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">10</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_10d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>11</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">11</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_EuropeanCity_N1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_11d_NaviSnwD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_Tails</param>
+      <param>10</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">11</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_Snow_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_11d_NaviEucN</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">11</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_11d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">20</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>iFlag_Tails</expression>
+        <value operator="=">10</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_20d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>21</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">20</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_20d_Camara</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>21</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">21</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_21d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">30</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_30d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>31</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">31</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_China_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_31d_NaviEucD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">31</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_EuropeanCity_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_31d_NaviChnD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">31</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_31d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">40</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_40d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>41</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">41</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_40d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">50</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_50d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>51</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">51</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_50d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">60</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_60d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>61</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">70</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_70d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>71</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">71</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_71d_NaviNycD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">71</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_NYCity_N1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_71d_NaviPtrN</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">71</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_71d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">80</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_80d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>81</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">81</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_B1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_NYCity_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_SouthEastAsia_N1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_81d_AfterClearNycD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">81</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_B1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_NYCity_D1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_SouthEastAsia_N1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_81d_AfterClearSeaN</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">81</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_B1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_NYCity_D1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_SouthEastAsia_N1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_81d_AfterClearPtrD</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">81</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_B1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_NYCity_D1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_SouthEastAsia_N1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_81d_AfterClearPtrB</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">81</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_PetraCapital_B1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_NYCity_D1</expression>
+        <value operator="=">true</value>
+      </element>
+    </Flag>
+    <Flag operator="&amp;">
+      <element>
+        <expression>bFlag_StgClear_SouthEastAsia_N1</expression>
+        <value operator="=">false</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_81d_LastSeaN</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">81</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_81d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">90</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_90d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>91</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">91</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_90d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">100</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotionEndFlag">
+      <param>ProfInfo_100d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+      <param>iFlag_ProfInfo_State</param>
+      <param>101</param>
+    </Behavior>
+  </TimeSet>
+  <TimeSet>
+    <Flag>
+      <element>
+        <expression>iFlag_ProfInfo_State</expression>
+        <value operator="=">101</value>
+      </element>
+    </Flag>
+    <TownID>EULabo</TownID>
+    <PosID>StandNormal</PosID>
+    <Behavior type="StandTalkMotion">
+      <param>ProfInfo_100d</param>
+      <param>idle</param>
+      <param>NO</param>
+      <param>ON</param>
+    </Behavior>
+  </TimeSet>
+</TownManTimeTable>
