@@ -1164,3 +1164,13 @@ registers = ["r3", "r10", "r11"]
 name = "SWA_AP_HubRandoMidAsmHook"
 address = 0x8258A340
 registers = ["r29", "r30"]
+
+[[midasm_hook]]
+name = "SWA_AP_MedalLocationMidAsmHook"
+address = 0x8251C114
+registers = ["r3", "r29", "r31"]
+
+[[midasm_hook]]
+name = "SWA_AP_StageCompleteMidAsmHook"
+address = 0x824A14D8
+registers = ["r18"]

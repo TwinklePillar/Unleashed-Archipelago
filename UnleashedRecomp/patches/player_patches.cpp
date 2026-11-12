@@ -95,11 +95,15 @@ void PostUnleashMidAsmHook(PPCRegister& r30)
     g_isUnleashCancelled = false;
 }
 
+#include "archipelago/archipelago.h"
+
 // SWA::Player::CEvilSonicContext
 PPC_FUNC_IMPL(__imp__sub_823B49D8);
 PPC_FUNC(sub_823B49D8)
 {
     __imp__sub_823B49D8(ctx, base);
+    printf("r3: %08x\n", ctx.r3.u32);
+    SWAAP::ArchipelagoManager::evilContext.ptr = ctx.r3.u32;
 
     App::s_isWerehog = true;
 
@@ -111,6 +115,7 @@ PPC_FUNC_IMPL(__imp__sub_823B4590);
 PPC_FUNC(sub_823B4590)
 {
     __imp__sub_823B4590(ctx, base);
+    SWAAP::ArchipelagoManager::evilContext.ptr = 0;
 
     App::s_isWerehog = false;
 

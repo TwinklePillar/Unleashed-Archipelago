@@ -50,7 +50,7 @@ class SWAWorld(World):
 		self.location_state.include_night = self.options.include_night.value
 		
 		if self.options.medalsanity:
-			self.location_state.sanities += ["sun", "moon"]
+			self.location_state.sanities += ["Sun Medals", "Moon Medals"]
 		
 		self.free_hub = self.random.choice((
 			HUB_UNLOCK_APOTOS,

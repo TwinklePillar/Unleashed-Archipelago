@@ -9,7 +9,7 @@ class SWALocation(Location):
 class LocationState:
 	def __init__(self):
 		self.er_regions = []
-		self.sanities = ["complete", "shoe"]
+		self.sanities = ["Completions", "Shoes"]
 		self.regen = False
 		self.act_levels = {}
 		
@@ -65,7 +65,7 @@ class LocationState:
 				if stage["name"] == "Adabat Hub" and world.free_hub == HUB_UNLOCK_ADABAT: free_hub = (stage, stage_region)
 				continue
 
-		level_weights = [0, 4, 4, 3, 3, 2, 2, 1]
+		level_weights = [0, 8, 8, 7, 7, 6, 6, 4]
 		levels = []
 		for i in range(len(level_weights)):
 			for j in range(level_weights[i]):
@@ -121,8 +121,9 @@ class LocationState:
 					level = -1
 				if (level == -1): level = sub["level"]
 				if level > 1:
-					if sub["evil"]: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
-					else: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
+					if sub["evil"] == 1: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
+					elif sub["evil"] == 0: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
+					else: rule = True_()
 				else:
 					rule = True_()
 				if world.act_items:

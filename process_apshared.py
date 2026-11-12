@@ -71,7 +71,11 @@ with open("world/apshared.py", "w") as appy:
 	appy.write("\nitem_name_groups = ")
 	appy.write(json.dumps(item_name_groups))
 	for item in shared["items"]:
-		appy.write(f"\n{item['name'].replace(' ', '_').replace('.', '').replace('-', '').replace(':', '').upper()} = '{item['name']}'")
+		if "const_name" in item:
+			item_const = item["const_name"]
+		else:
+			item_const = item['name'].replace(' ', '_').replace('.', '').replace('-', '').replace(':', '').upper()
+		appy.write(f"\n{item_const} = '{item['name']}'")
 
 with open("UnleashedRecomp/archipelago/apshared.h", "w") as apcpp:
 	apcpp.write("#ifndef SWA_AP_SHARED\n#define SWA_AP_SHARED\n\n")
@@ -79,7 +83,11 @@ with open("UnleashedRecomp/archipelago/apshared.h", "w") as apcpp:
 	apcpp.write(f"#define SWA_AP_MIN_VERSION {shared['min_version']}\n")
 	apcpp.write(f'#define SWA_AP_GAME "{shared['game']}"\n\n')
 	for item in shared["items"]:
-		apcpp.write(f"#define {item['name'].replace(' ', '_').replace('.', '').replace('-', '').replace(':', '').upper()} {item['id']}\n")
+		if "const_name" in item:
+			item_const = item["const_name"]
+		else:
+			item_const = item['name'].replace(' ', '_').replace('.', '').replace('-', '').replace(':', '').replace('+', '').upper()
+		apcpp.write(f"#define {item_const} {item['id']}\n")
 	apcpp.write("\nstatic const char* const VANILLA_ACT_ORDER[] = {\n")
 	for stage in shared["stages"]:
 		if stage["type"] != "hub":
