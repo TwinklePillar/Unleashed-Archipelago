@@ -37,7 +37,8 @@ class ArchipelagoManager {
 		static void SetActOrderCallback(std::map<int, int> actorder);
 
 		static void DebugLog(std::string buf);
-		
+
+		static bool isDebug;
 		static int version;
 		static int progressionMode;
 		static int actItems;

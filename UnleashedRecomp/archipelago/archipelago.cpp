@@ -30,10 +30,12 @@ static auto lastFlags = std::map<const char*, uint32_t>();
 static auto excludedIndices = std::set<int>();
 static auto indexStat = std::filesystem::file_time_type();
 
+bool ArchipelagoManager::isDebug = false;
+
 xpointer<CEvilSonicContext> ArchipelagoManager::evilContext;
 
 void ArchipelagoManager::DebugLog(std::string buf) {
-	if (std::filesystem::exists(GetUserPath() / "indices.txt") && hasInit) {
+	if (isDebug) {
 		AP_Say(buf);
 		DisplayMessage(APMessageType::MEMORY_DEBUG, buf);
 	}
@@ -138,10 +140,11 @@ static void resetWatchers() {
 
 void ArchipelagoManager::Update(double dt) {
 	auto dataPath = GetUserPath() / "indices.txt";
-	if (std::filesystem::exists(dataPath) && hasInit) {
-		elapsed += dt;
-		if (elapsed > 1) {
-			elapsed -= 1;
+	elapsed += dt;
+	if (elapsed > 1) {
+		elapsed -= 1;
+		if (std::filesystem::exists(dataPath) && hasInit) {
+			isDebug = true;
 			auto curStat = std::filesystem::last_write_time(dataPath);
 			if (curStat != indexStat) {
 				indexStat = curStat;
@@ -155,7 +158,7 @@ void ArchipelagoManager::Update(double dt) {
 					excludedIndices.insert(std::stoi(buf));
 				}
 			}
-		}
+		} else isDebug = false;
 	}
 	
 	auto appdoc = SWA::CApplicationDocument::GetInstance();
@@ -165,7 +168,7 @@ void ArchipelagoManager::Update(double dt) {
 //	printf("GameParameter @ %p\n", appdoc->m_pMember->m_spGameParameter.get());
 //	printf("Save Data @ %p\n", save);
 	
-	if (std::filesystem::exists(dataPath) && hasInit) {
+	if (isDebug) {
 		FlagManager* flags = FlagManager::GetInstance();
 		watchFlags(flags->eFlag);
 		watchFlags(flags->iFlag);
@@ -179,7 +182,7 @@ void ArchipelagoManager::Update(double dt) {
 		if (lastStage.StageID != curStage.StageID) DebugLog(std::format<int>("New Stage: {0}", curStage.StageID));
 	}
 
-	if (std::filesystem::exists(dataPath) && hasInit) {
+	if (isDebug) {
 		for (int i = 0; i < sizeof(SaveData); i++) {
 			if (excludedIndices.contains(i)) continue;
 			uint8_t prev = ((uint8_t*)&g_lastSaveData)[i];
@@ -545,7 +548,7 @@ PPC_FUNC(sub_8273EFC0) {
 	}
 
 	int needMedalNum = PPC_LOAD_U32(ctx.r3.u32 + 276);
-	printf("r3: %08x\n", ctx.r3.u32);
+	printf("Entrance @ %08x\n", ctx.r3.u32);
 	printf("\tAreaType: %i\n", areaType);
 	printf("\tDoorType: %i\n", doorType);
 	printf("\tNeedMedalNum: %i\n", needMedalNum);

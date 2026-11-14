@@ -15,20 +15,27 @@ class LocationState:
 		
 		self.include_day = 1
 		self.include_night = 1
+		self.enable_shop = 0
 
 	def setup_regions(self, world):
 		menu_region = Region("Menu", world.player, world.multiworld)
 		world.multiworld.regions.append(menu_region)
 		
-		souvenir_region = Region("Souvenir", world.player, world.multiworld)
-		world.multiworld.regions.append(souvenir_region)
-		for k in apshared["souvenirs"].keys():
-			souvenir = apshared["souvenirs"][k]
-			count = int(k)
-			check_name = f"Souvenir - {souvenir['name']}"
-			souvenir_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
-			world.set_rule(world.get_location(check_name), Has("Progressive Souvenir", count))
-		world.create_entrance(menu_region, souvenir_region, Has("Level Completion"))
+		if self.enable_shop:
+			menu_region.add_event(
+				f"Shop Access", "Shop Access",
+				location_type=SWALocation, item_type=SWAItem,
+				rule=Has("Level Completion", 2), show_in_spoiler=False
+			)
+			souvenir_region = Region("Souvenir", world.player, world.multiworld)
+			world.multiworld.regions.append(souvenir_region)
+			for k in apshared["souvenirs"].keys():
+				souvenir = apshared["souvenirs"][k]
+				count = int(k)
+				check_name = f"Souvenir - {souvenir['name']}"
+				souvenir_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
+				world.set_rule(world.get_location(check_name), Has("Progressive Souvenir", count))
+			world.create_entrance(menu_region, souvenir_region)
 		
 		hubs = []
 		free_hub = ()
@@ -51,14 +58,11 @@ class LocationState:
 				if check["evil"] == 0 and not self.include_day: continue
 				if check["evil"] == 1 and not self.include_night: continue
 				check_name = f"{stage['name']} - {check['name']}"
-				if check["sanity"] in self.sanities:
+				if check["sanity"] in self.sanities and (self.enable_shop or not "Shop Access" in check["req"]):
 					stage_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
 					rule = True_()
 					for req in check["req"]:
-						if req in item_name_to_id.keys():
-							rule = rule & Has(req)
-						else:
-							rule = rule & Has(f"{req} Complete")
+						rule = rule & Has(req)
 					world.set_rule(world.get_location(check_name), rule)
 					if check["name"] == "Completion" and len(check["req"]) == 0:
 						sphere_zero_stages.append(stage["name"])
@@ -108,13 +112,15 @@ class LocationState:
 			all_stages_unshuffled.append(stage)
 		
 		for hub in hubs:
-			for i in range(5):
-				hub[1].add_event(
-					f"{hub[0]['name']} - Progressive Souvenir #{i+1}", "Progressive Souvenir",
-					location_type=SWALocation, item_type=SWAItem,
-					rule=True_(), show_in_spoiler=False
-				)
-			
+			if hub[0]["name"] != "World Map" and self.enable_shop:
+				for i in range(5):
+					hub[1].add_event(
+						f"{hub[0]['name']} - Progressive Souvenir #{i+1}", "Progressive Souvenir",
+						location_type=SWALocation, item_type=SWAItem,
+						rule=Has("Shop Access"), show_in_spoiler=False
+					)
+
+			MEDAL_TO_LEVEL = [0, 0, 15, 30, 45, 60, 80, 120]
 			for sub in hub[0]["sub"]:
 				if sub["evil"] == 0 and not self.include_day: continue
 				if sub["evil"] == 1 and not self.include_night: continue
@@ -141,8 +147,12 @@ class LocationState:
 					level = sub["level"]
 					self.act_levels[index] = level
 				if level > 1:
-					if sub["evil"] == 1: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
-					elif sub["evil"] == 0: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
+					if sub["evil"] == 1:
+						if world.medal_items: rule = Has(MOON_MEDAL, MEDAL_TO_LEVEL[level])
+						else: rule = Has(PROGRESSIVE_MOON_LEVEL, level-1)
+					elif sub["evil"] == 0:
+						if world.medal_items: rule = Has(SUN_MEDAL, MEDAL_TO_LEVEL[level])
+						else: rule = Has(PROGRESSIVE_SUN_LEVEL, level-1)
 					else: rule = True_()
 				else:
 					rule = True_()
@@ -162,6 +172,7 @@ class LocationState:
 			world.spoiler_text += f"\t{all_stages_unshuffled[i]} -> {self.act_levels[str(i)]} ({'Moon' if 'Night' in all_stages_unshuffled[i] else 'Sun'})\n"
 		
 		if world.progression_mode == 1:
+			world.create_entrance(menu_region, world.get_region("World Map"))
 			world.create_entrance(menu_region, world.get_region("Apotos Hub"), Has(HUB_UNLOCK_APOTOS))
 			world.create_entrance(menu_region, world.get_region("Mazuri Hub"), Has(HUB_UNLOCK_MAZURI))
 			world.create_entrance(menu_region, world.get_region("Spagonia Hub"), Has(HUB_UNLOCK_SPAGONIA))
@@ -171,7 +182,11 @@ class LocationState:
 			world.create_entrance(menu_region, world.get_region("Empire City Hub"), Has(HUB_UNLOCK_EMPIRE_CITY))
 			world.create_entrance(menu_region, world.get_region("Adabat Hub"), Has(HUB_UNLOCK_ADABAT))
 
-			egg_req = Has(HUB_UNLOCK_EGGMANLAND) & Has(PROGRESSIVE_SUN_LEVEL, 6) & Has(PROGRESSIVE_MOON_LEVEL, 5)
+			egg_req = Has(HUB_UNLOCK_EGGMANLAND)
+			if world.medal_items:
+				egg_req = egg_req & Has(SUN_MEDAL, 120) & Has(MOON_MEDAL, 80)
+			else:
+				egg_req = egg_req & Has(PROGRESSIVE_SUN_LEVEL, 6) & Has(PROGRESSIVE_MOON_LEVEL, 5)
 			for i in item_name_groups["Emeralds"]: egg_req = egg_req & Has(i)
 			world.create_entrance(menu_region, world.get_region("Eggmanland Hub"), egg_req)
 		world.get_location("Dark Gaia - Completion").place_locked_item(world.create_item(THE_WORLD_REPAIRED))

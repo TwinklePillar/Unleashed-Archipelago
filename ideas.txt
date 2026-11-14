@@ -11,8 +11,6 @@ Alpha:
 		Ice Trap
 		Hourglass Trap
 		QTE Trap
-	Medal/Collectible Sanities
-	Medal/Level Toggle
 	"Sent Item" prompt
 
 Level IDs

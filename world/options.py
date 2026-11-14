@@ -50,12 +50,23 @@ class RandomizeMedalRequirements(Choice):
 	option_randomize = 1
 	option_no_requirements = 2
 	
+class MedalItems(Toggle):
+	"""
+	Should there be 200 sun and 200 moon medals in the pool instead of 7 progressive levels each?
+	"""
+	display_name = "Medal Items"
 
 class ChaosEmeralds(DefaultOnToggle):
 	"""
 	Should the 7 chaos emeralds be shuffled into the item pool?
 	"""
 	display_name = "Chaos Emeralds"
+
+class EnableShop(Toggle):
+	"""
+	Should the shop locations be counted for sanities?
+	"""
+	display_name = "Enable Shop"
 
 class MedalSanity(Toggle):
 	"""
@@ -77,6 +88,8 @@ class SWAOptions(PerGameCommonOptions):
 	include_night: IncludeNight
 #	act_shuffle: ActShuffle
 	random_act_levels: RandomizeMedalRequirements
+	medal_items: MedalItems
 	chaos_emeralds: ChaosEmeralds
+	enable_shop: EnableShop
 	medalsanity: MedalSanity
 	mediasanity: MediaSanity

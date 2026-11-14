@@ -1174,3 +1174,8 @@ registers = ["r3", "r29", "r31"]
 name = "SWA_AP_StageCompleteMidAsmHook"
 address = 0x824A14D8
 registers = ["r18"]
+
+[[midasm_hook]]
+name = "SWA_AP_InventoryLocationMidAsmHook"
+address = 0x8251B834
+registers = ["r4", "r5"]

@@ -16,7 +16,6 @@ class SWAItem(Item):
 class ItemState:
 	def __init__(self):
 		self.item_class = {}
-		self.no_medal_requirements = 0
 		self.chaos_emeralds = 0
 		for item in apshared["items"]:
 			self.item_class[item["name"]] = item["classif"]
@@ -34,12 +33,13 @@ class ItemState:
 		if world.location_state.include_day:
 			for i in item_name_groups["Shoes"]:
 				itempool.append(world.create_item(i))
-		
-		for i in range(6):
-			if self.no_medal_requirements:
-				precollect.append(PROGRESSIVE_SUN_LEVEL)
-				precollect.append(PROGRESSIVE_MOON_LEVEL)
-			else:
+
+		if world.medal_items:
+			for i in range(200):
+				itempool.append(world.create_item(SUN_MEDAL))
+				itempool.append(world.create_item(MOON_MEDAL))
+		else:
+			for i in range(6):
 				itempool.append(world.create_item(PROGRESSIVE_SUN_LEVEL))
 				itempool.append(world.create_item(PROGRESSIVE_MOON_LEVEL))
 

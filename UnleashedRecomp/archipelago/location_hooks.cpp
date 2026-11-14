@@ -37,6 +37,17 @@ void SWA_AP_MedalLocationMidAsmHook(PPCRegister& r3, PPCRegister& r29, PPCRegist
 	SWAAP::ArchipelagoManager::DebugLog(buf);
 }
 
+void SWA_AP_InventoryLocationMidAsmHook(PPCRegister& r4, PPCRegister& r5) {
+	// r4: inventory index
+	// r5: count
+	if (r5.s32 > 0) {
+		AP_SendItem(r4.u32 + 1);
+		char buf[256] = {0};
+		snprintf(buf, 256, "Sending Inventory #%i\n", r4.u32 + 1);
+		SWAAP::ArchipelagoManager::DebugLog(buf);
+	}
+}
+
 // Shoe Location
 PPC_FUNC_IMPL(__imp__sub_82519C20);
 PPC_FUNC(sub_82519C20) {

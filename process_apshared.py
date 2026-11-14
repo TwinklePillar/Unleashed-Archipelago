@@ -12,7 +12,7 @@ hub_base = 400
 act_base = 410
 
 for stage in shared["stages"]:
-	if stage["type"] == "hub":
+	if stage["type"] == "hub" and stage["name"] != "World Map":
 		shared["items"].append({"name": f"Hub Unlock: {stage['name'][:-4]}", "item_classif": "progression", "group": "Hubs", "id": hub_base})
 		hub_base += 1
 

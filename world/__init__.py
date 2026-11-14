@@ -46,9 +46,12 @@ class SWAWorld(World):
 		self.item_state.chaos_emeralds = self.options.chaos_emeralds.value
 		self.act_items = self.options.act_items.value
 		
+		self.medal_items = self.options.medal_items.value
+		
 		self.location_state.include_day = self.options.include_day.value
 		self.location_state.include_night = self.options.include_night.value
 		
+		self.location_state.enable_shop = self.options.enable_shop.value
 		if self.options.medalsanity:
 			self.location_state.sanities += ["Sun Medals", "Moon Medals"]
 		if self.options.mediasanity:
@@ -70,8 +73,10 @@ class SWAWorld(World):
 			slot_data = re_gen_passthrough[self.game]
 			self.progression_mode = slot_data["progression_mode"]
 			self.act_items = slot_data["act_items"]
+			self.medal_items = slot_data["medal_items"]
 			self.location_state.sanities = slot_data["sanities"]
 			self.location_state.act_levels = slot_data["act_levels"]
+			self.location_state.enable_shop = 1
 			self.location_state.include_day = 1
 			self.location_state.include_night = 1
 			self.location_state.regen = True
@@ -99,7 +104,8 @@ class SWAWorld(World):
 			"sanities": self.location_state.sanities,
 			"progression_mode": self.progression_mode,
 			"act_levels": self.location_state.act_levels,
-			"act_items": self.act_items
+			"act_items": self.act_items,
+			"medal_items": self.medal_items
 		}
 
 	@staticmethod

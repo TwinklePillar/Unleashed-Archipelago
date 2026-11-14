@@ -1,11 +1,13 @@
 {
-	"version": 1,
-	"min_version": 1,
+	"version": 2,
+	"min_version": 2,
 	"game": "Sonic Unleashed",
 	"items": [
 		{"name": "The World Repaired", "item_classif": "filler"},
 		{"name": "Progressive Sun Level", "item_classif": "progression"},
 		{"name": "Progressive Moon Level", "item_classif": "progression"},
+		{"name": "Sun Medal", "item_classif": "progression"},
+		{"name": "Moon Medal", "item_classif": "progression"},
 
 		{"name": "Stomping Shoes", "item_classif": "progression", "group": "Shoes"},
 		{"name": "Wall Jump Shoes", "item_classif": "progression", "group": "Shoes"},
@@ -32,27 +34,46 @@
 		"3": {"name": "Sun Medal #1", "id": 50030060, "sanity": "Sun Medals"},
 		"6": {"name": "Moon Medal #1", "id": 50030020, "sanity": "Moon Medals"},
 		"7": {"name": "Sun Medal #2", "id": 50030061, "sanity": "Sun Medals"},
+		"9": {"name": "Art Book #19", "id": 247, "sanity": "Books"},
 		"11": {"name": "Moon Medal #2", "id": 50030021, "sanity": "Moon Medals"},
+		"12": {"name": "Art Book #52", "id": 280, "sanity": "Books"},
 		"16": {"name": "Sun Medal #3", "id": 50030062, "sanity": "Sun Medals"},
 		"18": {"name": "Sun Medal #4", "id": 50030063, "sanity": "Sun Medals"},
 		"27": {"name": "Moon Medal #3", "id": 50030022, "sanity": "Moon Medals"},
 		"30": {"name": "Sun Medal #5", "id": 50030064, "sanity": "Sun Medals"},
 		"32": {"name": "Moon Medal #4", "id": 50030023, "sanity": "Moon Medals"},
+		"33": {"name": "Art Book #53", "id": 281, "sanity": "Books"},
 		"36": {"name": "Moon Medal #5", "id": 50030024, "sanity": "Moon Medals"},
+		"39": {"name": "Art Book #20", "id": 248, "sanity": "Books"},
 		"40": {"name": "Moon Medal #6", "id": 50030025, "sanity": "Moon Medals"},
-		"42": {"name": "Sun Medal #6", "id": 50030065, "sanity": "Sun Medals"}
+		"42": {"name": "Sun Medal #6", "id": 50030065, "sanity": "Sun Medals"},
+		"43": {"name": "Record #3", "id": 169, "sanity": "Records"},
+		"45": {"name": "Video Tape #52", "id": 351, "sanity": "Tapes"}
 	},
 	"stages": [
+		{"name": "World Map", "type": "hub", "evil": -1, "checks": [
+			{"name": "Record #58 (Wentos)", "sanity": "Records", "id": 224, "req": ["Shop Access"]},
+			{"name": "Art Book #55 (Wentos)", "sanity": "Books", "id": 283, "req": ["Shop Access"]},
+			{"name": "Art Book #56 (Wentos)", "sanity": "Books", "id": 284, "req": ["Shop Access"]},
+			{"name": "Art Book #57 (Wentos)", "sanity": "Books", "id": 285, "req": ["Shop Access"]}
+		], "sub": []},
 		{"name": "Apotos Hub", "type": "hub", "evil": -1, "checks": [
 			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 60010020, "req": []},
 			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 60010021, "req": []},
 			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 61010060, "req": []},
 			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 61010061, "req": []},
+			{"name": "Record #15 (Shop)", "sanity": "Records", "id": 181, "req": ["Shop Access"]},
+			{"name": "Record #40 (Shop)", "sanity": "Records", "id": 206, "req": ["Shop Access"]},
+			{"name": "Record #41 (Shop)", "sanity": "Records", "id": 207, "req": ["Shop Access"]},
 
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 60020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 60020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 60020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 60020061, "req": []}
+			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 60020061, "req": []},
+			{"name": "Record #4 (ETF)", "sanity": "Records", "id": 170, "req": []},
+			{"name": "Record #59 (ETF)", "sanity": "Records", "id": 225, "req": []},
+			{"name": "Art Book #21 (ETF)", "sanity": "Books", "id": 249, "req": []},
+			{"name": "Art Book #25 (ETF)", "sanity": "Books", "id": 253, "req": []}
 		], "sub": [
 			{"stage": "Windmill Isle Day Act 1", "evil": 0, "level": 1, "req": []},
 			{"stage": "Windmill Isle Day Act 2", "evil": 0, "level": 1, "req": []},
@@ -74,13 +95,20 @@
 			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 60040026, "req": []},
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 60040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 60040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 60040062, "req": []}
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 60040062, "req": []},
+
+			{"name": "Record #1", "sanity": "Records", "id": 167, "req": ["Wall Jump Shoes"]},
+			{"name": "Record #5", "sanity": "Records", "id": 171, "req": []},
+			{"name": "Art Book #1", "sanity": "Books", "id": 229, "req": []},
+			{"name": "Video Tape #1", "sanity": "Tapes", "id": 300, "req": []}
 		]},
 		{"name": "Windmill Isle Day Act 3", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 60050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 60050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 60050021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 60050060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 60050060, "req": []},
+			{"name": "Art Book #2", "sanity": "Books", "id": 230, "req": []},
+			{"name": "Art Book #22", "sanity": "Books", "id": 250, "req": []}
 		]},
 		{"name": "Windmill Isle Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 61040000, "req": []},
@@ -99,7 +127,13 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 61040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 61040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 61040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 61040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 61040069, "req": []},
+
+			{"name": "Record #16", "sanity": "Records", "id": 182, "req": []},
+			{"name": "Record #61", "sanity": "Records", "id": 227, "req": []},
+			{"name": "Art Book #24", "sanity": "Books", "id": 252, "req": []},
+			{"name": "Art Book #26", "sanity": "Books", "id": 254, "req": []},
+			{"name": "Art Book #64", "sanity": "Books", "id": 292, "req": []}
 		]},
 		{"name": "Windmill Isle Night Act 2", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 61050000, "req": []},
@@ -107,7 +141,10 @@
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 61050060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 61050061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 61050062, "req": []},
-			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 61050063, "req": []}
+			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 61050063, "req": []},
+
+			{"name": "Record #17", "sanity": "Records", "id": 183, "req": []},
+			{"name": "Art Book #54", "sanity": "Books", "id": 282, "req": []}
 		]},
 		
 		{"name": "Mazuri Hub", "type": "hub", "evil": -1, "checks": [
@@ -116,10 +153,17 @@
 			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 11010060, "req": []},
 			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 11010061, "req": []},
 
+			{"name": "Art Book #65 (Shop)", "sanity": "Books", "id": 293, "req": ["Shop Access"]},
+			{"name": "Video Tape #18 (Shop)", "sanity": "Tapes", "id": 317, "req": ["Shop Access"]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 10020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 10020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 10020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 10020061, "req": []}
+			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 10020061, "req": []},
+
+			{"name": "Record #42 (ETF)", "sanity": "Records", "id": 208, "req": []},
+			{"name": "Record #43 (ETF)", "sanity": "Records", "id": 209, "req": []},
+			{"name": "Art Book #38 (ETF)", "sanity": "Books", "id": 266, "req": []}
 		], "sub": [
 			{"stage": "Savannah Citadel Day Act 1", "evil": 0, "level": 1, "req": []},
 			{"stage": "Savannah Citadel Day Act 2", "evil": 0, "level": 3, "req": []},
@@ -139,19 +183,29 @@
 			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 10040026, "req": []},
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 10040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 10040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 10040062, "req": []}
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 10040062, "req": []},
+
+			{"name": "Record #6", "sanity": "Records", "id": 172, "req": []},
+			{"name": "Art Book #5", "sanity": "Books", "id": 233, "req": []},
+			{"name": "Video Tape #6", "sanity": "Tapes", "id": 305, "req": []},
+			{"name": "Video Tape #8", "sanity": "Tapes", "id": 307, "req": []}
 		]},
 		{"name": "Savannah Citadel Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 10050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 10050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 10050021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 10050060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 10050060, "req": []},
+
+			{"name": "Record #60", "sanity": "Records", "id": 226, "req": []},
+			{"name": "Art Book #6", "sanity": "Books", "id": 234, "req": []}
 		]},
 		{"name": "Savannah Citadel Day Act 3", "type": "stage", "evil": 0, "checks": [
-			{"name": "Completion", "sanity": "Completions", "id": 10070000, "req": []},
-			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 10070020, "req": []},
-			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 10070021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 10070060, "req": []}
+			{"name": "Completion", "sanity": "Completions", "id": 10070000, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 10070020, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 10070021, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 10070060, "req": ["Wall Jump Shoes"]},
+
+			{"name": "Art Book #35", "sanity": "Books", "id": 263, "req": ["Wall Jump Shoes"]}
 		]},
 		{"name": "Savannah Citadel Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 11040000, "req": []},
@@ -170,7 +224,13 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 11040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 11040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 11040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 11040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 11040069, "req": []},
+
+			{"name": "Record #14", "sanity": "Records", "id": 180, "req": []},
+			{"name": "Record #18", "sanity": "Records", "id": 184, "req": []},
+			{"name": "Record #62", "sanity": "Records", "id": 228, "req": []},
+			{"name": "Art Book #36", "sanity": "Books", "id": 264, "req": []},
+			{"name": "Video Tape #2", "sanity": "Tapes", "id": 301, "req": []}
 		]},
 		{"name": "Savannah Citadel Night Act 2", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 11050000, "req": []},
@@ -178,7 +238,10 @@
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 11050060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 11050061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 11050062, "req": []},
-			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 11050063, "req": []}
+			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 11050063, "req": []},
+
+			{"name": "Record #19", "sanity": "Records", "id": 185, "req": []},
+			{"name": "Art Book #37", "sanity": "Books", "id": 265, "req": []}
 		]},
 		{"name": "Egg Beetle", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 10080000, "req": []},
@@ -199,43 +262,61 @@
 			{"name": "Town Sun Medal #3", "sanity": "Sun Medals", "evil": 1, "id": 51010062, "req": []},
 			{"name": "Town Sun Medal #4", "sanity": "Sun Medals", "evil": 1, "id": 51010063, "req": []},
 
+			{"name": "Record #46 (Shop)", "sanity": "Records", "id": 212, "req": ["Shop Access"]},
+			{"name": "Record #47 (Shop)", "sanity": "Records", "id": 213, "req": ["Shop Access"]},
+			{"name": "Art Book #69 (Shop)", "sanity": "Books", "id": 297, "req": ["Shop Access"]},
+			{"name": "Video Tape #22 (Shop)", "sanity": "Tapes", "id": 321, "req": ["Shop Access"]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 50020020, "req": ["Stomping Shoes"]},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 50020021, "req": ["Stomping Shoes"]},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 50020060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
 			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 50020061, "req": ["Stomping Shoes"]},
-			{"name": "Wall Jump Shoes", "sanity": "Shoes", "id": 32773, "evil": 0, "req": ["Stomping Shoes"]}
+			{"name": "Wall Jump Shoes", "sanity": "Shoes", "id": 32773, "evil": 0, "req": ["Stomping Shoes"]},
+
+			{"name": "Record #2 (ETF)", "sanity": "Records", "id": 168, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #30 (ETF)", "sanity": "Books", "id": 258, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #31 (ETF)", "sanity": "Books", "id": 259, "req": ["Stomping Shoes", "Light Dash Shoes"]}
 		], "sub": [
 			{"stage": "Rooftop Run Day Act 1", "evil": 0, "level": 3, "req": ["Wall Jump Shoes"]},
 			{"stage": "Rooftop Run Day Act 2", "evil": 0, "level": 4, "req": ["Stomping Shoes"]},
 			{"stage": "Rooftop Run Day Act 3", "evil": 0, "level": 4, "req": ["Wall Jump Shoes"]},
 			{"stage": "Rooftop Run Night Act 1", "evil": 1, "level": 2, "req": []},
-			{"stage": "Egg Devil Ray", "evil": 0, "level": 1, "req": []},
-			{"stage": "Tornado Defense Act 1", "evil": -1, "level": 1, "req": []}
+			{"stage": "Egg Devil Ray", "evil": 0, "level": 1, "req": []}
 		]},
 		{"name": "Rooftop Run Day Act 1", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 50040000, "req": ["Wall Jump Shoes"]},
-			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 50040020, "req": []},
-			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 50040021, "req": []},
-			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 50040022, "req": []},
-			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 50040023, "req": []},
-			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 50040024, "req": []},
-			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 50040025, "req": []},
-			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 50040026, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50040060, "req": []},
-			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 50040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 50040062, "req": []}
+			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 50040022, "req": []},
+			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 50040023, "req": []},
+			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 50040024, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 50040025, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 50040021, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 50040026, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 50040020, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50040062, "req": []},
+			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 50040060, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 50040061, "req": ["Wall Jump Shoes"]},
+
+			{"name": "Record #8", "sanity": "Records", "id": 174, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #3", "sanity": "Books", "id": 231, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #58", "sanity": "Books", "id": 286, "req": ["Wall Jump Shoes"]},
+			{"name": "Video Tape #3", "sanity": "Tapes", "id": 302, "req": ["Wall Jump Shoes"]}
 		]},
 		{"name": "Rooftop Run Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 50050000, "req": ["Wall Jump Shoes"]},
-			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 50050020, "req": []},
-			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 50050021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50050060, "req": []}
+			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 50050021, "req": []},
+			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 50050020, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50050060, "req": ["Wall Jump Shoes"]},
+
+			{"name": "Art Book #4", "sanity": "Books", "id": 232, "req": []},
+			{"name": "Art Book #23", "sanity": "Books", "id": 251, "req": []}
 		]},
 		{"name": "Rooftop Run Day Act 3", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 50060000, "req": ["Wall Jump Shoes"]},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 50060020, "req": []},
-			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 50060021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50060060, "req": []}
+			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 50060021, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50060060, "req": ["Wall Jump Shoes"]},
+
+			{"name": "Art Book #27", "sanity": "Books", "id": 255, "req": ["Wall Jump Shoes"]}
 		]},
 		{"name": "Rooftop Run Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 51040000, "req": []},
@@ -254,7 +335,15 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 51040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 51040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 51040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 51040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 51040069, "req": []},
+
+			{"name": "Record #22", "sanity": "Records", "id": 188, "req": []},
+			{"name": "Record #23", "sanity": "Records", "id": 189, "req": []},
+			{"name": "Record #38", "sanity": "Records", "id": 204, "req": []},
+			{"name": "Art Book #28", "sanity": "Books", "id": 256, "req": []},
+			{"name": "Art Book #29", "sanity": "Books", "id": 257, "req": []},
+			{"name": "Video Tape #7", "sanity": "Tapes", "id": 306, "req": []},
+			{"name": "Video Tape #13", "sanity": "Tapes", "id": 312, "req": []}
 		]},
 		{"name": "Egg Devil Ray", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 50080000, "req": []},
@@ -264,9 +353,6 @@
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 50080060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 50080061, "req": []}
 		]},
-		{"name": "Tornado Defense Act 1", "type": "stage", "evil": -1, "checks": [
-			{"name": "Completion", "sanity": "Completions", "id": 50100000, "req": []}
-		]},
 		
 		{"name": "Holoska Hub", "type": "hub", "evil": -1, "checks": [
 			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 90010020, "req": []},
@@ -274,11 +360,20 @@
 			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 91010060, "req": []},
 			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 91010061, "req": []},
 
+			{"name": "Record #44 (Shop)", "sanity": "Records", "id": 210, "req": ["Shop Access"]},
+			{"name": "Record #45 (Shop)", "sanity": "Records", "id": 211, "req": ["Shop Access"]},
+			{"name": "Video Tape #47 (Shop)", "sanity": "Tapes", "id": 346, "req": ["Shop Access"]},
+			{"name": "Video Tape #55 (Shop)", "sanity": "Tapes", "id": 354, "req": ["Shop Access"]},
+			{"name": "Video Tape #58 (Smoked Mohn)", "sanity": "Tapes", "id": 357, "req": ["Shop Access"]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 90020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 90020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 90020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 90020061, "req": []},
-			{"name": "Stomping Shoes", "sanity": "Shoes", "id": 32772, "evil": 0, "req": []}
+			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 90020061, "req": ["Stomping Shoes"]},
+			{"name": "Stomping Shoes", "sanity": "Shoes", "id": 32772, "evil": 0, "req": []},
+
+			{"name": "Record #33 (ETF)", "sanity": "Records", "id": 199, "req": []},
+			{"name": "Art Book #41 (ETF)", "sanity": "Books", "id": 269, "req": ["Stomping Shoes"]}
 		], "sub": [
 			{"stage": "Cool Edge Day Act 1", "evil": 0, "level": 2, "req": ["Stomping Shoes"]},
 			{"stage": "Cool Edge Day Act 2", "evil": 0, "level": 4, "req": []},
@@ -289,20 +384,28 @@
 			{"name": "Completion", "sanity": "Completions", "id": 90040000, "req": ["Stomping Shoes"]},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 90040020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 90040021, "req": []},
-			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 90040022, "req": []},
-			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 90040023, "req": []},
-			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 90040024, "req": []},
-			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 90040025, "req": []},
-			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 90040026, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 90040060, "req": []},
-			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 90040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 90040062, "req": []}
+			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 90040022, "req": ["Stomping Shoes"]},
+			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 90040023, "req": ["Stomping Shoes"]},
+			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 90040024, "req": ["Stomping Shoes"]},
+			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 90040025, "req": ["Stomping Shoes"]},
+			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 90040026, "req": ["Stomping Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 90040061, "req": []},
+			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 90040062, "req": ["Stomping Shoes"]},
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 90040060, "req": ["Stomping Shoes"]},
+
+			{"name": "Record #7", "sanity": "Records", "id": 173, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #9", "sanity": "Books", "id": 237, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+			{"name": "Video Tape #9", "sanity": "Tapes", "id": 308, "req": ["Stomping Shoes"]}
 		]},
 		{"name": "Cool Edge Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 90050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 90050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 90050021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 90050060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 90050060, "req": []},
+
+			{"name": "Art Book #10", "sanity": "Books", "id": 238, "req": []},
+			{"name": "Art Book #39", "sanity": "Books", "id": 267, "req": []},
+			{"name": "Video Tape #12", "sanity": "Tapes", "id": 311, "req": []}
 		]},
 		{"name": "Cool Edge Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 91040000, "req": []},
@@ -321,7 +424,16 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 91040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 91040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 91040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 91040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 91040069, "req": []},
+
+			{"name": "Record #20", "sanity": "Records", "id": 186, "req": []},
+			{"name": "Record #21", "sanity": "Records", "id": 187, "req": []},
+			{"name": "Art Book #63", "sanity": "Books", "id": 291, "req": []},
+			{"name": "Art Book #70", "sanity": "Books", "id": 298, "req": []},
+			{"name": "Video Tape #5", "sanity": "Tapes", "id": 304, "req": []},
+			{"name": "Video Tape #15", "sanity": "Tapes", "id": 314, "req": []},
+			{"name": "Video Tape #20", "sanity": "Tapes", "id": 319, "req": []},
+			{"name": "Video Tape #23", "sanity": "Tapes", "id": 322, "req": []}
 		]},
 		{"name": "Dark Moray", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 91080000, "req": []},
@@ -338,13 +450,23 @@
 			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 31010060, "req": []},
 			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 31010061, "req": []},
 
+			{"name": "Record #48 (Shop)", "sanity": "Records", "id": 214, "req": ["Shop Access"]},
+			{"name": "Record #49 (Shop)", "sanity": "Records", "id": 215, "req": ["Shop Access"]},
+			{"name": "Video Tape #19 (Shop)", "sanity": "Tapes", "id": 318, "req": ["Shop Access"]},
+			{"name": "Video Tape #46 (Shop)", "sanity": "Tapes", "id": 345, "req": ["Shop Access"]},
+			{"name": "Video Tape #57 (Lin's Meat Buns)", "sanity": "Tapes", "id": 356, "req": ["Shop Access"]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 30020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 30020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 30020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 30020061, "req": []},
-			{"name": "Air Boost Shoes", "sanity": "Shoes", "id": 32774, "evil": 0, "req": ["Wall Jump Shoes"]}
+			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 30020060, "req": ["Air Boost Shoes"]},
+			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 30020061, "req": ["Air Boost Shoes"]},
+			{"name": "Air Boost Shoes", "sanity": "Shoes", "id": 32774, "evil": 0, "req": ["Wall Jump Shoes"]},
+
+			{"name": "Art Book #33 (ETF)", "sanity": "Books", "id": 261, "req": []},
+			{"name": "Video Tape #10 (ETF)", "sanity": "Tapes", "id": 309, "req": []},
+			{"name": "Video Tape #14 (ETF)", "sanity": "Tapes", "id": 313, "req": []}
 		], "sub": [
-			{"stage": "Dragon Road Day Act 1", "evil": 0, "level": 4, "req": ["Wall Jump Shoes", "Air Boost Shoes"]},
+			{"stage": "Dragon Road Day Act 1", "evil": 0, "level": 4, "req": ["Air Boost Shoes"]},
 			{"stage": "Dragon Road Day Act 2", "evil": 0, "level": 3, "req": []},
 			{"stage": "Dragon Road Day Act 3", "evil": 0, "level": 5, "req": []},
 			{"stage": "Dragon Road Night Act 1", "evil": 1, "level": 2, "req": []},
@@ -354,7 +476,7 @@
 		{"name": "Dragon Road Day Act 1", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 30040000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 30040020, "req": []},
-			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 30040021, "req": []},
+			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 30040021, "req": ["Air Boost Shoes"]},
 			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 30040022, "req": []},
 			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 30040023, "req": []},
 			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 30040024, "req": []},
@@ -362,19 +484,28 @@
 			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 30040026, "req": []},
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 30040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 30040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 30040062, "req": []}
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 30040062, "req": []},
+
+			{"name": "Record #9", "sanity": "Records", "id": 175, "req": []},
+			{"name": "Record #34", "sanity": "Records", "id": 200, "req": []},
+			{"name": "Art Book #7", "sanity": "Books", "id": 235, "req": []},
+			{"name": "Video Tape #4", "sanity": "Tapes", "id": 303, "req": []}
 		]},
 		{"name": "Dragon Road Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 30070000, "req": ["Wall Jump Shoes"]},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 30070020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 30070021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 30070060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 30070060, "req": []},
+
+			{"name": "Art Book #8", "sanity": "Books", "id": 236, "req": []}
 		]},
 		{"name": "Dragon Road Day Act 3", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 30110000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 30110020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 30110021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 30110060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 30110060, "req": []},
+			
+			{"name": "Art Book #32", "sanity": "Books", "id": 260, "req": []}
 		]},
 		{"name": "Dragon Road Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 31040000, "req": []},
@@ -393,7 +524,12 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 31040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 31040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 31040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 31040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 31040069, "req": []},
+
+			{"name": "Record #24", "sanity": "Records", "id": 190, "req": []},
+			{"name": "Record #25", "sanity": "Records", "id": 191, "req": []},
+			{"name": "Art Book #34", "sanity": "Books", "id": 262, "req": []},
+			{"name": "Video Tape #11", "sanity": "Tapes", "id": 310, "req": []}
 		]},
 		{"name": "Dragon Road Night Act 2", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 31050000, "req": []},
@@ -401,7 +537,9 @@
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 31050060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 31050061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 31050062, "req": []},
-			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 31050063, "req": []}
+			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 31050063, "req": []},
+
+			{"name": "Art Book #62", "sanity": "Books", "id": 290, "req": []}
 		]},
 		{"name": "Dark Gaia Phoenix", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 31080000, "req": []},
@@ -422,11 +560,38 @@
 			{"name": "Town Sun Medal #3", "sanity": "Sun Medals", "evil": 1, "id": 81010062, "req": []},
 			{"name": "Town Sun Medal #4", "sanity": "Sun Medals", "evil": 1, "id": 81010063, "req": []},
 
+			{"name": "Record #50 (Shop)", "sanity": "Records", "id": 216, "req": ["Shop Access"]},
+			{"name": "Record #51 (Shop)", "sanity": "Records", "id": 217, "req": ["Shop Access"]},
+			{"name": "Video Tape #31 (Shop)", "sanity": "Tapes", "id": 330, "req": ["Shop Access"]},
+			{"name": "Video Tape #35 (Shop)", "sanity": "Tapes", "id": 334, "req": ["Shop Access"]},
+			{"name": "Video Tape #38 (Shop)", "sanity": "Tapes", "id": 337, "req": ["Shop Access"]},
+			{"name": "Video Tape #42 (Shop)", "sanity": "Tapes", "id": 341, "req": ["Shop Access"]},
+			{"name": "Video Tape #48 (Shop)", "sanity": "Tapes", "id": 347, "req": ["Shop Access"]},
+			{"name": "Art Book #40 (Sandra)", "sanity": "Books", "id": 268, "req": [
+				"Hub Unlock: Apotos",
+				"Hub Unlock: Mazuri",
+				"Hub Unlock: Chun-Nan",
+				"Hub Unlock: Spagonia",
+				"Hub Unlock: Empire City"
+			]},
+			{"name": "Video Tape #24 (Sa'id)", "sanity": "Tapes", "id": 323, "req": [
+				"Hub Unlock: Chun-Nan",
+				"Hub Unlock: Mazuri",
+				"Hub Unlock: Apotos",
+				"Hub Unlock: Holoska",
+				"Hub Unlock: Empire City",
+				"Hub Unlock: Adabat"
+			]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 80020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 80020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 80020060, "req": []},
 			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 80020061, "req": []},
-			{"name": "Light Dash Shoes", "sanity": "Shoes", "id": 32775, "evil": 0, "req": []}
+			{"name": "Light Dash Shoes", "sanity": "Shoes", "id": 32775, "evil": 0, "req": []},
+
+			{"name": "Record #57 (ETF)", "sanity": "Records", "id": 223, "req": []},
+			{"name": "Art Book #42 (ETF)", "sanity": "Books", "id": 270, "req": []},
+			{"name": "Video Tape #25 (ETF)", "sanity": "Tapes", "id": 324, "req": []}
 		], "sub": [
 			{"stage": "Arid Sands Day Act 1", "evil": 0, "level": 4, "req": ["Light Dash Shoes"]},
 			{"stage": "Arid Sands Day Act 2", "evil": 0, "level": 4, "req": []},
@@ -439,12 +604,19 @@
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 80040021, "req": []},
 			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 80040022, "req": []},
 			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 80040023, "req": []},
-			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 80040024, "req": []},
-			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 80040025, "req": []},
-			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 80040026, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 80040060, "req": []},
+			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 80040024, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 80040025, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 80040026, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 80040060, "req": ["Light Dash Shoes"]},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 80040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 80040062, "req": []}
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 80040062, "req": ["Wall Jump Shoes"]},
+
+			{"name": "Record #10", "sanity": "Records", "id": 176, "req": []},
+			{"name": "Art Book #11", "sanity": "Books", "id": 239, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #12", "sanity": "Books", "id": 240, "req": ["Light Dash Shoes"]},
+			{"name": "Art Book #13", "sanity": "Books", "id": 241, "req": []},
+			{"name": "Art Book #43", "sanity": "Books", "id": 271, "req": ["Wall Jump Shoes"]},
+			{"name": "Video Tape #28", "sanity": "Tapes", "id": 327, "req": ["Wall Jump Shoes"]}
 		]},
 		{"name": "Arid Sands Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 80070000, "req": []},
@@ -469,7 +641,12 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 81040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 81040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 81040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 81040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 81040069, "req": []},
+
+			{"name": "Record #26", "sanity": "Records", "id": 192, "req": []},
+			{"name": "Record #27", "sanity": "Records", "id": 193, "req": []},
+			{"name": "Art Book #45", "sanity": "Books", "id": 273, "req": []},
+			{"name": "Art Book #61", "sanity": "Books", "id": 289, "req": []}
 		]},
 		{"name": "Dark Guardian", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 81080000, "req": []},
@@ -486,10 +663,35 @@
 			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 71010060, "req": []},
 			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 71010061, "req": []},
 
+			{"name": "Record #52 (Shop)", "sanity": "Records", "id": 218, "req": ["Shop Access"]},
+			{"name": "Record #53 (Shop)", "sanity": "Records", "id": 219, "req": ["Shop Access"]},
+			{"name": "Video Tape #33 (Shop)", "sanity": "Tapes", "id": 332, "req": ["Shop Access"]},
+			{"name": "Video Tape #40 (Shop)", "sanity": "Tapes", "id": 339, "req": ["Shop Access"]},
+			{"name": "Video Tape #41 (Shop)", "sanity": "Tapes", "id": 340, "req": ["Shop Access"]},
+			{"name": "Video Tape #44 (Shop)", "sanity": "Tapes", "id": 343, "req": ["Shop Access"]},
+			{"name": "Video Tape #49 (Shop)", "sanity": "Tapes", "id": 348, "req": ["Shop Access"]},
+			{"name": "Video Tape #53 (Shop)", "sanity": "Tapes", "id": 352, "req": ["Shop Access"]},
+			{"name": "Art Book #44 (A Final Gift)", "sanity": "Books", "id": 272, "req": [
+				"Hub Unlock: Spagonia",
+				"Hub Unlock: Mazuri",
+				"Hub Unlock: Apotos",
+				"Hub Unlock: Shamar",
+				"Hub Unlock: Chun-Nan"
+			]},
+			{"name": "Video Tape #17 (Brenda)", "sanity": "Tapes", "id": 316, "req": [
+				"Hub Unlock: Chun-Nan",
+				"Hub Unlock: Spagonia",
+				"Hub Unlock: Holoska",
+				"Hub Unlock: Shamar",
+				"Hub Unlock: Adabat"
+			]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 70020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 70020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 70020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 70020061, "req": []}
+			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 70020061, "req": []},
+
+			{"name": "Record #29 (ETF)", "sanity": "Records", "id": 195, "req": []}
 		], "sub": [
 			{"stage": "Skyscraper Scamper Day Act 1", "evil": 0, "level": 5, "req": []},
 			{"stage": "Skyscraper Scamper Day Act 2", "evil": 0, "level": 5, "req": ["Air Boost Shoes"]},
@@ -501,18 +703,27 @@
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 70040021, "req": []},
 			{"name": "Moon Medal #3", "sanity": "Moon Medals", "id": 70040022, "req": []},
 			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 70040023, "req": []},
-			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 70040024, "req": []},
-			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 70040025, "req": []},
-			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 70040026, "req": []},
+			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 70040024, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 70040025, "req": ["Wall Jump Shoes"]},
+			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 70040026, "req": ["Wall Jump Shoes", "Stomping Shoes"]},
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 70040060, "req": []},
-			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 70040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 70040062, "req": []}
+			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 70040061, "req": ["Wall Jump Shoes", "Stomping Shoes"]},
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 70040062, "req": ["Wall Jump Shoes", "Stomping Shoes"]},
+
+			{"name": "Record #11", "sanity": "Records", "id": 177, "req": []},
+			{"name": "Art Book #14", "sanity": "Books", "id": 242, "req": []},
+			{"name": "Art Book #47", "sanity": "Books", "id": 275, "req": ["Wall Jump Shoes"]},
+			{"name": "Video Tape #16", "sanity": "Tapes", "id": 315, "req": []},
+			{"name": "Video Tape #26", "sanity": "Tapes", "id": 325, "req": ["Stomping Shoes"]}
 		]},
 		{"name": "Skyscraper Scamper Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 70050000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 70050020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 70050021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 70050060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 70050060, "req": []},
+
+			{"name": "Art Book #46", "sanity": "Books", "id": 274, "req": []},
+			{"name": "Video Tape #21", "sanity": "Tapes", "id": 320, "req": []}
 		]},
 		{"name": "Skyscraper Scamper Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 71040000, "req": []},
@@ -531,7 +742,10 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 71040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 71040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 71040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 71040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 71040069, "req": []},
+
+			{"name": "Record #28", "sanity": "Records", "id": 194, "req": []},
+			{"name": "Art Book #48", "sanity": "Books", "id": 276, "req": []}
 		]},
 
 		{"name": "Adabat Hub", "type": "hub", "evil": -1, "checks": [
@@ -540,10 +754,22 @@
 			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 21010060, "req": []},
 			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 21010061, "req": []},
 
+			{"name": "Record #54 (Shop)", "sanity": "Records", "id": 220, "req": ["Shop Access"]},
+			{"name": "Record #55 (Shop)", "sanity": "Records", "id": 221, "req": ["Shop Access"]},
+			{"name": "Video Tape #30 (Shop)", "sanity": "Tapes", "id": 329, "req": ["Shop Access"]},
+			{"name": "Video Tape #32 (Shop)", "sanity": "Tapes", "id": 331, "req": ["Shop Access"]},
+			{"name": "Video Tape #34 (Shop)", "sanity": "Tapes", "id": 333, "req": ["Shop Access"]},
+			{"name": "Video Tape #37 (Shop)", "sanity": "Tapes", "id": 336, "req": ["Shop Access"]},
+			{"name": "Video Tape #43 (Shop)", "sanity": "Tapes", "id": 342, "req": ["Shop Access"]},
+			{"name": "Video Tape #50 (Shop)", "sanity": "Tapes", "id": 349, "req": ["Shop Access"]},
+			{"name": "Video Tape #59 (Bananas)", "sanity": "Tapes", "id": 358, "req": ["Shop Access"]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 20020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 20020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 20020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 20020061, "req": []}
+			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 20020061, "req": []},
+
+			{"name": "Art Book #50 (ETF)", "sanity": "Books", "id": 278, "req": []}
 		], "sub": [
 			{"stage": "Jungle Joyride Day Act 1", "evil": 0, "level": 7, "req": []},
 			{"stage": "Jungle Joyride Day Act 2", "evil": 0, "level": 5, "req": []},
@@ -560,22 +786,31 @@
 			{"name": "Moon Medal #4", "sanity": "Moon Medals", "id": 20040023, "req": []},
 			{"name": "Moon Medal #5", "sanity": "Moon Medals", "id": 20040024, "req": []},
 			{"name": "Moon Medal #6", "sanity": "Moon Medals", "id": 20040025, "req": []},
-			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 20040026, "req": []},
+			{"name": "Moon Medal #7", "sanity": "Moon Medals", "id": 20040026, "req": ["Stomping Shoes"]},
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 20040060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 20040061, "req": []},
-			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 20040062, "req": []}
+			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 20040062, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+
+			{"name": "Record #12", "sanity": "Records", "id": 178, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+			{"name": "Art Book #15", "sanity": "Books", "id": 243, "req": ["Stomping Shoes"]}
 		]},
 		{"name": "Jungle Joyride Day Act 2", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 20060000, "req": ["Wall Jump Shoes"]},
-			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 20060020, "req": []},
-			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 20060021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 20060060, "req": []}
+			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 20060021, "req": []},
+			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 20060020, "req": ["Wall Jump Shoes"]},
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 20060060, "req": []},
+
+			{"name": "Art Book #16", "sanity": "Books", "id": 244, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #49", "sanity": "Books", "id": 277, "req": ["Wall Jump Shoes"]}
 		]},
 		{"name": "Jungle Joyride Day Act 3", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 20110000, "req": []},
 			{"name": "Moon Medal #1", "sanity": "Moon Medals", "id": 20110020, "req": []},
 			{"name": "Moon Medal #2", "sanity": "Moon Medals", "id": 20110021, "req": []},
-			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 20110060, "req": []}
+			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 20110060, "req": []},
+
+			{"name": "Art Book #51", "sanity": "Books", "id": 279, "req": []},
+			{"name": "Video Tape #29", "sanity": "Tapes", "id": 328, "req": []}
 		]},
 		{"name": "Jungle Joyride Night Act 1", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 21040000, "req": []},
@@ -594,7 +829,10 @@
 			{"name": "Sun Medal #7", "sanity": "Sun Medals", "id": 21040066, "req": []},
 			{"name": "Sun Medal #8", "sanity": "Sun Medals", "id": 21040067, "req": []},
 			{"name": "Sun Medal #9", "sanity": "Sun Medals", "id": 21040068, "req": []},
-			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 21040069, "req": []}
+			{"name": "Sun Medal #10", "sanity": "Sun Medals", "id": 21040069, "req": []},
+
+			{"name": "Record #30", "sanity": "Records", "id": 196, "req": []},
+			{"name": "Art Book #59", "sanity": "Books", "id": 287, "req": []}
 		]},
 		{"name": "Jungle Joyride Night Act 2", "type": "stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 21050000, "req": []},
@@ -602,7 +840,11 @@
 			{"name": "Sun Medal #1", "sanity": "Sun Medals", "id": 21050060, "req": []},
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 21050061, "req": []},
 			{"name": "Sun Medal #3", "sanity": "Sun Medals", "id": 21050062, "req": []},
-			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 21050063, "req": []}
+			{"name": "Sun Medal #4", "sanity": "Sun Medals", "id": 21050063, "req": []},
+
+			{"name": "Record #31", "sanity": "Records", "id": 197, "req": []},
+			{"name": "Art Book #68", "sanity": "Books", "id": 296, "req": []},
+			{"name": "Video Tape #27", "sanity": "Tapes", "id": 326, "req": []}
 		]},
 		{"name": "Egg Lancer", "type": "stage", "evil": 0, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 20080000, "req": []},
@@ -613,17 +855,33 @@
 			{"name": "Sun Medal #2", "sanity": "Sun Medals", "id": 20080061, "req": []}
 		]},
 		
-		{"name": "Eggmanland Hub", "type": "hub", "evil": -1, "checks": [], "sub": [
-			{"stage": "Tornado Defense Act 2", "evil": -1, "level": 1, "req": []},
+		{"name": "Eggmanland Hub", "type": "hub", "evil": -1, "checks": [
+			{"name": "Record #35 (Shop)", "sanity": "Records", "id": 201, "req": ["Shop Access"]},
+			{"name": "Record #36 (Shop)", "sanity": "Records", "id": 202, "req": ["Shop Access"]},
+			{"name": "Record #37 (Shop)", "sanity": "Records", "id": 203, "req": ["Shop Access"]},
+			{"name": "Art Book #71 (Shop)", "sanity": "Books", "id": 299, "req": ["Shop Access"]},
+			{"name": "Video Tape #36 (Shop)", "sanity": "Tapes", "id": 335, "req": ["Shop Access"]},
+			{"name": "Video Tape #39 (Shop)", "sanity": "Tapes", "id": 338, "req": ["Shop Access"]},
+			{"name": "Video Tape #45 (Shop)", "sanity": "Tapes", "id": 344, "req": ["Shop Access"]},
+			{"name": "Video Tape #51 (Shop)", "sanity": "Tapes", "id": 350, "req": ["Shop Access"]},
+			{"name": "Video Tape #54 (Shop)", "sanity": "Tapes", "id": 353, "req": ["Shop Access"]},
+			{"name": "Video Tape #56 (Shop)", "sanity": "Tapes", "id": 355, "req": ["Shop Access"]}
+		], "sub": [
 			{"stage": "Eggmanland", "evil": -1, "level": 1, "req": []},
 			{"stage": "Egg Dragoon", "evil": 1, "level": 1, "req": []},
 			{"stage": "Dark Gaia", "evil": -1, "level": 1, "req": []}
 		]},
-		{"name": "Tornado Defense Act 2", "type": "unshuffled_stage", "evil": -1, "checks": [
-			{"name": "Completion", "sanity": "Completions", "id": 40100000, "req": []}
-		]},
 		{"name": "Eggmanland", "type": "unshuffled_stage", "evil": -1, "checks": [
-			{"name": "Completion", "sanity": "Completions", "id": 40040000, "req": ["Stomping Shoes"]}
+			{"name": "Completion", "sanity": "Completions", "id": 40040000, "req": ["Stomping Shoes"]},
+			{"name": "Record #13", "sanity": "Records", "id": 179, "req": []},
+			{"name": "Record #32", "sanity": "Records", "id": 198, "req": []},
+			{"name": "Record #39", "sanity": "Records", "id": 205, "req": []},
+			{"name": "Record #56", "sanity": "Records", "id": 222, "req": []},
+			{"name": "Art Book #17", "sanity": "Books", "id": 245, "req": []},
+			{"name": "Art Book #18", "sanity": "Books", "id": 246, "req": []},
+			{"name": "Art Book #60", "sanity": "Books", "id": 288, "req": []},
+			{"name": "Art Book #66", "sanity": "Books", "id": 294, "req": []},
+			{"name": "Art Book #67", "sanity": "Books", "id": 295, "req": []}
 		]},
 		{"name": "Egg Dragoon", "type": "unshuffled_stage", "evil": 1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 40080000, "req": []}

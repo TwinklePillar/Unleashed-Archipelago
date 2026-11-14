@@ -27,9 +27,9 @@ struct StageRecord {
     padding[40];
 };
 
-struct Collectable {
-    u8 a;
-    u8 b;
+struct InventoryItem {
+    u8 count;
+    u8 unk;
 };
 
 struct Stat {
@@ -44,7 +44,7 @@ struct SaveData {
     bool walljump;
     bool airboost;
     bool lightdash;
-    padding[0x773];
+    InventoryItem inventory[400] [[color("BFBFFF")]];
     
     be u32 chaosEnergy @ saveBegin + 34268;
     be u32 dayEnemiesKilled @ saveBegin + 34280;
@@ -59,9 +59,9 @@ struct SaveData {
     Stat ringEnergy @ saveBegin + 34296;
     be u32 nightEnemiesKilled @ saveBegin + 34272;
         
-    Collectable records[62] @ saveBegin + 33108 [[color("7F0000")]];
-    Collectable tapes[59] @ saveBegin + 33374 [[color("7F7F7F")]];
-    Collectable books[71] @ saveBegin + 33232 [[color("7F3F00")]];
+    InventoryItem records[62] @ saveBegin + 33108 [[color("7F0000")]]; // 166
+    InventoryItem tapes[59] @ saveBegin + 33374 [[color("7F7F7F")]];
+    InventoryItem books[71] @ saveBegin + 33232 [[color("7F3F00")]];
 };
 
 be s32 listFlags[5] @ 0x04;
