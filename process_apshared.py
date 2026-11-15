@@ -36,6 +36,8 @@ for stage in shared["stages"]:
 		
 		if not "evil" in check:
 			check["evil"] = -1
+		if not "mission" in check:
+			check["mission"] = 0
 
 for souvenir in shared["souvenirs"].values():
 	check_name = f"Souvenir - {souvenir['name']}"

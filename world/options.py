@@ -29,14 +29,20 @@ class ActItems(Toggle):
 class IncludeDay(DefaultOnToggle):
 	"""
 	Should the Day Sonic locations be included?
-	You may be required to transform into the Hedgehog in entrance fields regardless of this setting
+	Regardless of this setting, you may be required to transform for:
+	- Eggmanland
+	- Entrance Fields
+	- Missions
 	"""
 	display_name = "Include Day Locations"
 
 class IncludeNight(DefaultOnToggle):
 	"""
 	Should the Night Sonic locations be included?
-	You may be required to transform into the Werehog in entrance fields regardless of this setting
+	Regardless of this setting, you may be required to transform for:
+	- Eggmanland
+	- Entrance Fields
+	- Missions
 	"""
 	display_name = "Include Night Locations"
 
@@ -68,6 +74,12 @@ class EnableShop(Toggle):
 	"""
 	display_name = "Enable Shop"
 
+class EnableMissions(Toggle):
+	"""
+	Should locations from missions be counted for sanities?
+	"""
+	display_name = "Enable Missions"
+
 class MedalSanity(Toggle):
 	"""
 	Should the sun and moon medals be locations?
@@ -91,5 +103,6 @@ class SWAOptions(PerGameCommonOptions):
 	medal_items: MedalItems
 	chaos_emeralds: ChaosEmeralds
 	enable_shop: EnableShop
+	enable_missions: EnableMissions
 	medalsanity: MedalSanity
 	mediasanity: MediaSanity

@@ -50,6 +50,7 @@ class SWAWorld(World):
 		
 		self.location_state.include_day = self.options.include_day.value
 		self.location_state.include_night = self.options.include_night.value
+		self.location_state.enable_missions = self.options.enable_missions.value
 		
 		self.location_state.enable_shop = self.options.enable_shop.value
 		if self.options.medalsanity:
@@ -77,6 +78,7 @@ class SWAWorld(World):
 			self.location_state.sanities = slot_data["sanities"]
 			self.location_state.act_levels = slot_data["act_levels"]
 			self.location_state.enable_shop = 1
+			self.location_state.enable_missions = 1
 			self.location_state.include_day = 1
 			self.location_state.include_night = 1
 			self.location_state.regen = True

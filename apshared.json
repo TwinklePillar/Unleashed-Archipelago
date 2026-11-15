@@ -65,7 +65,9 @@
 			{"name": "Record #15 (Shop)", "sanity": "Records", "id": 181, "req": ["Shop Access"]},
 			{"name": "Record #40 (Shop)", "sanity": "Records", "id": 206, "req": ["Shop Access"]},
 			{"name": "Record #41 (Shop)", "sanity": "Records", "id": 207, "req": ["Shop Access"]},
-
+			
+			{"name": "The Elder's Book - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 61750060, "req": []},
+			
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 60020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 60020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 60020060, "req": []},
@@ -155,6 +157,13 @@
 
 			{"name": "Art Book #65 (Shop)", "sanity": "Books", "id": 293, "req": ["Shop Access"]},
 			{"name": "Video Tape #18 (Shop)", "sanity": "Tapes", "id": 317, "req": ["Shop Access"]},
+
+			{"name": "Spooky Shadows - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 10730020, "req": []},
+			{"name": "Run Yaya Run - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 11750060, "req": []},
+			{"name": "Final Exam - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 11770060, "req": [
+				"Hub Unlock: Spagonia",
+				"Hub Unlock: Shamar"
+			]},
 
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 10020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 10020021, "req": []},
@@ -267,6 +276,11 @@
 			{"name": "Art Book #69 (Shop)", "sanity": "Books", "id": 297, "req": ["Shop Access"]},
 			{"name": "Video Tape #22 (Shop)", "sanity": "Tapes", "id": 321, "req": ["Shop Access"]},
 
+			{"name": "Elio's Nights - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 51700060, "req": []},
+			{"name": "Lunch Thief - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 50710020, "req": []},
+			{"name": "Elio's Loss - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 50740020, "req": []},
+			{"name": "Tower Terror - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 50810020, "req": []},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 50020020, "req": ["Stomping Shoes"]},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 50020021, "req": ["Stomping Shoes"]},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 50020060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
@@ -366,6 +380,9 @@
 			{"name": "Video Tape #55 (Shop)", "sanity": "Tapes", "id": 354, "req": ["Shop Access"]},
 			{"name": "Video Tape #58 (Smoked Mohn)", "sanity": "Tapes", "id": 357, "req": ["Shop Access"]},
 
+			{"name": "A Promise Made - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 91750060, "req": []},
+			{"name": "Love Is Jerky - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 90770020, "req": ["Shop Access"]},
+
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 90020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 90020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 90020060, "req": []},
@@ -456,6 +473,11 @@
 			{"name": "Video Tape #46 (Shop)", "sanity": "Tapes", "id": 345, "req": ["Shop Access"]},
 			{"name": "Video Tape #57 (Lin's Meat Buns)", "sanity": "Tapes", "id": 356, "req": ["Shop Access"]},
 
+			{"name": "Kung Fu Speed - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 30810020, "req": []},
+			{"name": "Get Pumped - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 30720020, "req": []},
+			{"name": "Chronic Ailment - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 31730060, "req": []},
+			{"name": "Energy Boost - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 31780060, "req": []},
+			
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 30020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 30020021, "req": []},
 			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 30020060, "req": ["Air Boost Shoes"]},
@@ -567,14 +589,14 @@
 			{"name": "Video Tape #38 (Shop)", "sanity": "Tapes", "id": 337, "req": ["Shop Access"]},
 			{"name": "Video Tape #42 (Shop)", "sanity": "Tapes", "id": 341, "req": ["Shop Access"]},
 			{"name": "Video Tape #48 (Shop)", "sanity": "Tapes", "id": 347, "req": ["Shop Access"]},
-			{"name": "Art Book #40 (Sandra)", "sanity": "Books", "id": 268, "req": [
+			{"name": "Art Book #40 (Sandra)", "sanity": "Books", "mission": 1, "id": 268, "req": [
 				"Hub Unlock: Apotos",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Chun-Nan",
 				"Hub Unlock: Spagonia",
 				"Hub Unlock: Empire City"
 			]},
-			{"name": "Video Tape #24 (Sa'id)", "sanity": "Tapes", "id": 323, "req": [
+			{"name": "Video Tape #24 (Sa'id)", "sanity": "Tapes", "mission": 1, "id": 323, "req": [
 				"Hub Unlock: Chun-Nan",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Apotos",
@@ -582,6 +604,11 @@
 				"Hub Unlock: Empire City",
 				"Hub Unlock: Adabat"
 			]},
+
+			{"name": "Ice Dream - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 80740020, "req": []},
+			{"name": "Urgent Mission - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 80710020, "req": []},
+			{"name": "Shamaran Peace - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 80720020, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+			{"name": "Missing Son - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 81760060, "req": []},
 
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 80020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 80020021, "req": []},
@@ -671,20 +698,24 @@
 			{"name": "Video Tape #44 (Shop)", "sanity": "Tapes", "id": 343, "req": ["Shop Access"]},
 			{"name": "Video Tape #49 (Shop)", "sanity": "Tapes", "id": 348, "req": ["Shop Access"]},
 			{"name": "Video Tape #53 (Shop)", "sanity": "Tapes", "id": 352, "req": ["Shop Access"]},
-			{"name": "Art Book #44 (A Final Gift)", "sanity": "Books", "id": 272, "req": [
+			{"name": "Art Book #44 (A Final Gift)", "sanity": "Books", "mission": 1, "id": 272, "req": [
 				"Hub Unlock: Spagonia",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Apotos",
 				"Hub Unlock: Shamar",
 				"Hub Unlock: Chun-Nan"
 			]},
-			{"name": "Video Tape #17 (Brenda)", "sanity": "Tapes", "id": 316, "req": [
+			{"name": "Video Tape #17 (Brenda)", "sanity": "Tapes", "mission": 1, "id": 316, "req": [
 				"Hub Unlock: Chun-Nan",
 				"Hub Unlock: Spagonia",
 				"Hub Unlock: Holoska",
 				"Hub Unlock: Shamar",
 				"Hub Unlock: Adabat"
 			]},
+
+			{"name": "Passion Power - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 70740020, "req": ["Wall Jump Shoes"]},
+			{"name": "Sonic Presents - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 71770060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+			{"name": "A Dead End - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 71720060, "req": ["Hub Unlock: Shamar"]},
 
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 70020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 70020021, "req": []},
@@ -763,6 +794,8 @@
 			{"name": "Video Tape #43 (Shop)", "sanity": "Tapes", "id": 342, "req": ["Shop Access"]},
 			{"name": "Video Tape #50 (Shop)", "sanity": "Tapes", "id": 349, "req": ["Shop Access"]},
 			{"name": "Video Tape #59 (Bananas)", "sanity": "Tapes", "id": 358, "req": ["Shop Access"]},
+
+			{"name": "Jungle Fright - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 21760060, "req": ["Hub Unlock: Spagonia"]},
 
 			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 20020020, "req": []},
 			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 20020021, "req": []},

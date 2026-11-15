@@ -16,6 +16,7 @@ class LocationState:
 		self.include_day = 1
 		self.include_night = 1
 		self.enable_shop = 0
+		self.enable_missions = 0
 
 	def setup_regions(self, world):
 		menu_region = Region("Menu", world.player, world.multiworld)
@@ -58,7 +59,7 @@ class LocationState:
 				if check["evil"] == 0 and not self.include_day: continue
 				if check["evil"] == 1 and not self.include_night: continue
 				check_name = f"{stage['name']} - {check['name']}"
-				if check["sanity"] in self.sanities and (self.enable_shop or not "Shop Access" in check["req"]):
+				if check["sanity"] in self.sanities and (self.enable_shop or not "Shop Access" in check["req"]) and (self.enable_missions or not check["mission"]):
 					stage_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
 					rule = True_()
 					for req in check["req"]:
