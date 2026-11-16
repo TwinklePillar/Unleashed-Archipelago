@@ -118,6 +118,7 @@ static bool CanDequeueAchievement()
 
 bool g_isArchiAchievement{};
 std::string g_archiAchieveHeader{};
+uint16_t g_archiAchieveImg{};
 
 void AchievementOverlay::Draw()
 {
@@ -138,6 +139,7 @@ void AchievementOverlay::Draw()
                 .Score=0,
             };
             g_archiAchieveHeader = apMessage.header;
+            g_archiAchieveImg = apMessage.imgID;
             g_isArchiAchievement = true;
             SWAAP::ArchipelagoManager::messageQueue.pop();
         } else {
@@ -197,10 +199,12 @@ void AchievementOverlay::Draw()
     {
         if (!g_isClosing)
         {
+        	uint16_t achImg = g_archiAchieveImg;
+         	if (!g_isArchiAchievement) achImg = g_achievement.ID;
             // Draw achievement icon.
-            if (!g_isArchiAchievement) drawList->AddImage
+            if (achImg) drawList->AddImage
             (
-                g_xdbfTextureCache[g_achievement.ID],                                                   // user_texture_id
+                g_xdbfTextureCache[achImg],                                                   // user_texture_id
                 { /* X */ min.x + imageMarginX, /* Y */ min.y + imageMarginY },                         // p_min
                 { /* X */ min.x + imageMarginX + imageSize, /* Y */ min.y + imageMarginY + imageSize }, // p_max
                 { 0, 0 },                                                                               // uv_min

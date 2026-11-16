@@ -11,7 +11,8 @@ Alpha:
 		Ice Trap
 		Hourglass Trap
 		QTE Trap
-	"Sent Item" prompt
+	Trap Link
+	Better Connection Inputting
 
 Level IDs
     Apotos Hub (Day): 60010

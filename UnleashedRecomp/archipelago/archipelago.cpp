@@ -12,7 +12,6 @@
 #include <ui/message_window.h>
 
 #include "apshared.h"
-#include "kernel/memory.h"
 
 namespace SWAAP {
 
@@ -22,6 +21,9 @@ int ArchipelagoManager::actItems;
 std::map<std::string, int> ArchipelagoManager::actLevels;
 int ArchipelagoManager::itemState[AP_ITEM_MAX];
 bool ArchipelagoManager::hasInit;
+std::string ArchipelagoManager::ipport;
+std::string ArchipelagoManager::slot;
+std::string ArchipelagoManager::password;
 
 static SaveData g_lastSaveData{};
 static double elapsed = -1;
@@ -129,6 +131,30 @@ static void setupFlags(void) {
 		}
 	}
 	setBoolFlag("bFlag_IsVisitWorldMap", true);
+
+	int emeralds[] = {
+		BLUE_CHAOS_EMERALD,
+		RED_CHAOS_EMERALD,
+		PURPLE_CHAOS_EMERALD,
+		CYAN_CHAOS_EMERALD,
+		GREEN_CHAOS_EMERALD,
+		YELLOW_CHAOS_EMERALD,
+		WHITE_CHAOS_EMERALD
+	};
+	int numEmerald = 0;
+	for (int emerald : emeralds) {
+		if (ArchipelagoManager::itemState[emerald]) numEmerald += 1;
+	}
+	switch (numEmerald) {
+		case 7: setBoolFlag("bFlag_IsStageRescue_EggManBase", true); setBoolFlag("bFlag_IsStageRescueEvent_EggManBase", true);
+		case 6: setBoolFlag("bFlag_IsStageRescue_SouthEastAsia", true); setBoolFlag("bFlag_IsStageRescueEvent_SouthEastAsia", true);
+		case 5: setBoolFlag("bFlag_IsStageRescue_PetraCapital", true); setBoolFlag("bFlag_IsStageRescueEvent_PetraCapital", true);
+		case 4: setBoolFlag("bFlag_IsStageRescue_Snow", true); setBoolFlag("bFlag_IsStageRescueEvent_Snow", true);
+		case 3: setBoolFlag("bFlag_IsStageRescue_EuropeanCity", true); setBoolFlag("bFlag_IsStageRescueEvent_EuropeanCity", true);
+		case 2: setBoolFlag("bFlag_IsStageRescue_China", true); setBoolFlag("bFlag_IsStageRescueEvent_China", true);
+		case 1: setBoolFlag("bFlag_IsStageRescue_Africa", true); setBoolFlag("bFlag_IsStageRescueEvent_Africa", true);
+		default: break;
+	}
 }
 
 static void resetWatchers() {
@@ -195,9 +221,61 @@ void ArchipelagoManager::Update(double dt) {
 	}
 	
 	memcpy(&g_lastSaveData, save, sizeof(SaveData));
+	// Plaintext, ItemSend, ItemRecv, Hint, Countdown, Chat, ServerChat
+	if (AP_IsMessagePending()) {
+		auto baseMsg = AP_GetLatestMessage();
+		switch (baseMsg->type) {
+			case AP_MessageType::ItemSend: {
+				auto castMsg = (AP_ItemSendMessage*)baseMsg;
+				char buf[1024] = {0};
+				if (castMsg->recvPlayer == slot) break;
+				if (castMsg->sendPlayer != slot) break;
+				snprintf(buf, 1024, "%s to %s", castMsg->item.c_str(), castMsg->recvPlayer.c_str());
+				DisplayMessage(SENT_ITEM, buf);
+				break;
+			}
+			case AP_MessageType::ItemRecv: {
+				auto castMsg = (AP_ItemRecvMessage*)baseMsg;
+				int i = 0;
+				for (i = 0; i < AP_ITEM_MAX; i++) {
+					if (ITEM_TO_NAME[i] && !strcmp(ITEM_TO_NAME[i], castMsg->item.c_str())) break;
+				}
+				uint16_t imgID = 0;
+				switch (i) {
+					case BLUE_CHAOS_EMERALD: imgID = 26; break;
+					case RED_CHAOS_EMERALD: imgID = 25; break;
+					case PURPLE_CHAOS_EMERALD: imgID = 29; break;
+					case CYAN_CHAOS_EMERALD: imgID = 27; break;
+					case GREEN_CHAOS_EMERALD: imgID = 24; break;
+					case YELLOW_CHAOS_EMERALD: imgID = 28; break;
+					case WHITE_CHAOS_EMERALD: imgID = 31; break; // slightly inaccurate but shrug
+					case SUN_MEDAL: imgID = 32; break;
+					case PROGRESSIVE_SUN_LEVEL: imgID = 33; break;
+					case MOON_MEDAL: imgID = 34; break;
+					case PROGRESSIVE_MOON_LEVEL: imgID = 35; break;
+					case STOMPING_SHOES: imgID = 41; break;
+					case WALL_JUMP_SHOES: imgID = 42; break;
+					case AIR_BOOST_SHOES: imgID = 43; break;
+					case LIGHT_DASH_SHOES: imgID = 44; break;
+					default: break;
+				}
+				if (castMsg->item.starts_with("Act Unlock")) imgID = 79;
+				if (castMsg->item.starts_with("Hub Unlock")) imgID = 51;
+				if (castMsg->sendPlayer == slot) {
+					DisplayMessage(RECV_ITEM, castMsg->item, imgID);
+				} else {
+					char buf[1024] = {0};
+					snprintf(buf, 1024, "%s from %s", castMsg->item.c_str(), castMsg->sendPlayer.c_str());
+					DisplayMessage(RECV_ITEM, buf, imgID);
+				}
+				break;
+			}
+		}
+		AP_ClearLatestMessage();
+	}
 }
 
-void ArchipelagoManager::DisplayMessage(APMessageType type, std::string message) {
+void ArchipelagoManager::DisplayMessage(APMessageType type, std::string message, uint16_t imgID) {
 	std::string header = "";
 	switch (type) {
 		case APMessageType::SENT_ITEM:
@@ -213,7 +291,7 @@ void ArchipelagoManager::DisplayMessage(APMessageType type, std::string message)
 			header = "Unknown AP Message";
 			break;
 	}
-	messageQueue.push(ArchipelagoMessage{.header=header, .message=message});
+	messageQueue.push(ArchipelagoMessage{.header=header, .message=message, .imgID=imgID});
 	AchievementOverlay::Open(AP_MESSAGE_ACH);
 }
 
@@ -240,8 +318,6 @@ void ArchipelagoManager::ItemRecvCallback(int64_t item, bool notify) {
 	itemState[item] += 1;
 	printf("Receiving Item %s (%i, #%i)\n", ITEM_TO_NAME[item], (int)item, itemState[item]);
 	if (notify) {
-		DisplayMessage(RECV_ITEM, ITEM_TO_NAME[item]);
-
 		auto appdoc = SWA::CApplicationDocument::GetInstance();
 		auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
 		switch (item) {
@@ -311,9 +387,9 @@ void ArchipelagoManager::ConnectToArchipelago() {
 		return;
 	}
 
-	auto ipport = ini.getString("Connect", "ipport", "");
-	auto slot = ini.getString("Connect", "slot", "");
-	auto password = ini.getString("Connect", "password", "");
+	ipport = ini.getString("Connect", "ipport", "");
+	slot = ini.getString("Connect", "slot", "");
+	password = ini.getString("Connect", "password", "");
 
 	if (ipport.empty() || slot.empty()) {
 		int result = -1;
@@ -371,12 +447,14 @@ PPC_FUNC(sub_82519C08) {
 
 // Medal Patch
 
-static int getMedalCount(int levelItem) {
+static int getMedalCount(int levelItem, int medalItem) {
 	int numMedal = 0;
 	const int medalList[] = {0, 15, 30, 45, 60, 80, 120};
 	if (SWAAP::ArchipelagoManager::itemState[levelItem] > 6) numMedal = 200;
 	else numMedal = medalList[SWAAP::ArchipelagoManager::itemState[levelItem]];
 
+	numMedal += SWAAP::ArchipelagoManager::itemState[medalItem];
+	
 	return numMedal;
 }
 
@@ -384,9 +462,10 @@ void SWA_AP_MedalCountMidAsmHook(PPCRegister& r3, PPCRegister& r10, PPCRegister 
 	uint8_t* base = g_memory.base;
 	
 	int levelItem = r10.u64 == 12 ? PROGRESSIVE_MOON_LEVEL : PROGRESSIVE_SUN_LEVEL;
+	int medalItem = r10.u64 == 12 ? MOON_MEDAL : SUN_MEDAL;
 	
-	r3.u64 = getMedalCount(levelItem);
-	PPC_STORE_U32(r10.u32 + r11.u32, getMedalCount(levelItem));
+	r3.u64 = getMedalCount(levelItem, medalItem);
+	PPC_STORE_U32(r10.u32 + r11.u32, getMedalCount(levelItem, medalItem));
 }
 
 void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
@@ -417,7 +496,7 @@ void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
 
 		bool hasEmeralds = true;
 		for (int i = 0; i < 7; i++) if (SWAAP::ArchipelagoManager::itemState[chaosEmeralds[i]] == 0) hasEmeralds = false;
-		if (!(hasEmeralds && getMedalCount(PROGRESSIVE_SUN_LEVEL) >= 120 && getMedalCount(PROGRESSIVE_MOON_LEVEL) >= 80)) {
+		if (!(hasEmeralds && getMedalCount(PROGRESSIVE_SUN_LEVEL, SUN_MEDAL) >= 120 && getMedalCount(PROGRESSIVE_MOON_LEVEL, MOON_MEDAL) >= 80)) {
 			r29.s32 = -1;
 			r30.s32 = -1;
 		}

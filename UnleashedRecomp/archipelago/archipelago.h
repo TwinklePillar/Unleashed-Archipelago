@@ -14,6 +14,7 @@ namespace SWAAP {
 struct ArchipelagoMessage {
 	std::string header;
 	std::string message;
+	uint16_t imgID;
 };
 
 enum APMessageType {
@@ -37,7 +38,11 @@ class ArchipelagoManager {
 		static void SetActOrderCallback(std::map<int, int> actorder);
 
 		static void DebugLog(std::string buf);
-
+		
+		static std::string ipport;
+		static std::string slot;
+		static std::string password;
+		
 		static bool isDebug;
 		static int version;
 		static int progressionMode;
@@ -46,7 +51,7 @@ class ArchipelagoManager {
 		static std::map<std::string, int> actLevels;
 		static inline std::queue<ArchipelagoMessage> messageQueue;
 		static void Update(double dt);
-		static void DisplayMessage(APMessageType type, std::string message);
+		static void DisplayMessage(APMessageType type, std::string message, uint16_t imgID = 0);
 		static void ConnectToArchipelago();
 		static void DisconnectFromArchipelago();
 

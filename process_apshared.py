@@ -110,5 +110,5 @@ with open("UnleashedRecomp/archipelago/apshared.h", "w") as apcpp:
 	apcpp.write("\nstatic const char* const ITEM_TO_NAME[] = {\n")
 	for item in shared["items"]:
 		apcpp.write(f"\t[{item['id']}] = \"{item['name']}\",\n")
-	apcpp.write("};\n")
+	apcpp.write("\t[511] = \"__IDS_END__\"\n};\n")
 	apcpp.write("\n#endif")
