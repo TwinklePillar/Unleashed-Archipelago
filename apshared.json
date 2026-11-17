@@ -1,6 +1,6 @@
 {
-	"version": 2,
-	"min_version": 2,
+	"version": 3,
+	"min_version": 3,
 	"game": "Sonic Unleashed",
 	"items": [
 		{"name": "The World Repaired", "item_classif": "filler"},
@@ -52,30 +52,31 @@
 	},
 	"stages": [
 		{"name": "World Map", "type": "hub", "evil": -1, "checks": [
-			{"name": "Record #58 (Wentos)", "sanity": "Records", "id": 224, "req": ["Shop Access"]},
-			{"name": "Art Book #55 (Wentos)", "sanity": "Books", "id": 283, "req": ["Shop Access"]},
-			{"name": "Art Book #56 (Wentos)", "sanity": "Books", "id": 284, "req": ["Shop Access"]},
-			{"name": "Art Book #57 (Wentos)", "sanity": "Books", "id": 285, "req": ["Shop Access"]}
+			{"name": "Wentos - Record #58", "sanity": "Records", "shop": 1, "id": 224, "req": []},
+			{"name": "Wentos - Art Book #55", "sanity": "Books", "shop": 1, "id": 283, "req": []},
+			{"name": "Wentos - Art Book #56", "sanity": "Books", "shop": 1, "id": 284, "req": []},
+			{"name": "Wentos - Art Book #57", "sanity": "Books", "shop": 1, "id": 285, "req": []}
 		], "sub": []},
 		{"name": "Apotos Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 60010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 60010021, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 61010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 61010061, "req": []},
-			{"name": "Record #15 (Shop)", "sanity": "Records", "id": 181, "req": ["Shop Access"]},
-			{"name": "Record #40 (Shop)", "sanity": "Records", "id": 206, "req": ["Shop Access"]},
-			{"name": "Record #41 (Shop)", "sanity": "Records", "id": 207, "req": ["Shop Access"]},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 60010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 60010021, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 61010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 61010061, "req": []},
+			
+			{"name": "Shop - Record #15", "sanity": "Records", "shop": 1, "id": 181, "req": ["Apotos Currency"]},
+			{"name": "Shop - Record #40", "sanity": "Records", "shop": 1, "id": 206, "req": ["Apotos Currency"]},
+			{"name": "Shop - Record #41", "sanity": "Records", "shop": 1, "id": 207, "req": ["Apotos Currency"]},
 			
 			{"name": "The Elder's Book - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 61750060, "req": []},
 			
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 60020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 60020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 60020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 60020061, "req": []},
-			{"name": "Record #4 (ETF)", "sanity": "Records", "id": 170, "req": []},
-			{"name": "Record #59 (ETF)", "sanity": "Records", "id": 225, "req": []},
-			{"name": "Art Book #21 (ETF)", "sanity": "Books", "id": 249, "req": []},
-			{"name": "Art Book #25 (ETF)", "sanity": "Books", "id": 253, "req": []}
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 60020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 60020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 60020060, "req": []},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 60020061, "req": []},
+			{"name": "ETF - Record #4", "sanity": "Records", "id": 170, "req": []},
+			{"name": "ETF - Record #59", "sanity": "Records", "id": 225, "req": []},
+			{"name": "ETF - Art Book #21", "sanity": "Books", "id": 249, "req": []},
+			{"name": "ETF - Art Book #25", "sanity": "Books", "id": 253, "req": []}
 		], "sub": [
 			{"stage": "Windmill Isle Day Act 1", "evil": 0, "level": 1, "req": []},
 			{"stage": "Windmill Isle Day Act 2", "evil": 0, "level": 1, "req": []},
@@ -150,13 +151,13 @@
 		]},
 		
 		{"name": "Mazuri Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 10010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 10010021, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 11010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 11010061, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 10010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 10010021, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 11010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 11010061, "req": []},
 
-			{"name": "Art Book #65 (Shop)", "sanity": "Books", "id": 293, "req": ["Shop Access"]},
-			{"name": "Video Tape #18 (Shop)", "sanity": "Tapes", "id": 317, "req": ["Shop Access"]},
+			{"name": "Shop - Art Book #65", "sanity": "Books", "shop": 1, "id": 293, "req": ["Mazuri Currency"]},
+			{"name": "Shop - Video Tape #18", "sanity": "Tapes", "shop": 1, "id": 317, "req": ["Mazuri Currency"]},
 
 			{"name": "Spooky Shadows - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 10730020, "req": []},
 			{"name": "Run Yaya Run - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 11750060, "req": []},
@@ -165,14 +166,14 @@
 				"Hub Unlock: Shamar"
 			]},
 
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 10020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 10020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 10020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 10020061, "req": []},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 10020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 10020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 10020060, "req": []},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 10020061, "req": []},
 
-			{"name": "Record #42 (ETF)", "sanity": "Records", "id": 208, "req": []},
-			{"name": "Record #43 (ETF)", "sanity": "Records", "id": 209, "req": []},
-			{"name": "Art Book #38 (ETF)", "sanity": "Books", "id": 266, "req": []}
+			{"name": "ETF - Record #42", "sanity": "Records", "id": 208, "req": []},
+			{"name": "ETF - Record #43", "sanity": "Records", "id": 209, "req": []},
+			{"name": "ETF - Art Book #38", "sanity": "Books", "id": 266, "req": []}
 		], "sub": [
 			{"stage": "Savannah Citadel Day Act 1", "evil": 0, "level": 1, "req": []},
 			{"stage": "Savannah Citadel Day Act 2", "evil": 0, "level": 3, "req": []},
@@ -262,34 +263,34 @@
 		]},
 		
 		{"name": "Spagonia Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 50010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 50010021, "req": []},
-			{"name": "Town Moon Medal #3", "sanity": "Moon Medals", "evil": 0, "id": 50010022, "req": []},
-			{"name": "Town Moon Medal #4", "sanity": "Moon Medals", "evil": 0, "id": 50010023, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 51010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 51010061, "req": []},
-			{"name": "Town Sun Medal #3", "sanity": "Sun Medals", "evil": 1, "id": 51010062, "req": []},
-			{"name": "Town Sun Medal #4", "sanity": "Sun Medals", "evil": 1, "id": 51010063, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 50010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 50010021, "req": []},
+			{"name": "Town - Moon Medal #3", "sanity": "Moon Medals", "evil": 0, "id": 50010022, "req": []},
+			{"name": "Town - Moon Medal #4", "sanity": "Moon Medals", "evil": 0, "id": 50010023, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 51010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 51010061, "req": []},
+			{"name": "Town - Sun Medal #3", "sanity": "Sun Medals", "evil": 1, "id": 51010062, "req": []},
+			{"name": "Town - Sun Medal #4", "sanity": "Sun Medals", "evil": 1, "id": 51010063, "req": []},
 
-			{"name": "Record #46 (Shop)", "sanity": "Records", "id": 212, "req": ["Shop Access"]},
-			{"name": "Record #47 (Shop)", "sanity": "Records", "id": 213, "req": ["Shop Access"]},
-			{"name": "Art Book #69 (Shop)", "sanity": "Books", "id": 297, "req": ["Shop Access"]},
-			{"name": "Video Tape #22 (Shop)", "sanity": "Tapes", "id": 321, "req": ["Shop Access"]},
+			{"name": "Shop - Record #46", "sanity": "Records", "shop": 1, "id": 212, "req": ["Spagonia Currency"]},
+			{"name": "Shop - Record #47", "sanity": "Records", "shop": 1, "id": 213, "req": ["Spagonia Currency"]},
+			{"name": "Shop - Art Book #69", "sanity": "Books", "shop": 1, "id": 297, "req": ["Spagonia Currency"]},
+			{"name": "Shop - Video Tape #22", "sanity": "Tapes", "shop": 1, "id": 321, "req": ["Spagonia Currency"]},
 
 			{"name": "Elio's Nights - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 51700060, "req": []},
 			{"name": "Lunch Thief - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 50710020, "req": []},
 			{"name": "Elio's Loss - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 50740020, "req": []},
 			{"name": "Tower Terror - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 50810020, "req": []},
 
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 50020020, "req": ["Stomping Shoes"]},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 50020021, "req": ["Stomping Shoes"]},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 50020060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 50020061, "req": ["Stomping Shoes"]},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 50020020, "req": ["Stomping Shoes"]},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 50020021, "req": ["Stomping Shoes"]},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 50020060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 50020061, "req": ["Stomping Shoes"]},
 			{"name": "Wall Jump Shoes", "sanity": "Shoes", "id": 32773, "evil": 0, "req": ["Stomping Shoes"]},
 
-			{"name": "Record #2 (ETF)", "sanity": "Records", "id": 168, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #30 (ETF)", "sanity": "Books", "id": 258, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #31 (ETF)", "sanity": "Books", "id": 259, "req": ["Stomping Shoes", "Light Dash Shoes"]}
+			{"name": "ETF - Record #2", "sanity": "Records", "id": 168, "req": ["Stomping Shoes"]},
+			{"name": "ETF - Art Book #30", "sanity": "Books", "id": 258, "req": ["Stomping Shoes"]},
+			{"name": "ETF - Art Book #31", "sanity": "Books", "id": 259, "req": ["Stomping Shoes", "Light Dash Shoes"]}
 		], "sub": [
 			{"stage": "Rooftop Run Day Act 1", "evil": 0, "level": 3, "req": ["Wall Jump Shoes"]},
 			{"stage": "Rooftop Run Day Act 2", "evil": 0, "level": 4, "req": ["Stomping Shoes"]},
@@ -369,28 +370,28 @@
 		]},
 		
 		{"name": "Holoska Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 90010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 90010021, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 91010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 91010061, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 90010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 90010021, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 91010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 91010061, "req": []},
 
-			{"name": "Record #44 (Shop)", "sanity": "Records", "id": 210, "req": ["Shop Access"]},
-			{"name": "Record #45 (Shop)", "sanity": "Records", "id": 211, "req": ["Shop Access"]},
-			{"name": "Video Tape #47 (Shop)", "sanity": "Tapes", "id": 346, "req": ["Shop Access"]},
-			{"name": "Video Tape #55 (Shop)", "sanity": "Tapes", "id": 354, "req": ["Shop Access"]},
-			{"name": "Video Tape #58 (Smoked Mohn)", "sanity": "Tapes", "id": 357, "req": ["Shop Access"]},
+			{"name": "Shop - Record #44", "sanity": "Records", "shop": 1, "id": 210, "req": ["Holoska Currency"]},
+			{"name": "Shop - Record #45", "sanity": "Records", "shop": 1, "id": 211, "req": ["Holoska Currency"]},
+			{"name": "Shop - Video Tape #47", "sanity": "Tapes", "shop": 1, "id": 346, "req": ["Holoska Currency"]},
+			{"name": "Shop - Video Tape #55", "sanity": "Tapes", "shop": 1, "id": 354, "req": ["Holoska Currency"]},
+			{"name": "Video Tape #58 (Smoked Mohn)", "sanity": "_Tapes", "shop": 1, "id": 357, "req": []},
 
 			{"name": "A Promise Made - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 91750060, "req": []},
-			{"name": "Love Is Jerky - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 90770020, "req": ["Shop Access"]},
+			{"name": "Love Is Jerky - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "shop": 1, "id": 90770020, "req": ["Hub Unlock: Apotos", "Apotos Currency"]},
 
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 90020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 90020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 90020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 90020061, "req": ["Stomping Shoes"]},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 90020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 90020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 90020060, "req": []},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 90020061, "req": ["Stomping Shoes"]},
 			{"name": "Stomping Shoes", "sanity": "Shoes", "id": 32772, "evil": 0, "req": []},
 
-			{"name": "Record #33 (ETF)", "sanity": "Records", "id": 199, "req": []},
-			{"name": "Art Book #41 (ETF)", "sanity": "Books", "id": 269, "req": ["Stomping Shoes"]}
+			{"name": "ETF - Record #33", "sanity": "Records", "id": 199, "req": []},
+			{"name": "ETF - Art Book #41", "sanity": "Books", "id": 269, "req": ["Stomping Shoes"]}
 		], "sub": [
 			{"stage": "Cool Edge Day Act 1", "evil": 0, "level": 2, "req": ["Stomping Shoes"]},
 			{"stage": "Cool Edge Day Act 2", "evil": 0, "level": 4, "req": []},
@@ -462,31 +463,31 @@
 		]},
 
 		{"name": "Chun-Nan Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 30010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 30010021, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 31010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 31010061, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 30010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 30010021, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 31010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 31010061, "req": []},
 
-			{"name": "Record #48 (Shop)", "sanity": "Records", "id": 214, "req": ["Shop Access"]},
-			{"name": "Record #49 (Shop)", "sanity": "Records", "id": 215, "req": ["Shop Access"]},
-			{"name": "Video Tape #19 (Shop)", "sanity": "Tapes", "id": 318, "req": ["Shop Access"]},
-			{"name": "Video Tape #46 (Shop)", "sanity": "Tapes", "id": 345, "req": ["Shop Access"]},
-			{"name": "Video Tape #57 (Lin's Meat Buns)", "sanity": "Tapes", "id": 356, "req": ["Shop Access"]},
+			{"name": "Shop - Record #48", "sanity": "Records", "shop": 1, "id": 214, "req": ["Chun-Nan Currency"]},
+			{"name": "Shop - Record #49", "sanity": "Records", "shop": 1, "id": 215, "req": ["Chun-Nan Currency"]},
+			{"name": "Shop - Video Tape #19", "sanity": "Tapes", "shop": 1, "id": 318, "req": ["Chun-Nan Currency"]},
+			{"name": "Shop - Video Tape #46", "sanity": "Tapes", "shop": 1, "id": 345, "req": ["Chun-Nan Currency"]},
+			{"name": "Video Tape #57 (Lin's Meat Buns)", "sanity": "_Tapes", "shop": 1, "id": 356, "req": []},
 
 			{"name": "Kung Fu Speed - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 30810020, "req": []},
 			{"name": "Get Pumped - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 30720020, "req": []},
 			{"name": "Chronic Ailment - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 31730060, "req": []},
 			{"name": "Energy Boost - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 31780060, "req": []},
 			
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 30020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 30020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 30020060, "req": ["Air Boost Shoes"]},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 30020061, "req": ["Air Boost Shoes"]},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 30020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 30020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 30020060, "req": ["Air Boost Shoes"]},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 30020061, "req": ["Air Boost Shoes"]},
 			{"name": "Air Boost Shoes", "sanity": "Shoes", "id": 32774, "evil": 0, "req": ["Wall Jump Shoes"]},
 
-			{"name": "Art Book #33 (ETF)", "sanity": "Books", "id": 261, "req": []},
-			{"name": "Video Tape #10 (ETF)", "sanity": "Tapes", "id": 309, "req": []},
-			{"name": "Video Tape #14 (ETF)", "sanity": "Tapes", "id": 313, "req": []}
+			{"name": "ETF - Art Book #33", "sanity": "Books", "id": 261, "req": []},
+			{"name": "ETF - Video Tape #10", "sanity": "Tapes", "id": 309, "req": []},
+			{"name": "ETF - Video Tape #14", "sanity": "Tapes", "id": 313, "req": []}
 		], "sub": [
 			{"stage": "Dragon Road Day Act 1", "evil": 0, "level": 4, "req": ["Air Boost Shoes"]},
 			{"stage": "Dragon Road Day Act 2", "evil": 0, "level": 3, "req": []},
@@ -573,30 +574,30 @@
 		]},
 
 		{"name": "Shamar Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 80010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 80010021, "req": []},
-			{"name": "Town Moon Medal #3", "sanity": "Moon Medals", "evil": 0, "id": 80010022, "req": []},
-			{"name": "Town Moon Medal #4", "sanity": "Moon Medals", "evil": 0, "id": 80010023, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 81010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 81010061, "req": []},
-			{"name": "Town Sun Medal #3", "sanity": "Sun Medals", "evil": 1, "id": 81010062, "req": []},
-			{"name": "Town Sun Medal #4", "sanity": "Sun Medals", "evil": 1, "id": 81010063, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 80010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 80010021, "req": []},
+			{"name": "Town - Moon Medal #3", "sanity": "Moon Medals", "evil": 0, "id": 80010022, "req": []},
+			{"name": "Town - Moon Medal #4", "sanity": "Moon Medals", "evil": 0, "id": 80010023, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 81010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 81010061, "req": []},
+			{"name": "Town - Sun Medal #3", "sanity": "Sun Medals", "evil": 1, "id": 81010062, "req": []},
+			{"name": "Town - Sun Medal #4", "sanity": "Sun Medals", "evil": 1, "id": 81010063, "req": []},
 
-			{"name": "Record #50 (Shop)", "sanity": "Records", "id": 216, "req": ["Shop Access"]},
-			{"name": "Record #51 (Shop)", "sanity": "Records", "id": 217, "req": ["Shop Access"]},
-			{"name": "Video Tape #31 (Shop)", "sanity": "Tapes", "id": 330, "req": ["Shop Access"]},
-			{"name": "Video Tape #35 (Shop)", "sanity": "Tapes", "id": 334, "req": ["Shop Access"]},
-			{"name": "Video Tape #38 (Shop)", "sanity": "Tapes", "id": 337, "req": ["Shop Access"]},
-			{"name": "Video Tape #42 (Shop)", "sanity": "Tapes", "id": 341, "req": ["Shop Access"]},
-			{"name": "Video Tape #48 (Shop)", "sanity": "Tapes", "id": 347, "req": ["Shop Access"]},
-			{"name": "Art Book #40 (Sandra)", "sanity": "Books", "mission": 1, "id": 268, "req": [
+			{"name": "Shop - Record #50", "sanity": "Records", "shop": 1, "id": 216, "req": ["Shamar Currency"]},
+			{"name": "Shop - Record #51", "sanity": "Records", "shop": 1, "id": 217, "req": ["Shamar Currency"]},
+			{"name": "Shop - Video Tape #31", "sanity": "Tapes", "shop": 1, "id": 330, "req": ["Shamar Currency"]},
+			{"name": "Shop - Video Tape #35", "sanity": "Tapes", "shop": 1, "id": 334, "req": ["Shamar Currency"]},
+			{"name": "Shop - Video Tape #38", "sanity": "Tapes", "shop": 1, "id": 337, "req": ["Shamar Currency"]},
+			{"name": "Shop - Video Tape #42", "sanity": "Tapes", "shop": 1, "id": 341, "req": ["Shamar Currency"]},
+			{"name": "Shop - Video Tape #48", "sanity": "Tapes", "shop": 1, "id": 347, "req": ["Shamar Currency"]},
+			{"name": "Quiz Lady 6 - Art Book #40", "sanity": "Books", "mission": 1, "id": 268, "req": [
 				"Hub Unlock: Apotos",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Chun-Nan",
 				"Hub Unlock: Spagonia",
 				"Hub Unlock: Empire City"
 			]},
-			{"name": "Video Tape #24 (Sa'id)", "sanity": "Tapes", "mission": 1, "id": 323, "req": [
+			{"name": "Tip Top Tea 7 - Video Tape #24", "sanity": "Tapes", "mission": 1, "id": 323, "req": [
 				"Hub Unlock: Chun-Nan",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Apotos",
@@ -610,15 +611,15 @@
 			{"name": "Shamaran Peace - Moon Medal", "sanity": "Moon Medals", "evil": 0, "mission": 1, "id": 80720020, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
 			{"name": "Missing Son - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 81760060, "req": []},
 
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 80020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 80020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 80020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 80020061, "req": []},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 80020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 80020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 80020060, "req": []},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 80020061, "req": []},
 			{"name": "Light Dash Shoes", "sanity": "Shoes", "id": 32775, "evil": 0, "req": []},
 
-			{"name": "Record #57 (ETF)", "sanity": "Records", "id": 223, "req": []},
-			{"name": "Art Book #42 (ETF)", "sanity": "Books", "id": 270, "req": []},
-			{"name": "Video Tape #25 (ETF)", "sanity": "Tapes", "id": 324, "req": []}
+			{"name": "ETF - Record #57", "sanity": "Records", "id": 223, "req": []},
+			{"name": "ETF - Art Book #42", "sanity": "Books", "id": 270, "req": []},
+			{"name": "ETF - Video Tape #25", "sanity": "Tapes", "id": 324, "req": []}
 		], "sub": [
 			{"stage": "Arid Sands Day Act 1", "evil": 0, "level": 4, "req": ["Light Dash Shoes"]},
 			{"stage": "Arid Sands Day Act 2", "evil": 0, "level": 4, "req": []},
@@ -685,27 +686,27 @@
 		]},
 
 		{"name": "Empire City Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 70010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 70010021, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 71010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 71010061, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 70010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 70010021, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 71010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 71010061, "req": []},
 
-			{"name": "Record #52 (Shop)", "sanity": "Records", "id": 218, "req": ["Shop Access"]},
-			{"name": "Record #53 (Shop)", "sanity": "Records", "id": 219, "req": ["Shop Access"]},
-			{"name": "Video Tape #33 (Shop)", "sanity": "Tapes", "id": 332, "req": ["Shop Access"]},
-			{"name": "Video Tape #40 (Shop)", "sanity": "Tapes", "id": 339, "req": ["Shop Access"]},
-			{"name": "Video Tape #41 (Shop)", "sanity": "Tapes", "id": 340, "req": ["Shop Access"]},
-			{"name": "Video Tape #44 (Shop)", "sanity": "Tapes", "id": 343, "req": ["Shop Access"]},
-			{"name": "Video Tape #49 (Shop)", "sanity": "Tapes", "id": 348, "req": ["Shop Access"]},
-			{"name": "Video Tape #53 (Shop)", "sanity": "Tapes", "id": 352, "req": ["Shop Access"]},
-			{"name": "Art Book #44 (A Final Gift)", "sanity": "Books", "mission": 1, "id": 272, "req": [
+			{"name": "Shop - Record #52", "sanity": "Records", "shop": 1, "id": 218, "req": ["Empire City Currency"]},
+			{"name": "Shop - Record #53", "sanity": "Records", "shop": 1, "id": 219, "req": ["Empire City Currency"]},
+			{"name": "Shop - Video Tape #33", "sanity": "Tapes", "shop": 1, "id": 332, "req": ["Empire City Currency"]},
+			{"name": "Shop - Video Tape #40", "sanity": "Tapes", "shop": 1, "id": 339, "req": ["Empire City Currency"]},
+			{"name": "Shop - Video Tape #41", "sanity": "Tapes", "shop": 1, "id": 340, "req": ["Empire City Currency"]},
+			{"name": "Shop - Video Tape #44", "sanity": "Tapes", "shop": 1, "id": 343, "req": ["Empire City Currency"]},
+			{"name": "Shop - Video Tape #49", "sanity": "Tapes", "shop": 1, "id": 348, "req": ["Empire City Currency"]},
+			{"name": "Shop - Video Tape #53", "sanity": "Tapes", "shop": 1, "id": 352, "req": ["Empire City Currency"]},
+			{"name": "A Final Gift - Art Book #44", "sanity": "Books", "mission": 1, "id": 272, "req": [
 				"Hub Unlock: Spagonia",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Apotos",
 				"Hub Unlock: Shamar",
 				"Hub Unlock: Chun-Nan"
 			]},
-			{"name": "Video Tape #17 (Brenda)", "sanity": "Tapes", "mission": 1, "id": 316, "req": [
+			{"name": "Brenda Blurb 5 - Video Tape #17", "sanity": "Tapes", "mission": 1, "id": 316, "req": [
 				"Hub Unlock: Chun-Nan",
 				"Hub Unlock: Spagonia",
 				"Hub Unlock: Holoska",
@@ -717,12 +718,12 @@
 			{"name": "Sonic Presents - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 71770060, "req": ["Stomping Shoes", "Wall Jump Shoes"]},
 			{"name": "A Dead End - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 71720060, "req": ["Hub Unlock: Shamar"]},
 
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 70020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 70020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 70020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 70020061, "req": []},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 70020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 70020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 70020060, "req": []},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 70020061, "req": []},
 
-			{"name": "Record #29 (ETF)", "sanity": "Records", "id": 195, "req": []}
+			{"name": "ETF - Record #29", "sanity": "Records", "id": 195, "req": []}
 		], "sub": [
 			{"stage": "Skyscraper Scamper Day Act 1", "evil": 0, "level": 5, "req": []},
 			{"stage": "Skyscraper Scamper Day Act 2", "evil": 0, "level": 5, "req": ["Air Boost Shoes"]},
@@ -780,29 +781,29 @@
 		]},
 
 		{"name": "Adabat Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Town Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 20010020, "req": []},
-			{"name": "Town Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 20010021, "req": []},
-			{"name": "Town Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 21010060, "req": []},
-			{"name": "Town Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 21010061, "req": []},
+			{"name": "Town - Moon Medal #1", "sanity": "Moon Medals", "evil": 0, "id": 20010020, "req": []},
+			{"name": "Town - Moon Medal #2", "sanity": "Moon Medals", "evil": 0, "id": 20010021, "req": []},
+			{"name": "Town - Sun Medal #1", "sanity": "Sun Medals", "evil": 1, "id": 21010060, "req": []},
+			{"name": "Town - Sun Medal #2", "sanity": "Sun Medals", "evil": 1, "id": 21010061, "req": []},
 
-			{"name": "Record #54 (Shop)", "sanity": "Records", "id": 220, "req": ["Shop Access"]},
-			{"name": "Record #55 (Shop)", "sanity": "Records", "id": 221, "req": ["Shop Access"]},
-			{"name": "Video Tape #30 (Shop)", "sanity": "Tapes", "id": 329, "req": ["Shop Access"]},
-			{"name": "Video Tape #32 (Shop)", "sanity": "Tapes", "id": 331, "req": ["Shop Access"]},
-			{"name": "Video Tape #34 (Shop)", "sanity": "Tapes", "id": 333, "req": ["Shop Access"]},
-			{"name": "Video Tape #37 (Shop)", "sanity": "Tapes", "id": 336, "req": ["Shop Access"]},
-			{"name": "Video Tape #43 (Shop)", "sanity": "Tapes", "id": 342, "req": ["Shop Access"]},
-			{"name": "Video Tape #50 (Shop)", "sanity": "Tapes", "id": 349, "req": ["Shop Access"]},
-			{"name": "Video Tape #59 (Bananas)", "sanity": "Tapes", "id": 358, "req": ["Shop Access"]},
+			{"name": "Shop - Record #54", "sanity": "Records", "shop": 1, "id": 220, "req": ["Adabat Currency"]},
+			{"name": "Shop - Record #55", "sanity": "Records", "shop": 1, "id": 221, "req": ["Adabat Currency"]},
+			{"name": "Shop - Video Tape #30", "sanity": "Tapes", "shop": 1, "id": 329, "req": ["Adabat Currency"]},
+			{"name": "Shop - Video Tape #32", "sanity": "Tapes", "shop": 1, "id": 331, "req": ["Adabat Currency"]},
+			{"name": "Shop - Video Tape #34", "sanity": "Tapes", "shop": 1, "id": 333, "req": ["Adabat Currency"]},
+			{"name": "Shop - Video Tape #37", "sanity": "Tapes", "shop": 1, "id": 336, "req": ["Adabat Currency"]},
+			{"name": "Shop - Video Tape #43", "sanity": "Tapes", "shop": 1, "id": 342, "req": ["Adabat Currency"]},
+			{"name": "Shop - Video Tape #50", "sanity": "Tapes", "shop": 1, "id": 349, "req": ["Adabat Currency"]},
+			{"name": "Video Tape #59 (Bananas)", "sanity": "_Tapes", "shop": 1, "id": 358, "req": []},
 
 			{"name": "Jungle Fright - Sun Medal", "sanity": "Sun Medals", "evil": 1, "mission": 1, "id": 21760060, "req": ["Hub Unlock: Spagonia"]},
 
-			{"name": "ETF Moon Medal #1", "sanity": "Moon Medals", "id": 20020020, "req": []},
-			{"name": "ETF Moon Medal #2", "sanity": "Moon Medals", "id": 20020021, "req": []},
-			{"name": "ETF Sun Medal #1", "sanity": "Sun Medals", "id": 20020060, "req": []},
-			{"name": "ETF Sun Medal #2", "sanity": "Sun Medals", "id": 20020061, "req": []},
+			{"name": "ETF - Moon Medal #1", "sanity": "Moon Medals", "id": 20020020, "req": []},
+			{"name": "ETF - Moon Medal #2", "sanity": "Moon Medals", "id": 20020021, "req": []},
+			{"name": "ETF - Sun Medal #1", "sanity": "Sun Medals", "id": 20020060, "req": []},
+			{"name": "ETF - Sun Medal #2", "sanity": "Sun Medals", "id": 20020061, "req": []},
 
-			{"name": "Art Book #50 (ETF)", "sanity": "Books", "id": 278, "req": []}
+			{"name": "ETF - Art Book #50", "sanity": "Books", "id": 278, "req": []}
 		], "sub": [
 			{"stage": "Jungle Joyride Day Act 1", "evil": 0, "level": 7, "req": []},
 			{"stage": "Jungle Joyride Day Act 2", "evil": 0, "level": 5, "req": []},
@@ -889,34 +890,34 @@
 		]},
 		
 		{"name": "Eggmanland Hub", "type": "hub", "evil": -1, "checks": [
-			{"name": "Record #35 (Shop)", "sanity": "Records", "id": 201, "req": ["Shop Access"]},
-			{"name": "Record #36 (Shop)", "sanity": "Records", "id": 202, "req": ["Shop Access"]},
-			{"name": "Record #37 (Shop)", "sanity": "Records", "id": 203, "req": ["Shop Access"]},
-			{"name": "Art Book #71 (Shop)", "sanity": "Books", "id": 299, "req": ["Shop Access"]},
-			{"name": "Video Tape #36 (Shop)", "sanity": "Tapes", "id": 335, "req": ["Shop Access"]},
-			{"name": "Video Tape #39 (Shop)", "sanity": "Tapes", "id": 338, "req": ["Shop Access"]},
-			{"name": "Video Tape #45 (Shop)", "sanity": "Tapes", "id": 344, "req": ["Shop Access"]},
-			{"name": "Video Tape #51 (Shop)", "sanity": "Tapes", "id": 350, "req": ["Shop Access"]},
-			{"name": "Video Tape #54 (Shop)", "sanity": "Tapes", "id": 353, "req": ["Shop Access"]},
-			{"name": "Video Tape #56 (Shop)", "sanity": "Tapes", "id": 355, "req": ["Shop Access"]}
+			{"name": "Shop - Record #35", "sanity": "Records", "shop": 1, "id": 201, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Record #36", "sanity": "Records", "shop": 1, "id": 202, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Record #37", "sanity": "Records", "shop": 1, "id": 203, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Art Book #71", "sanity": "Books", "shop": 1, "id": 299, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Video Tape #36", "sanity": "Tapes", "shop": 1, "id": 335, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Video Tape #39", "sanity": "Tapes", "shop": 1, "id": 338, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Video Tape #45", "sanity": "Tapes", "shop": 1, "id": 344, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Video Tape #51", "sanity": "Tapes", "shop": 1, "id": 350, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Video Tape #54", "sanity": "Tapes", "shop": 1, "id": 353, "req": ["Eggmanland Currency"]},
+			{"name": "Shop - Video Tape #56", "sanity": "Tapes", "shop": 1, "id": 355, "req": ["Eggmanland Currency"]}
 		], "sub": [
 			{"stage": "Eggmanland", "evil": -1, "level": 1, "req": []},
-			{"stage": "Egg Dragoon", "evil": 1, "level": 1, "req": []},
+			{"stage": "Egg Dragoon", "evil": -1, "level": 1, "req": []},
 			{"stage": "Dark Gaia", "evil": -1, "level": 1, "req": []}
 		]},
 		{"name": "Eggmanland", "type": "unshuffled_stage", "evil": -1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 40040000, "req": ["Stomping Shoes"]},
-			{"name": "Record #13", "sanity": "Records", "id": 179, "req": []},
-			{"name": "Record #32", "sanity": "Records", "id": 198, "req": []},
-			{"name": "Record #39", "sanity": "Records", "id": 205, "req": []},
-			{"name": "Record #56", "sanity": "Records", "id": 222, "req": []},
-			{"name": "Art Book #17", "sanity": "Books", "id": 245, "req": []},
-			{"name": "Art Book #18", "sanity": "Books", "id": 246, "req": []},
-			{"name": "Art Book #60", "sanity": "Books", "id": 288, "req": []},
-			{"name": "Art Book #66", "sanity": "Books", "id": 294, "req": []},
-			{"name": "Art Book #67", "sanity": "Books", "id": 295, "req": []}
+			{"name": "Record #13", "sanity": "Records", "id": 179, "req": ["Stomping Shoes"]},
+			{"name": "Record #32", "sanity": "Records", "id": 198, "req": ["Stomping Shoes"]},
+			{"name": "Record #39", "sanity": "Records", "id": 205, "req": ["Stomping Shoes"]},
+			{"name": "Record #56", "sanity": "Records", "id": 222, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #17", "sanity": "Books", "id": 245, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #18", "sanity": "Books", "id": 246, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #60", "sanity": "Books", "id": 288, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #66", "sanity": "Books", "id": 294, "req": ["Stomping Shoes"]},
+			{"name": "Art Book #67", "sanity": "Books", "id": 295, "req": ["Stomping Shoes"]}
 		]},
-		{"name": "Egg Dragoon", "type": "unshuffled_stage", "evil": 1, "checks": [
+		{"name": "Egg Dragoon", "type": "unshuffled_stage", "evil": -1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 40080000, "req": []}
 		]},
 		{"name": "Dark Gaia", "type": "unshuffled_stage", "evil": -1, "checks": [

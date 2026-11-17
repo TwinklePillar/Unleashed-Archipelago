@@ -61,6 +61,23 @@ namespace SWAAP {
 			return *(xpointer<FlagManager>*)MmGetHostAddress(0x833678F0);
 		}
 	};
+
+	class ShopObject {
+		public:
+		struct ShopData {
+			xpointer<char> id;
+			SWA_INSERT_PADDING(4);
+			be<int32_t> price;
+		};
+		struct ShopItem {
+			xpointer<ShopData> shopData;
+			be<uint32_t> shopObj; // some sort of object
+		};
+		SWA_INSERT_PADDING(540);
+		xpointer<hh::vector<ShopItem>> items;
+		SWA_INSERT_PADDING(4);
+		be<int32_t> index;
+	};
 	
 	class CPlayerSpeedContext {
 		public:

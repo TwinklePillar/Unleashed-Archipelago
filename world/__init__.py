@@ -52,11 +52,15 @@ class SWAWorld(World):
 		self.location_state.include_night = self.options.include_night.value
 		self.location_state.enable_missions = self.options.enable_missions.value
 		
-		self.location_state.enable_shop = self.options.enable_shop.value
+		self.location_state.enable_shop = self.options.shopsanity.value
+		self.item_state.shuffle_currencies = self.options.shuffle_currencies.value
+		
 		if self.options.medalsanity:
 			self.location_state.sanities += ["Sun Medals", "Moon Medals"]
 		if self.options.mediasanity:
 			self.location_state.sanities += ["Records", "Tapes", "Books"]
+		if self.options.shopsanity.value == 2:
+			self.location_state.sanities += ["Shop Items"]
 		
 		self.free_hub = self.random.choice((
 			HUB_UNLOCK_APOTOS,
@@ -83,8 +87,32 @@ class SWAWorld(World):
 			self.location_state.include_night = 1
 			self.location_state.regen = True
 			return
+		
+		num_unfilled = self.location_state.get_location_count(self) - 1
+		num_item = len(iname_groups["Hubs"])
+		if self.item_state.chaos_emeralds: num_item += len(iname_groups["Emeralds"])
+		if self.act_items: num_item += len(iname_groups["Acts"])
+		if self.medal_items: num_item += 400 # 200 Sun, 200 Moon
+		else: num_item += 12 # 6 sun levels, 6 moon levels
+		if self.location_state.enable_shop and self.item_state.shuffle_currencies: num_item += len(iname_groups["Currencies"])
+		if self.location_state.include_day: num_item += len(iname_groups["Shoes"])
 
-
+		while num_item > num_unfilled:
+			if self.medal_items:
+				print("Too many items! Disabling separate medals")
+				self.medal_items = 0
+				num_item -= 400
+			elif self.act_items:
+				print("Too many items! Disabling act items")
+				self.act_items = 0
+				num_item -= len(iname_groups["Acts"])
+			elif self.item_state.chaos_emeralds:
+				print("Too many items! Precollecting Chaos Emeralds")
+				self.item_state.chaos_emeralds = 0
+				num_item -= len(iname_groups["Emeralds"])
+			else:
+				raise OptionError(f"Too many items! Unable to disable more ({num_item} > {num_unfilled})")
+	
 	def create_regions(self):
 		self.location_state.setup_regions(self)
 

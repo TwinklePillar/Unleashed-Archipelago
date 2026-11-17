@@ -60,8 +60,9 @@ struct SaveData {
     be u32 nightEnemiesKilled @ saveBegin + 34272;
         
     InventoryItem records[62] @ saveBegin + 33108 [[color("7F0000")]]; // 166
-    InventoryItem tapes[59] @ saveBegin + 33374 [[color("7F7F7F")]];
+    InventoryItem tapes[56]@ saveBegin + 33374 [[color("7F7F7F")]];
     InventoryItem books[71] @ saveBegin + 33232 [[color("7F3F00")]];
+    InventoryItem banana @ saveBegin + 32928;
 };
 
 be s32 listFlags[5] @ 0x04;

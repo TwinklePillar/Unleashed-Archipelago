@@ -41,10 +41,10 @@ void SWA_AP_InventoryLocationMidAsmHook(PPCRegister& r4, PPCRegister& r5) {
 	// r4: inventory index
 	// r5: count
 	if (r5.s32 > 0) {
-		AP_SendItem(r4.u32 + 1);
 		char buf[256] = {0};
 		snprintf(buf, 256, "Sending Inventory #%i\n", r4.u32 + 1);
 		SWAAP::ArchipelagoManager::DebugLog(buf);
+		AP_SendItem(r4.u32 + 1);
 	}
 }
 
@@ -53,4 +53,27 @@ PPC_FUNC_IMPL(__imp__sub_82519C20);
 PPC_FUNC(sub_82519C20) {
 	AP_SendItem(32772 + ctx.r4.u64);
 	SWAAP::ArchipelagoManager::DebugLog("Sending Shoe");
+}
+
+// something involving shops
+PPC_FUNC_IMPL(__imp__sub_82B280A0);
+PPC_FUNC(sub_82B280A0) {
+	printf("r3: %08x, r4: %08x\n", ctx.r3.u32, ctx.r4.u32);
+	__imp__sub_82B280A0(ctx, base);
+	printf("\tret: %08x\n", ctx.r3.u32);
+}
+
+// shop update
+// 55462
+
+PPC_FUNC_IMPL(__imp__sub_82B2E698);
+PPC_FUNC(sub_82B2E698) {
+	__imp__sub_82B2E698(ctx, base);
+}
+
+PPC_FUNC_IMPL(__imp__sub_82519C60);
+PPC_FUNC(sub_82519C60) {
+//	__imp__sub_82519C60(ctx, base);
+//	printf("r3: %08x\n", ctx.r3.u32);
+	ctx.r3.u64 = 8;
 }

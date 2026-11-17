@@ -1,5 +1,5 @@
 from BaseClasses import Region, Location
-from rule_builder.rules import True_, Has, HasAll, CanReachLocation
+from rule_builder.rules import True_, Has, HasAll, CanReachLocation, CanReachRegion, AtLeast, HasGroupUnique
 from .apshared import *
 from .items import SWAItem
 
@@ -17,16 +17,44 @@ class LocationState:
 		self.include_night = 1
 		self.enable_shop = 0
 		self.enable_missions = 0
+	
+	def get_location_count(self, world):
+		num_locations = 0
+		if self.enable_shop:
+			for k in apshared["souvenirs"].keys():
+				num_locations += 1
+		
+		for stage in apshared["stages"]:
+			if stage["evil"] == 0 and not self.include_day: continue
+			if stage["evil"] == 1 and not self.include_night: continue
+			for check in stage["checks"]:
+				if check["evil"] == 0 and not self.include_day: continue
+				if check["evil"] == 1 and not self.include_night: continue
+				if check["sanity"] in self.sanities and (self.enable_shop or not check["shop"]) and (self.enable_missions or not check["mission"]):
+					num_locations += 1
 
+		return num_locations
+	
 	def setup_regions(self, world):
 		menu_region = Region("Menu", world.player, world.multiworld)
 		world.multiworld.regions.append(menu_region)
 		
 		if self.enable_shop:
+			shop_rule = HasAll(HUB_UNLOCK_CHUNNAN, WALL_JUMP_SHOES)
+			if self.include_day: shop_rule = shop_rule | AtLeast(2, 
+				CanReachRegion("Windmill Isle Day Act 2"),
+				CanReachRegion("Savannah Citadel Day Act 1"),
+				CanReachRegion("Rooftop Run Day Act 1") & Has(WALL_JUMP_SHOES),
+				CanReachRegion("Dragon Road Day Act 1"),
+				CanReachRegion("Cool Edge Day Act 1") & Has(STOMPING_SHOES),
+				CanReachRegion("Arid Sands Day Act 1") & Has(WALL_JUMP_SHOES),
+				CanReachRegion("Skyscraper Scamper Day Act 1") & HasAll(WALL_JUMP_SHOES, STOMPING_SHOES),
+				CanReachRegion("Jungle Joyride Day Act 1") & HasAll(WALL_JUMP_SHOES, STOMPING_SHOES)
+			)
 			menu_region.add_event(
 				f"Shop Access", "Shop Access",
 				location_type=SWALocation, item_type=SWAItem,
-				rule=Has("Level Completion", 2), show_in_spoiler=False
+				rule=shop_rule, show_in_spoiler=False
 			)
 			souvenir_region = Region("Souvenir", world.player, world.multiworld)
 			world.multiworld.regions.append(souvenir_region)
@@ -59,11 +87,14 @@ class LocationState:
 				if check["evil"] == 0 and not self.include_day: continue
 				if check["evil"] == 1 and not self.include_night: continue
 				check_name = f"{stage['name']} - {check['name']}"
-				if check["sanity"] in self.sanities and (self.enable_shop or not "Shop Access" in check["req"]) and (self.enable_missions or not check["mission"]):
+				if check["sanity"] in self.sanities and (self.enable_shop or not check["shop"]) and (self.enable_missions or not check["mission"]):
 					stage_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
 					rule = True_()
 					for req in check["req"]:
 						rule = rule & Has(req)
+					if check["shop"]:
+						rule = rule & Has("Shop Access")
+						if stage['name'] == "World Map": rule = rule & HasGroupUnique("Currencies", 1)
 					world.set_rule(world.get_location(check_name), rule)
 					if check["name"] == "Completion" and len(check["req"]) == 0:
 						sphere_zero_stages.append(stage["name"])
@@ -80,7 +111,7 @@ class LocationState:
 				if stage["name"] == "Adabat Hub" and world.free_hub == HUB_UNLOCK_ADABAT: free_hub = (stage, stage_region)
 				continue
 
-		level_weights = [0, 8, 8, 7, 7, 6, 6, 4]
+		level_weights = [0, 8, 8, 6, 6, 5, 5, 4]
 		levels = []
 		for i in range(len(level_weights)):
 			for j in range(level_weights[i]):
@@ -118,7 +149,7 @@ class LocationState:
 					hub[1].add_event(
 						f"{hub[0]['name']} - Progressive Souvenir #{i+1}", "Progressive Souvenir",
 						location_type=SWALocation, item_type=SWAItem,
-						rule=Has("Shop Access"), show_in_spoiler=False
+						rule=Has("Shop Access") & Has(f"{hub[0]['name'][:-4]} Currency"), show_in_spoiler=False
 					)
 
 			MEDAL_TO_LEVEL = [0, 0, 15, 30, 45, 60, 80, 120]
@@ -164,7 +195,6 @@ class LocationState:
 						rule = rule & Has(req)
 					else:
 						rule = rule & Has(f"{req} Complete")
-				print(rule)
 				world.set_rule(enter, rule)
 		
 		world.spoiler_text += f"Act Levels for {world.multiworld.player_name[world.player]}:\n"

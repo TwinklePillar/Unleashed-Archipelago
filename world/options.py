@@ -55,6 +55,8 @@ class RandomizeMedalRequirements(Choice):
 	option_vanilla = 0
 	option_randomize = 1
 	option_no_requirements = 2
+
+	default = option_vanilla
 	
 class MedalItems(Toggle):
 	"""
@@ -68,11 +70,23 @@ class ChaosEmeralds(DefaultOnToggle):
 	"""
 	display_name = "Chaos Emeralds"
 
-class EnableShop(Toggle):
+class EnableShop(Choice):
 	"""
-	Should the shop locations be counted for sanities?
+	Should the shop items be locations?
 	"""
-	display_name = "Enable Shop"
+	display_name = "ShopSanity"
+
+	option_disabled = 0
+	option_other_sanities_only = 1
+#	option_all = 2
+
+	default = option_disabled
+
+class ShuffleCurrencies(DefaultOnToggle):
+	"""
+	Should the currencies for each country be shuffled into the item pool?
+	"""
+	display_name = "Shuffle Currencies"
 
 class EnableMissions(Toggle):
 	"""
@@ -102,7 +116,8 @@ class SWAOptions(PerGameCommonOptions):
 	random_act_levels: RandomizeMedalRequirements
 	medal_items: MedalItems
 	chaos_emeralds: ChaosEmeralds
-	enable_shop: EnableShop
+	shuffle_currencies: ShuffleCurrencies
+	shopsanity: EnableShop
 	enable_missions: EnableMissions
 	medalsanity: MedalSanity
 	mediasanity: MediaSanity

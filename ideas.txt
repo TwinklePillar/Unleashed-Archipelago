@@ -12,6 +12,7 @@ Alpha:
 		Hourglass Trap
 		QTE Trap
 	Trap Link
+	Ring Link
 	Better Connection Inputting
 
 Level IDs

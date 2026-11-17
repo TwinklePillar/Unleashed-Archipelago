@@ -9,12 +9,14 @@ with open("apshared.json", "r") as sharedjson:
 	shared = json.load(sharedjson)
 
 hub_base = 400
-act_base = 410
+act_base = 430
 
 for stage in shared["stages"]:
 	if stage["type"] == "hub" and stage["name"] != "World Map":
 		shared["items"].append({"name": f"Hub Unlock: {stage['name'][:-4]}", "item_classif": "progression", "group": "Hubs", "id": hub_base})
-		hub_base += 1
+		shared["items"].append({"name": f"{stage['name'][:-4]} Dictionary", "item_classif": "progression", "group": "Dictionaries", "id": hub_base+1})
+		shared["items"].append({"name": f"{stage['name'][:-4]} Currency", "item_classif": "progression", "group": "Currencies", "id": hub_base+2})
+		hub_base += 3
 
 	if stage["type"] in ("stage", "unshuffled_stage"):
 		shared["items"].append({"name": f"Act Unlock: {stage['name']}", "item_classif": "progression", "group": "Acts", "id": act_base})
@@ -38,6 +40,8 @@ for stage in shared["stages"]:
 			check["evil"] = -1
 		if not "mission" in check:
 			check["mission"] = 0
+		if not "shop" in check:
+			check["shop"] = 0
 
 for souvenir in shared["souvenirs"].values():
 	check_name = f"Souvenir - {souvenir['name']}"

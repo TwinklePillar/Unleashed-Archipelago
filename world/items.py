@@ -17,6 +17,7 @@ class ItemState:
 	def __init__(self):
 		self.item_class = {}
 		self.chaos_emeralds = 0
+		self.shuffle_currencies = 1
 		for item in apshared["items"]:
 			self.item_class[item["name"]] = item["classif"]
 	
@@ -30,10 +31,19 @@ class ItemState:
 		itempool = []
 		precollect = []
 
-		if world.location_state.include_day:
-			for i in item_name_groups["Shoes"]:
+		for i in item_name_groups["Shoes"]:
+			if world.location_state.include_day:
 				itempool.append(world.create_item(i))
-
+			else:
+				precollect.append(i)
+		
+		if world.location_state.enable_shop:
+			for i in item_name_groups["Currencies"]:
+				if self.shuffle_currencies:
+					itempool.append(world.create_item(i))
+				else:
+					precollect.append(i)
+		
 		if world.medal_items:
 			for i in range(200):
 				itempool.append(world.create_item(SUN_MEDAL))

@@ -100,6 +100,17 @@ static void setListFlag(const char* name, int value) {
 	}
 }
 
+static const char* getListFlag(const char* name) {
+	FlagManager* fm = FlagManager::GetInstance();
+	for (auto cur = fm->eFlag.begin(); cur < fm->eFlag.end(); cur++) {
+		const char* flagName = cur->flag->name.get();
+		if (strcmp(flagName, name) == 0) {
+			return cur->flag->eFlag.named[cur->flag->eFlag.value];
+		}
+	}
+	return NULL;
+}
+
 static void setupFlags(void) {
 	setIntFlag("iFlag_TownSecNo", 270);
 	setIntFlag("iFlag_ProfInfo_State", 101);
@@ -250,9 +261,9 @@ void ArchipelagoManager::Update(double dt) {
 					case YELLOW_CHAOS_EMERALD: imgID = 28; break;
 					case WHITE_CHAOS_EMERALD: imgID = 31; break; // slightly inaccurate but shrug
 					case SUN_MEDAL: imgID = 32; break;
-					case PROGRESSIVE_SUN_LEVEL: imgID = 33; break;
+					case PROGRESSIVE_SUN_LEVEL: imgID = 52; break;
 					case MOON_MEDAL: imgID = 34; break;
-					case PROGRESSIVE_MOON_LEVEL: imgID = 35; break;
+					case PROGRESSIVE_MOON_LEVEL: imgID = 53; break;
 					case STOMPING_SHOES: imgID = 41; break;
 					case WALL_JUMP_SHOES: imgID = 42; break;
 					case AIR_BOOST_SHOES: imgID = 43; break;
@@ -261,6 +272,7 @@ void ArchipelagoManager::Update(double dt) {
 				}
 				if (castMsg->item.starts_with("Act Unlock")) imgID = 79;
 				if (castMsg->item.starts_with("Hub Unlock")) imgID = 51;
+				if (castMsg->item.ends_with("Currency")) imgID = 81;
 				if (castMsg->sendPlayer == slot) {
 					DisplayMessage(RECV_ITEM, castMsg->item, imgID);
 				} else {
@@ -602,7 +614,7 @@ PPC_FUNC(sub_8273EFC0) {
 		case 8: // Eggmanland
 			if (!strcmp(stageType, "ActD_Extra_02")) apStage = "Tornado Defense Act 2";
 			if (!strcmp(stageType, "boss_darkgaia")) {apStage = "Dark Gaia"; isBoss = 2;}
-			if (!strcmp(stageType, "boss_eggmanland")) {apStage = "Egg Dragoon"; isBoss = 3;}
+			if (!strcmp(stageType, "boss_eggmanland")) {apStage = "Egg Dragoon"; isBoss = 2;}
 			if (!strcmp(stageType, "Act_EggManLand")) apStage = "Eggmanland";
 			break;
 	}
@@ -658,6 +670,28 @@ PPC_FUNC(sub_82585550) {
 	__imp__sub_82585550(ctx, base);
 	SWAAP::setupFlags();
 	SWAAP::resetWatchers();
+}
+
+// Get Money Ring
+
+PPC_FUNC_IMPL(__imp__sub_82519FD0);
+PPC_FUNC(sub_82519FD0) {
+	const char* curHubChar = SWAAP::getListFlag("eFlag_LastTown");
+	if (!curHubChar) return;
+	std::string curHub = curHubChar;
+	int currency = 0;
+	if (curHub == "eFlag_TownState_PetraCapital") currency = SHAMAR_CURRENCY;
+	if (curHub == "eFlag_TownState_Mykonos") currency = APOTOS_CURRENCY;
+	if (curHub == "eFlag_TownState_China") currency = CHUNNAN_CURRENCY;
+	if (curHub == "eFlag_TownState_Snow") currency = HOLOSKA_CURRENCY;
+	if (curHub == "eFlag_TownState_EuropeanCity") currency = SPAGONIA_CURRENCY;
+	if (curHub == "eFlag_TownState_SouthEastAsia") currency = ADABAT_CURRENCY;
+	if (curHub == "eFlag_TownState_NYCity") currency = EMPIRE_CITY_CURRENCY;
+	if (curHub == "eFlag_TownState_Africa") currency = MAZURI_CURRENCY;
+	if (curHub == "eFlag_TownState_EggManBase") currency = EGGMANLAND_CURRENCY;
+
+	if (SWAAP::ArchipelagoManager::itemState[currency]) __imp__sub_82519FD0(ctx, base);
+	else ctx.r3.u64 = 0;
 }
 
 // Stage Return Data (size: 80)
