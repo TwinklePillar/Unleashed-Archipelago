@@ -4,9 +4,6 @@ Alpha:
 	Death Link
 	Filler/Traps
 		Claws
-		Reverse Trap
-		Slow Trap
-		Fast Trap
 		Gravity Trap
 		Ice Trap
 		Hourglass Trap

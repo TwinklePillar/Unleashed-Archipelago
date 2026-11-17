@@ -96,7 +96,7 @@ std::vector<std::filesystem::path>* ModLoader::GetIncludeDirectories(size_t modI
 static void InitAPMod() {
 	Mod apMod;
 	apMod.type = ModType::HMM;
-	apMod.includeDirs.emplace_back(g_executableRoot / "SWAAP/Assets");
+	apMod.includeDirs.emplace_back(GetGamePath() / "SWAAP/Assets");
 	g_mods.emplace_back(apMod);
 }
 
@@ -125,7 +125,7 @@ void ModLoader::Init()
         else
             ModLoader::s_saveFilePath = userPath / "mlsave";
 
-        ModLoader::s_saveFilePath /= "SYS-DATA";
+        ModLoader::s_saveFilePath = GetGamePath() / "SWAAP/SYS-DATA";
     }
 
     if (configIni.getString("CPKREDIR", "LogType", std::string()) == "console")

@@ -4,6 +4,8 @@
 #include <queue>
 #include <SWA.h>
 
+#include <Archipelago.h>
+
 #include "classmaps.h"
 
 #define AP_MESSAGE_ACH 12407
@@ -47,6 +49,10 @@ class ArchipelagoManager {
 		static std::string ipport;
 		static std::string slot;
 		static std::string password;
+		
+		static std::queue<int> trapQueue;
+		static std::queue<int> prioTrapQueue;
+		static double trapTimer;
 		
 		static bool isDebug;
 		static int version;

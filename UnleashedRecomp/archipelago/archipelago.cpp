@@ -10,6 +10,7 @@
 #include <mod/ini_file.h>
 #include <user/paths.h>
 #include <ui/message_window.h>
+#include <user/config.h>
 
 #include "apshared.h"
 
@@ -25,6 +26,10 @@ std::string ArchipelagoManager::ipport;
 std::string ArchipelagoManager::slot;
 std::string ArchipelagoManager::password;
 std::vector<ActiveTrap> ArchipelagoManager::activeTraps;
+
+std::queue<int> ArchipelagoManager::trapQueue{};
+std::queue<int> ArchipelagoManager::prioTrapQueue{};
+double ArchipelagoManager::trapTimer{};
 
 static SaveData g_lastSaveData{};
 static double elapsed = -1;
@@ -184,7 +189,7 @@ bool ArchipelagoManager::isTrapActive(int trapID) {
 }
 
 void ArchipelagoManager::Update(double dt, PPCContext& ctx, uint8_t* base) {
-	auto dataPath = GetUserPath() / "indices.txt";
+	auto dataPath = GetGamePath() / "SWAAP/indices.txt";
 	elapsed += dt;
 	if (elapsed > 1) {
 		elapsed -= 1;
@@ -206,6 +211,28 @@ void ArchipelagoManager::Update(double dt, PPCContext& ctx, uint8_t* base) {
 		} else isDebug = false;
 	}
 
+	trapTimer -= dt;
+	if (trapTimer < 0) {
+		trapTimer = Config::TrapTimer;
+		int item = 0;
+		bool isPrio = false;
+		if (!prioTrapQueue.empty()) {
+			item = prioTrapQueue.front();
+			prioTrapQueue.pop();
+			isPrio = true;
+		} else if (!trapQueue.empty()) {
+			item = trapQueue.front();
+			trapQueue.pop();
+		}
+		if (item) {
+			switch (item) {
+				case REVERSE_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=REVERSE_TRAP, .timer=20}); break;
+				case SLOW_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=SLOW_TRAP, .timer=20}); break;
+				case FAST_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=FAST_TRAP, .timer=20}); break;
+			}
+		}
+	}
+	
 	for (int i = activeTraps.size()-1; i >= 0; i--) {
 		activeTraps[i].timer -= dt;
 		if (activeTraps[i].timer < 0) activeTraps.erase(activeTraps.begin()+i);
@@ -356,9 +383,11 @@ void ArchipelagoManager::ItemRecvCallback(int64_t item, bool notify) {
 			case RINGS_20: addRings(20); break;
 			case RINGS_50: addRings(50); break;
 
-			case REVERSE_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=REVERSE_TRAP, .timer=30}); break;
-			case SLOW_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=SLOW_TRAP, .timer=30}); break;
-			case FAST_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=FAST_TRAP, .timer=30}); break;
+			case REVERSE_TRAP:
+			case SLOW_TRAP:
+			case FAST_TRAP:
+				trapQueue.emplace(item);
+				break;
 		}
 	}
 	
@@ -411,7 +440,7 @@ void ArchipelagoManager::ConnectToArchipelago() {
 	ItemClearCallback();
 	
 	auto ini = IniFile();
-	auto path = GetUserPath() / "connection.ini";
+	auto path = GetGamePath() / "SWAAP/connection.ini";
 	if (!ini.read(path)) {
 		int result = -1;
 		MessageWindow::Open("Connection failed: Unable to read \"connection.ini\"", &result);
@@ -711,12 +740,6 @@ PPC_FUNC(sub_82519FD0) {
 
 	if (SWAAP::ArchipelagoManager::itemState[currency]) __imp__sub_82519FD0(ctx, base);
 	else ctx.r3.u64 = 0;
-}
-
-PPC_FUNC_IMPL(__imp__sub_8238AD80);
-PPC_FUNC(sub_8238AD80) {
-	printf("r3: %08x, CPlayerSpeedContext: %p\n", ctx.r3.u32, SWAAP::CPlayerSpeedContext::GetInstance());
-	__imp__sub_8238AD80(ctx, base);
 }
 
 // Stage Return Data (size: 80)

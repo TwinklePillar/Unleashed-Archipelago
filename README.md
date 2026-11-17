@@ -1,3 +1,19 @@
+# Sonic Unleashed Archipelago
+
+[Archipelago](https://archipelago.gg/) is "a cross-game modification system which randomizes different games, then uses the result to build a single unified multi-player game. Items from one game may be present in another, and you will need your fellow players to find items you need in their games to help you complete your own" (copied from the website)
+
+## Setup
+
+- Extract the contents of the zip into the folder of your installation
+- Edit `SWAAP/connection.ini` with your room's connection info
+- Launch the game. You will connect upon hitting continue or new game
+
+## AI Usage
+
+The main developer has not used AI during the development of this implementation
+
+## Original README
+
 <p align="center">
     <img src="https://raw.githubusercontent.com/hedge-dev/UnleashedRecompResources/refs/heads/main/images/logo/Logo.png" width="512"/>
 </p>

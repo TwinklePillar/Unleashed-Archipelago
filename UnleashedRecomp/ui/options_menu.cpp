@@ -1287,8 +1287,12 @@ static void DrawConfigOptions()
 
             break;
         }
-        case 4: { // ARCHPIELAGO
-        	// TODO :: AP OPTIONS
+        case 4: { // ARCHIPELAGO
+	      	//DrawConfigOption(rowCount++, yOffset, &Config::DeathLinkEnabled, true);
+	        //DrawConfigOption(rowCount++, yOffset, &Config::DeathLinkAmnesty, true, nullptr, 1, 10, 20);
+	        //DrawConfigOption(rowCount++, yOffset, &Config::TrapLinkEnabled, true);
+	        //DrawConfigOption(rowCount++, yOffset, &Config::RingLinkEnabled, true);
+	        DrawConfigOption(rowCount++, yOffset, &Config::TrapTimer, true, nullptr, 0.0f, 5.0f, 10.0f);
         }
     }
 
