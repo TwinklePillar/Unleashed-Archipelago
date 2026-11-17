@@ -12,6 +12,7 @@
 #include <user/registry.h>
 
 #include <archipelago/archipelago.h>
+#include <archipelago/apshared.h>
 
 void App::Restart(std::vector<std::string> restartArgs)
 {
@@ -60,7 +61,11 @@ PPC_FUNC(sub_822C1130)
         if (abs(ctx.f1.f64 - targetDeltaTime) < 0.00001)
             ctx.f1.f64 = targetDeltaTime;
     }
-
+    
+    double realDT = ctx.f1.f64;
+    if (SWAAP::ArchipelagoManager::isTrapActive(SLOW_TRAP)) ctx.f1.f64 /= 3;
+    if (SWAAP::ArchipelagoManager::isTrapActive(FAST_TRAP)) ctx.f1.f64 *= 3;
+    
     App::s_deltaTime = ctx.f1.f64;
     App::s_time += App::s_deltaTime;
 
@@ -75,9 +80,9 @@ PPC_FUNC(sub_822C1130)
         GameWindow::Update();
     }
 
-    AudioPatches::Update(App::s_deltaTime);
+    AudioPatches::Update(realDT);
     InspirePatches::Update();
-    SWAAP::ArchipelagoManager::Update(App::s_deltaTime);
+    SWAAP::ArchipelagoManager::Update(realDT, ctx, base);
 
     // Apply subtitles option.
     if (auto pApplicationDocument = SWA::CApplicationDocument::GetInstance())

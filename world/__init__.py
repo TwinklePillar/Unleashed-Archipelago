@@ -54,6 +54,8 @@ class SWAWorld(World):
 		
 		self.location_state.enable_shop = self.options.shopsanity.value
 		self.item_state.shuffle_currencies = self.options.shuffle_currencies.value
+
+		self.item_state.trap_chance = self.options.trap_chance.value
 		
 		if self.options.medalsanity:
 			self.location_state.sanities += ["Sun Medals", "Moon Medals"]

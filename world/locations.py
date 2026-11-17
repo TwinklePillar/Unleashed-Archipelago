@@ -39,33 +39,6 @@ class LocationState:
 		menu_region = Region("Menu", world.player, world.multiworld)
 		world.multiworld.regions.append(menu_region)
 		
-		if self.enable_shop:
-			shop_rule = HasAll(HUB_UNLOCK_CHUNNAN, WALL_JUMP_SHOES)
-			if self.include_day: shop_rule = shop_rule | AtLeast(2, 
-				CanReachRegion("Windmill Isle Day Act 2"),
-				CanReachRegion("Savannah Citadel Day Act 1"),
-				CanReachRegion("Rooftop Run Day Act 1") & Has(WALL_JUMP_SHOES),
-				CanReachRegion("Dragon Road Day Act 1"),
-				CanReachRegion("Cool Edge Day Act 1") & Has(STOMPING_SHOES),
-				CanReachRegion("Arid Sands Day Act 1") & Has(WALL_JUMP_SHOES),
-				CanReachRegion("Skyscraper Scamper Day Act 1") & HasAll(WALL_JUMP_SHOES, STOMPING_SHOES),
-				CanReachRegion("Jungle Joyride Day Act 1") & HasAll(WALL_JUMP_SHOES, STOMPING_SHOES)
-			)
-			menu_region.add_event(
-				f"Shop Access", "Shop Access",
-				location_type=SWALocation, item_type=SWAItem,
-				rule=shop_rule, show_in_spoiler=False
-			)
-			souvenir_region = Region("Souvenir", world.player, world.multiworld)
-			world.multiworld.regions.append(souvenir_region)
-			for k in apshared["souvenirs"].keys():
-				souvenir = apshared["souvenirs"][k]
-				count = int(k)
-				check_name = f"Souvenir - {souvenir['name']}"
-				souvenir_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
-				world.set_rule(world.get_location(check_name), Has("Progressive Souvenir", count))
-			world.create_entrance(menu_region, souvenir_region)
-		
 		hubs = []
 		free_hub = ()
 		sphere_zero_stages = []
@@ -158,16 +131,6 @@ class LocationState:
 				if sub["evil"] == 1 and not self.include_night: continue
 				shuffled_stage = all_stages[all_stages_unshuffled.index(sub["stage"])]
 				stage_region = world.get_region(shuffled_stage)
-				stage_region.add_event(
-					f"{sub['stage']} Complete", f"{sub['stage']} Complete",
-					location_type=SWALocation, item_type=SWAItem,
-					rule=CanReachLocation(f"{shuffled_stage} - Completion"), show_in_spoiler=False
-				)
-				stage_region.add_event(
-					f"{sub['stage']} Level Completion", "Level Completion",
-					location_type=SWALocation, item_type=SWAItem,
-					rule=CanReachLocation(f"{shuffled_stage} - Completion"), show_in_spoiler=False
-				)
 				hub[1].connect(stage_region)
 				enter = world.get_entrance(f"{hub[1].name} -> {stage_region.name}")
 				index = str(all_stages_unshuffled.index(sub["stage"]))
@@ -196,6 +159,33 @@ class LocationState:
 					else:
 						rule = rule & Has(f"{req} Complete")
 				world.set_rule(enter, rule)
+		
+		if self.enable_shop:
+			shop_rule = HasAll(HUB_UNLOCK_CHUNNAN, WALL_JUMP_SHOES)
+			if self.include_day: shop_rule = shop_rule | AtLeast(2, 
+				CanReachLocation("Windmill Isle Day Act 2 - Completion"),
+				CanReachLocation("Savannah Citadel Day Act 1 - Completion"),
+				CanReachLocation("Rooftop Run Day Act 1 - Completion"),
+				CanReachLocation("Dragon Road Day Act 1 - Completion"),
+				CanReachLocation("Cool Edge Day Act 1 - Completion"),
+				CanReachLocation("Arid Sands Day Act 1 - Completion"),
+				CanReachLocation("Skyscraper Scamper Day Act 1 - Completion"),
+				CanReachLocation("Jungle Joyride Day Act 1 - Completion")
+			)
+			menu_region.add_event(
+				f"Shop Access", "Shop Access",
+				location_type=SWALocation, item_type=SWAItem,
+				rule=shop_rule, show_in_spoiler=False
+			)
+			souvenir_region = Region("Souvenir", world.player, world.multiworld)
+			world.multiworld.regions.append(souvenir_region)
+			for k in apshared["souvenirs"].keys():
+				souvenir = apshared["souvenirs"][k]
+				count = int(k)
+				check_name = f"Souvenir - {souvenir['name']}"
+				souvenir_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
+				world.set_rule(world.get_location(check_name), Has("Progressive Souvenir", count))
+			world.create_entrance(menu_region, souvenir_region)
 		
 		world.spoiler_text += f"Act Levels for {world.multiworld.player_name[world.player]}:\n"
 		for i in range(len(all_stages)):

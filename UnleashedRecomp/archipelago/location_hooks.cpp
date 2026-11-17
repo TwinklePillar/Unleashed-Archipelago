@@ -8,7 +8,7 @@ void SWA_AP_StageCompleteMidAsmHook(PPCRegister& r18) {
 	auto base = (uint8_t*)MmGetHostAddress(0);
 	uint32_t temp = PPC_LOAD_U32(r18.u32 + 152);
 	uint32_t stageID = PPC_LOAD_U32(temp + 24);
-	printf("r18: %08x, temp: %08x, temp2: %i\n", r18.u32, temp, stageID);
+//	printf("r18: %08x, temp: %08x, temp2: %i\n", r18.u32, temp, stageID);
 	AP_SendItem(stageID * 1000);
 
 	char buf[256] = {0};
@@ -21,7 +21,7 @@ void SWA_AP_MedalLocationMidAsmHook(PPCRegister& r3, PPCRegister& r29, PPCRegist
 	// r31: moon/sun
 	// r3: record
 	auto base = (uint8_t*)MmGetHostAddress(0);
-	printf("r3: %08x, r29: %08x, r31: %08x\n", r3.u32, r29.u32, r31.u32);
+//	printf("r3: %08x, r29: %08x, r31: %08x\n", r3.u32, r29.u32, r31.u32);
 	int stageID = PPC_LOAD_U32(r3.u32);
 	const char* medalType = "";
 	char buf[256] = {0};
@@ -54,7 +54,7 @@ PPC_FUNC(sub_82519C20) {
 	AP_SendItem(32772 + ctx.r4.u64);
 	SWAAP::ArchipelagoManager::DebugLog("Sending Shoe");
 }
-
+/*
 // something involving shops
 PPC_FUNC_IMPL(__imp__sub_82B280A0);
 PPC_FUNC(sub_82B280A0) {
@@ -77,3 +77,4 @@ PPC_FUNC(sub_82519C60) {
 //	printf("r3: %08x\n", ctx.r3.u32);
 	ctx.r3.u64 = 8;
 }
+*/

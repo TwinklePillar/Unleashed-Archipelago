@@ -60,7 +60,7 @@ class RandomizeMedalRequirements(Choice):
 	
 class MedalItems(Toggle):
 	"""
-	Should there be 200 sun and 200 moon medals in the pool instead of 7 progressive levels each?
+	Should there be 200 sun and 200 moon medals in the pool instead of 6 progressive levels each?
 	"""
 	display_name = "Medal Items"
 
@@ -106,6 +106,17 @@ class MediaSanity(Toggle):
 	"""
 	display_name = "MediaSanity"
 
+class TrapChance(Range):
+	"""
+	What should be the chance of a filler item being replaced with a random trap?
+	"""
+	display_name = "Trap Chance"
+
+	range_start = 0
+	range_end = 100
+
+	default = 10
+
 @dataclass
 class SWAOptions(PerGameCommonOptions):
 	progression_mode: ProgressionMode
@@ -121,3 +132,4 @@ class SWAOptions(PerGameCommonOptions):
 	enable_missions: EnableMissions
 	medalsanity: MedalSanity
 	mediasanity: MediaSanity
+	trap_chance: TrapChance

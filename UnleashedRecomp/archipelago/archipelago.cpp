@@ -24,6 +24,7 @@ bool ArchipelagoManager::hasInit;
 std::string ArchipelagoManager::ipport;
 std::string ArchipelagoManager::slot;
 std::string ArchipelagoManager::password;
+std::vector<ActiveTrap> ArchipelagoManager::activeTraps;
 
 static SaveData g_lastSaveData{};
 static double elapsed = -1;
@@ -175,7 +176,14 @@ static void resetWatchers() {
 	memcpy(&g_lastSaveData, save, sizeof(SaveData));
 }
 
-void ArchipelagoManager::Update(double dt) {
+bool ArchipelagoManager::isTrapActive(int trapID) {
+	for (auto trap : activeTraps) {
+		if (trapID == trap.trapID) return true;
+	}
+	return false;
+}
+
+void ArchipelagoManager::Update(double dt, PPCContext& ctx, uint8_t* base) {
 	auto dataPath = GetUserPath() / "indices.txt";
 	elapsed += dt;
 	if (elapsed > 1) {
@@ -197,6 +205,11 @@ void ArchipelagoManager::Update(double dt) {
 			}
 		} else isDebug = false;
 	}
+
+	for (int i = activeTraps.size()-1; i >= 0; i--) {
+		activeTraps[i].timer -= dt;
+		if (activeTraps[i].timer < 0) activeTraps.erase(activeTraps.begin()+i);
+	}
 	
 	auto appdoc = SWA::CApplicationDocument::GetInstance();
 	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
@@ -204,6 +217,9 @@ void ArchipelagoManager::Update(double dt) {
 //	printf("AppDoc Member @ %p\n", appdoc->m_pMember.get());
 //	printf("GameParameter @ %p\n", appdoc->m_pMember->m_spGameParameter.get());
 //	printf("Save Data @ %p\n", save);
+	
+//	printf("Day Sonic Instance: %p\n", CPlayerSpeedContext::GetInstance());
+//	printf("Night Sonic Instance: %p\n", evilContext.get());
 	
 	if (isDebug) {
 		FlagManager* flags = FlagManager::GetInstance();
@@ -232,7 +248,6 @@ void ArchipelagoManager::Update(double dt) {
 	}
 	
 	memcpy(&g_lastSaveData, save, sizeof(SaveData));
-	// Plaintext, ItemSend, ItemRecv, Hint, Countdown, Chat, ServerChat
 	if (AP_IsMessagePending()) {
 		auto baseMsg = AP_GetLatestMessage();
 		switch (baseMsg->type) {
@@ -320,7 +335,7 @@ static void addRings(int amt) {
 	save->totalRing = save->totalRing + amt;
 	if (CPlayerSpeedContext::GetInstance()) {
 		CPlayerSpeedContext::GetInstance()->m_Rings = CPlayerSpeedContext::GetInstance()->m_Rings + amt;
-		CPlayerSpeedContext::GetInstance()->m_ringEnergy = CPlayerSpeedContext::GetInstance()->m_ringEnergy + 1.3 * amt;
+		CPlayerSpeedContext::GetInstance()->m_ChaosEnergy = CPlayerSpeedContext::GetInstance()->m_ChaosEnergy + 1.3 * amt;
 	} else if (SWAAP::ArchipelagoManager::evilContext) {
 		SWAAP::ArchipelagoManager::evilContext->m_Rings = SWAAP::ArchipelagoManager::evilContext->m_Rings + amt;
 	}
@@ -340,6 +355,10 @@ void ArchipelagoManager::ItemRecvCallback(int64_t item, bool notify) {
 			case RINGS_10: addRings(10); break;
 			case RINGS_20: addRings(20); break;
 			case RINGS_50: addRings(50); break;
+
+			case REVERSE_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=REVERSE_TRAP, .timer=30}); break;
+			case SLOW_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=SLOW_TRAP, .timer=30}); break;
+			case FAST_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=FAST_TRAP, .timer=30}); break;
 		}
 	}
 	
@@ -639,11 +658,11 @@ PPC_FUNC(sub_8273EFC0) {
 	}
 
 	int needMedalNum = PPC_LOAD_U32(ctx.r3.u32 + 276);
-	printf("Entrance @ %08x\n", ctx.r3.u32);
-	printf("\tAreaType: %i\n", areaType);
-	printf("\tDoorType: %i\n", doorType);
-	printf("\tNeedMedalNum: %i\n", needMedalNum);
-	printf("\tStageType: %s\n", stageType);
+//	printf("Entrance @ %08x\n", ctx.r3.u32);
+//	printf("\tAreaType: %i\n", areaType);
+//	printf("\tDoorType: %i\n", doorType);
+//	printf("\tNeedMedalNum: %i\n", needMedalNum);
+//	printf("\tStageType: %s\n", stageType);
 
 	if (isBoss == 2) PPC_STORE_U32(ctx.r3.u32 + 268, 0);
 	if (isBoss == 3) PPC_STORE_U32(ctx.r3.u32 + 268, 1);
@@ -692,6 +711,12 @@ PPC_FUNC(sub_82519FD0) {
 
 	if (SWAAP::ArchipelagoManager::itemState[currency]) __imp__sub_82519FD0(ctx, base);
 	else ctx.r3.u64 = 0;
+}
+
+PPC_FUNC_IMPL(__imp__sub_8238AD80);
+PPC_FUNC(sub_8238AD80) {
+	printf("r3: %08x, CPlayerSpeedContext: %p\n", ctx.r3.u32, SWAAP::CPlayerSpeedContext::GetInstance());
+	__imp__sub_8238AD80(ctx, base);
 }
 
 // Stage Return Data (size: 80)

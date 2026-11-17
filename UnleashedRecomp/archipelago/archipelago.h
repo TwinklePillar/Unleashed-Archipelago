@@ -17,6 +17,11 @@ struct ArchipelagoMessage {
 	uint16_t imgID;
 };
 
+struct ActiveTrap {
+	int trapID;
+	double timer;
+};
+
 enum APMessageType {
 	SENT_ITEM,
 	RECV_ITEM,
@@ -50,12 +55,15 @@ class ArchipelagoManager {
 		static int itemState[AP_ITEM_MAX];
 		static std::map<std::string, int> actLevels;
 		static inline std::queue<ArchipelagoMessage> messageQueue;
-		static void Update(double dt);
+		static void Update(double dt, PPCContext& ctx, uint8_t* base);
 		static void DisplayMessage(APMessageType type, std::string message, uint16_t imgID = 0);
 		static void ConnectToArchipelago();
 		static void DisconnectFromArchipelago();
 
 		static xpointer<CEvilSonicContext> evilContext;
+
+		static std::vector<ActiveTrap> activeTraps;
+		static bool isTrapActive(int trapID);
 };
 
 }

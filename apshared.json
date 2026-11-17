@@ -28,7 +28,11 @@
 		{"name": "100 Experience", "item_classif": "filler", "group": "Junk", "const_name": "EXPERIENCE_100"},
 		{"name": "10 Rings", "item_classif": "filler", "group": "Junk", "const_name": "RINGS_10"},
 		{"name": "20 Rings", "item_classif": "filler", "group": "Junk", "const_name": "RINGS_20"},
-		{"name": "50 Rings", "item_classif": "filler", "group": "Junk", "const_name": "RINGS_50"}
+		{"name": "50 Rings", "item_classif": "filler", "group": "Junk", "const_name": "RINGS_50"},
+
+		{"name": "Reverse Trap", "item_classif": "trap", "group": "Traps"},
+		{"name": "Slow Trap", "item_classif": "trap", "group": "Traps"},
+		{"name": "Fast Trap", "item_classif": "trap", "group": "Traps"}
 	],
 	"souvenirs": {
 		"3": {"name": "Sun Medal #1", "id": 50030060, "sanity": "Sun Medals"},

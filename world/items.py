@@ -18,6 +18,7 @@ class ItemState:
 		self.item_class = {}
 		self.chaos_emeralds = 0
 		self.shuffle_currencies = 1
+		self.trap_chance = 0
 		for item in apshared["items"]:
 			self.item_class[item["name"]] = item["classif"]
 	
@@ -25,6 +26,8 @@ class ItemState:
 		return SWAItem(item, self.item_class[item], item_name_to_id[item], world.player)
 
 	def get_filler_item(self, world):
+		if world.random.randint(0, 99) < self.trap_chance:
+			return world.random.choice(item_name_groups["Traps"])
 		return world.random.choice(item_name_groups["Junk"])
 	
 	def setup_items(self, world):

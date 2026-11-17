@@ -1,3 +1,4 @@
+#include "Hedgehog/Math/Vector.h"
 #include "kernel/memory.h"
 #include <SWA.h>
 
@@ -81,9 +82,26 @@ namespace SWAAP {
 	
 	class CPlayerSpeedContext {
 		public:
-		SWA_INSERT_PADDING(0x538);
+		enum EStateFlag {
+//			eStateFlag_;
+		};
+		class CStateFlag {
+			hh::vector<uint8_t> m_Flags;
+		};
+		
+		SWA_INSERT_PADDING(0x210);
+		Hedgehog::Math::CVector m_Velocity;
+		Hedgehog::Math::CVector m_HorizontalVelocity;
+		Hedgehog::Math::CVector m_VerticalVelocity;
+		Hedgehog::Math::CVector m_PreviousVelocity;
+		SWA_INSERT_PADDING(0x268);
+		be<float> m_MaxVelocity;
+		be<float> m_DeadHeight;
+		SWA_INSERT_PADDING(0x78);
 		be<int32_t> m_Rings;
-		be<float> m_ringEnergy;
+		be<float> m_ChaosEnergy;
+		SWA_INSERT_PADDING(0xb8);
+		Hedgehog::Math::CVector m_Gravity;
 
 		static CPlayerSpeedContext* GetInstance() {
 			return *(xpointer<CPlayerSpeedContext>*)MmGetHostAddress(0x83364724);

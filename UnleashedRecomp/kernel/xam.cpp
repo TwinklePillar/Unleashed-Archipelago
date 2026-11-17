@@ -401,6 +401,9 @@ uint32_t XamInputGetCapabilities(uint32_t unk, uint32_t userIndex, uint32_t flag
     return result;
 }
 
+#include <archipelago/archipelago.h>
+#include <archipelago/apshared.h>
+
 uint32_t XamInputGetState(uint32_t userIndex, uint32_t flags, XAMINPUT_STATE* state)
 {
     memset(state, 0, sizeof(*state));
@@ -465,7 +468,14 @@ uint32_t XamInputGetState(uint32_t userIndex, uint32_t flags, XAMINPUT_STATE* st
     }
 
     state->Gamepad.wButtons &= ~hid::g_prohibitedButtons;
-
+    
+    if (SWAAP::ArchipelagoManager::isTrapActive(REVERSE_TRAP)) {
+    	if (state->Gamepad.sThumbLX == -32768) state->Gamepad.sThumbLX = -32767;
+     	if (state->Gamepad.sThumbLY == -32768) state->Gamepad.sThumbLY = -32767;
+    	state->Gamepad.sThumbLX = -state->Gamepad.sThumbLX;
+     	state->Gamepad.sThumbLY = -state->Gamepad.sThumbLY;
+    }
+    
     if (hid::g_isLeftStickProhibited)
     {
         state->Gamepad.sThumbLX = 0;
