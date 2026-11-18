@@ -391,6 +391,9 @@ if (WIN32)
         Synchronization
         winmm
         windowsapp
+        ws2_32
+        crypt32
+        bcrypt
     )
 endif()
 
@@ -408,7 +411,7 @@ target_link_libraries(UnleashedRecomp PRIVATE
     xxHash::xxhash
     CURL::libcurl
     plume
-    APCpp
+    APCpp_static
 )
 
 target_include_directories(UnleashedRecomp PRIVATE

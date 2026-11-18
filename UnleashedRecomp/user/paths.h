@@ -31,7 +31,7 @@ inline std::filesystem::path GetSavePath(bool checkForMods)
     if (checkForMods && !ModLoader::s_saveFilePath.empty())
         return ModLoader::s_saveFilePath.parent_path();
     else
-        return GetUserPath() / "save";
+        return GetGamePath() / "SWAAP";
 }
 
 // Returned file name may not necessarily be

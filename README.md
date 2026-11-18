@@ -12,6 +12,18 @@
 
 The main developer has not used AI during the development of this implementation
 
+## Building
+
+Run the `process_apshared.py` script then follow the recomp building instructions.
+Running via flatpak is untested. You will at minimum need to copy the `SWAAP` folder from the release into the game's data directory
+
+## Special Thanks
+
+- GrimmyHunter
+- Broodlai
+- SomeLazyGamer
+- willowrg
+
 ## Original README
 
 <p align="center">

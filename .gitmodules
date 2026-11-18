@@ -61,3 +61,4 @@
 [submodule "thirdparty/APCpp"]
 	path = thirdparty/APCpp
 	url = https://github.com/N00byKing/APCpp.git
+	branch = staticlib

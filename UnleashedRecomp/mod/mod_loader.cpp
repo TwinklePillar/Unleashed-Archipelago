@@ -841,7 +841,6 @@ PPC_FUNC(sub_82E0B500)
                         appendArFilePath /= "+";
                         appendArFilePath += arFilePath.filename();
                     }
-                   	std::cout << "Found Mod Path: " << appendArFilePath << std::endl;
 
                     loadArchives(appendArFilePath);
                 }
