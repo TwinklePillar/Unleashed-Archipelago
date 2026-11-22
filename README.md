@@ -19,10 +19,11 @@ Running via flatpak is untested. You will at minimum need to copy the `SWAAP` fo
 
 ## Special Thanks
 
-- GrimmyHunter
-- Broodlai
-- SomeLazyGamer
-- willowrg
+- GrimmyHunter - Playtester
+- Broodlai - Playtester
+- SomeLazyGamer - PopTracker Developer
+- HothRaka - Medal Textures
+- HumMation - Logo
 
 ## Original README
 

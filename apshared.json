@@ -603,9 +603,11 @@
 			]},
 			{"name": "Tip Top Tea 7 - Video Tape #24", "sanity": "Tapes", "mission": 1, "id": 323, "req": [
 				"Hub Unlock: Chun-Nan",
+				"Air Boost Shoes",
 				"Hub Unlock: Mazuri",
 				"Hub Unlock: Apotos",
 				"Hub Unlock: Holoska",
+				"Stomping Shoes",
 				"Hub Unlock: Empire City",
 				"Hub Unlock: Adabat"
 			]},
@@ -910,16 +912,16 @@
 			{"stage": "Dark Gaia", "evil": -1, "level": 1, "req": []}
 		]},
 		{"name": "Eggmanland", "type": "unshuffled_stage", "evil": -1, "checks": [
-			{"name": "Completion", "sanity": "Completions", "id": 40040000, "req": ["Stomping Shoes"]},
-			{"name": "Record #13", "sanity": "Records", "id": 179, "req": ["Stomping Shoes"]},
-			{"name": "Record #32", "sanity": "Records", "id": 198, "req": ["Stomping Shoes"]},
-			{"name": "Record #39", "sanity": "Records", "id": 205, "req": ["Stomping Shoes"]},
-			{"name": "Record #56", "sanity": "Records", "id": 222, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #17", "sanity": "Books", "id": 245, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #18", "sanity": "Books", "id": 246, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #60", "sanity": "Books", "id": 288, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #66", "sanity": "Books", "id": 294, "req": ["Stomping Shoes"]},
-			{"name": "Art Book #67", "sanity": "Books", "id": 295, "req": ["Stomping Shoes"]}
+			{"name": "Completion", "sanity": "Completions", "id": 40040000, "req": ["Wall Jump Shoes"]},
+			{"name": "Record #13", "sanity": "Records", "id": 179, "req": ["Wall Jump Shoes"]},
+			{"name": "Record #32", "sanity": "Records", "id": 198, "req": ["Wall Jump Shoes"]},
+			{"name": "Record #39", "sanity": "Records", "id": 205, "req": ["Wall Jump Shoes"]},
+			{"name": "Record #56", "sanity": "Records", "id": 222, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #17", "sanity": "Books", "id": 245, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #18", "sanity": "Books", "id": 246, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #60", "sanity": "Books", "id": 288, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #66", "sanity": "Books", "id": 294, "req": ["Wall Jump Shoes"]},
+			{"name": "Art Book #67", "sanity": "Books", "id": 295, "req": ["Wall Jump Shoes"]}
 		]},
 		{"name": "Egg Dragoon", "type": "unshuffled_stage", "evil": -1, "checks": [
 			{"name": "Completion", "sanity": "Completions", "id": 40080000, "req": []}

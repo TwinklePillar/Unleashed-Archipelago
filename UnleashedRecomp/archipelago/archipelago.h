@@ -59,6 +59,7 @@ class ArchipelagoManager {
 		static int progressionMode;
 		static int actItems;
 		static int itemState[AP_ITEM_MAX];
+		static std::set<int64_t> locationState;
 		static std::map<std::string, int> actLevels;
 		static inline std::queue<ArchipelagoMessage> messageQueue;
 		static void Update(double dt, PPCContext& ctx, uint8_t* base);

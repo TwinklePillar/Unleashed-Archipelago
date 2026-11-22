@@ -87,11 +87,17 @@ class SWAWorld(World):
 			self.location_state.enable_missions = 1
 			self.location_state.include_day = 1
 			self.location_state.include_night = 1
+
+			if "enable_shop" in slot_data: self.location_state.enable_shop = slot_data["enable_shop"]
+			if "enable_missions" in slot_data: self.location_state.enable_missions = slot_data["enable_missions"]
+			if "include_day" in slot_data: self.location_state.include_day = slot_data["include_day"]
+			if "include_night" in slot_data: self.location_state.include_night = slot_data["include_night"]
+			
 			self.location_state.regen = True
 			return
 		
 		num_unfilled = self.location_state.get_location_count(self) - 1
-		num_item = len(iname_groups["Hubs"])
+		num_item = len(iname_groups["Hubs"])-1
 		if self.item_state.chaos_emeralds: num_item += len(iname_groups["Emeralds"])
 		if self.act_items: num_item += len(iname_groups["Acts"])
 		if self.medal_items: num_item += 400 # 200 Sun, 200 Moon
@@ -101,15 +107,16 @@ class SWAWorld(World):
 
 		while num_item > num_unfilled:
 			if self.medal_items:
-				print("Too many items! Disabling separate medals")
+				print(f"{self.multiworld.player_name[self.player]}: Too many items! Disabling separate medals")
 				self.medal_items = 0
 				num_item -= 400
+				num_item += 12
 			elif self.act_items:
-				print("Too many items! Disabling act items")
+				print(f"{self.multiworld.player_name[self.player]}: Too many items! Disabling act items")
 				self.act_items = 0
 				num_item -= len(iname_groups["Acts"])
 			elif self.item_state.chaos_emeralds:
-				print("Too many items! Precollecting Chaos Emeralds")
+				print(f"{self.multiworld.player_name[self.player]}: Too many items! Precollecting Chaos Emeralds")
 				self.item_state.chaos_emeralds = 0
 				num_item -= len(iname_groups["Emeralds"])
 			else:
@@ -137,7 +144,11 @@ class SWAWorld(World):
 			"progression_mode": self.progression_mode,
 			"act_levels": self.location_state.act_levels,
 			"act_items": self.act_items,
-			"medal_items": self.medal_items
+			"medal_items": self.medal_items,
+			"include_day": self.location_state.include_day,
+			"include_night": self.location_state.include_night,
+			"enable_shop": self.location_state.enable_shop,
+			"enable_missions": self.location_state.enable_missions
 		}
 
 	@staticmethod

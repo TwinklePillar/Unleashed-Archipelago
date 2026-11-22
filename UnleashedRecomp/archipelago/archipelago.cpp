@@ -21,6 +21,7 @@ int ArchipelagoManager::progressionMode;
 int ArchipelagoManager::actItems;
 std::map<std::string, int> ArchipelagoManager::actLevels;
 int ArchipelagoManager::itemState[AP_ITEM_MAX];
+std::set<int64_t> ArchipelagoManager::locationState{};
 bool ArchipelagoManager::hasInit;
 std::string ArchipelagoManager::ipport;
 std::string ArchipelagoManager::slot;
@@ -397,7 +398,7 @@ void ArchipelagoManager::ItemRecvCallback(int64_t item, bool notify) {
 }
 
 void ArchipelagoManager::LocationCheckCallback(int64_t location) {
-	
+	locationState.insert(location);
 }
 
 void ArchipelagoManager::SetAPVersionCallback(int version) {
@@ -422,7 +423,6 @@ void ArchipelagoManager::SetActOrderCallback(std::map<int, int> actorder) {
 	int max = 0;
 	for (auto it = actorder.begin(); it != actorder.end(); it++) {
 		actLevels.emplace(VANILLA_ACT_ORDER[it->first], it->second);
-		printf("%s -> %i\n", VANILLA_ACT_ORDER[it->first], it->second);
 	}
 }
 
@@ -432,12 +432,15 @@ void ArchipelagoManager::SetActItemsCallback(int ai) {
 
 void ArchipelagoManager::DisconnectFromArchipelago() {
 	AP_Shutdown();
+	ItemClearCallback();
+	locationState.clear();
 	hasInit = false;
 }
 
 void ArchipelagoManager::ConnectToArchipelago() {
 	if (hasInit) return;
 	ItemClearCallback();
+	locationState.clear();
 	
 	auto ini = IniFile();
 	auto path = GetGamePath() / "SWAAP/connection.ini";
@@ -486,21 +489,24 @@ PPC_FUNC(sub_82690D00) {
 
 PPC_FUNC_IMPL(__imp__sub_82519C08);
 PPC_FUNC(sub_82519C08) {
-	switch (ctx.r4.u64) {
-		case 0: // Stomp
-			ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[STOMPING_SHOES] > 0;
-			break;
-		case 1: // Wall Jump
-			ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[WALL_JUMP_SHOES] > 0;
-			break;
-		case 2: // Air Boost
-			ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[AIR_BOOST_SHOES] > 0;
-			break;
-		case 3: // Light Dash
-			ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[LIGHT_DASH_SHOES] > 0;
-			break;
+	if (isShoeItem) {
+		ctx.r3.u64 = SWAAP::ArchipelagoManager::locationState.contains(32772+ctx.r4.u64);
+	} else {
+		switch (ctx.r4.u64) {
+			case 0: // Stomp
+				ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[STOMPING_SHOES] > 0;
+				break;
+			case 1: // Wall Jump
+				ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[WALL_JUMP_SHOES] > 0;
+				break;
+			case 2: // Air Boost
+				ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[AIR_BOOST_SHOES] > 0;
+				break;
+			case 3: // Light Dash
+				ctx.r3.u64 = SWAAP::ArchipelagoManager::itemState[LIGHT_DASH_SHOES] > 0;
+				break;
+		}
 	}
-	if (isShoeItem) ctx.r3.u64 = 0;
 	
 	return;
 }

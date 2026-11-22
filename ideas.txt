@@ -1,3 +1,11 @@
+Fixed the black screen bug
+Added AP logo to medals
+Shoes now disappear after collecting their location
+`Tip Top Tea 7 - Videotape #24` now requires Stomp and Air Boost
+Fixed UT erroneously saying shops were in logic if `include_day` was off (requires regen)
+Fixed item count validation when changing `medal_items`
+Fixed Eggmanland (Stage) logic requires Stomp instead of Wall Jump
+
 Alpha:
 	DLC Toggle
 	Act Shuffle

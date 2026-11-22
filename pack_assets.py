@@ -19,7 +19,7 @@ def zip_directory(d):
 			else:
 				rmtree(f"{d}/{f.name}")
 		if f.is_file():
-			if not (f.name[0] == "+" or f.name == "mod.ini" or f.name[-4:] == ".sfd"):
+			if not (f.name[0] == "+" or f.name == "mod.ini" or f.name[-4:] == ".png"):
 				os.remove(f"{d}/{f.name}")
 
 pack_directory("mod")
