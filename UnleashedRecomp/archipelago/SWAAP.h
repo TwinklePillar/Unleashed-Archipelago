@@ -5,6 +5,7 @@
 #include <SWA.h>
 
 #include <Archipelago.h>
+#include <json/json.h>
 
 #include "classmaps.h"
 
@@ -19,14 +20,11 @@ struct ArchipelagoMessage {
 	uint16_t imgID;
 };
 
-struct ActiveTrap {
-	int trapID;
-	double timer;
-};
-
 enum APMessageType {
 	SENT_ITEM,
 	RECV_ITEM,
+	DEATH_LINK,
+	TRAP_LINK,
 	MEMORY_DEBUG,
 	MISC
 };
@@ -34,6 +32,7 @@ enum APMessageType {
 class ArchipelagoManager {
 	public:
 		static bool hasInit;
+		static bool connectAttempt;
 		
 		static void ItemClearCallback();
 		static void ItemRecvCallback(int64_t item, bool notify);
@@ -45,14 +44,15 @@ class ArchipelagoManager {
 		static void SetActOrderCallback(std::map<int, int> actorder);
 
 		static void DebugLog(std::string buf);
+		static void AddRings(int amt, bool fromLink = false);
 		
 		static std::string ipport;
 		static std::string slot;
 		static std::string password;
-		
-		static std::queue<int> trapQueue;
-		static std::queue<int> prioTrapQueue;
-		static double trapTimer;
+
+		static std::set<std::string> tags;
+
+		static int64_t uuid;
 		
 		static bool isDebug;
 		static int version;
@@ -68,9 +68,52 @@ class ArchipelagoManager {
 		static void DisconnectFromArchipelago();
 
 		static xpointer<CEvilSonicContext> evilContext;
+};
 
-		static std::vector<ActiveTrap> activeTraps;
-		static bool isTrapActive(int trapID);
+// Traps
+
+class BounceManager {
+	private:
+	// So we don't spam the server with rings
+	static double elapsed;
+	static int numRing;
+
+	static bool toDeath; // Should we be expecting a death link packet?
+	static int amnesty;
+	static void SendLink(Json::Value root, std::string tag);
+	
+	public:
+	static bool fromDeath; // Is the next death from death link?
+	static void BounceRecvCallback(AP_Bounce bounce);
+	static void SendDeathLink(std::string cause);
+	static void SendTrapLink(std::string trap);
+	static void SendRingLink(int amt);
+	static void Update(double dt);
+};
+
+#define DEATH_TRAP 5000
+struct TrapBase {
+	int trapID;
+
+	virtual bool OnReceive(PPCContext& ctx, uint8_t* base, int trapID);
+	virtual bool Update(double dt, PPCContext& ctx, uint8_t* base);
+};
+
+class TrapManager {
+	private:
+	static std::map<int, TrapBase*> StaticTrap;
+	static std::map<std::string, int> TrapNameToID;
+	static double TrapTimer;
+
+	public:
+	static std::vector<TrapBase*> ActiveTraps;
+	static std::queue<int> TrapQueue;
+	static std::queue<int> PrioTrapQueue;
+
+	static bool IsActive(int trapID);
+	static bool IsValidTrap(int trapID);
+	static void Update(double dt, PPCContext& ctx, uint8_t* base);
+	static int GetTrapFromName(std::string name);
 };
 
 }

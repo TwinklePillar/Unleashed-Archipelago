@@ -112,7 +112,9 @@ namespace SWAAP {
 		public:
 		SWA_INSERT_PADDING(0x660);
 		be<int32_t> m_Rings;
-		SWA_INSERT_PADDING(0x24);
+		SWA_INSERT_PADDING(0x18);
+		be<int32_t> m_Health;
+		SWA_INSERT_PADDING(0x8);
         be<float> m_DarkGaiaEnergy;
         SWA_INSERT_PADDING(0x138);
         be<uint32_t> m_AnimationID;

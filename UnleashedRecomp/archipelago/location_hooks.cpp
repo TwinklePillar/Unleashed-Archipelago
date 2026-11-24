@@ -1,4 +1,4 @@
-#include "archipelago.h"
+#include "SWAAP.h"
 #include <Archipelago.h>
 
 #include <cstdio>

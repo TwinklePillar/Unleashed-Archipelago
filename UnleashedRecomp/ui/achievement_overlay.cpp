@@ -12,7 +12,7 @@
 #include <decompressor.h>
 #include <patches/inspire_patches.h>
 
-#include <archipelago/archipelago.h>
+#include <archipelago/SWAAP.h>
 
 constexpr double OVERLAY_CONTAINER_COMMON_MOTION_START = 0;
 constexpr double OVERLAY_CONTAINER_COMMON_MOTION_END = 11;

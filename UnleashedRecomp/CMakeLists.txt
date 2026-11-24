@@ -195,6 +195,8 @@ set(UNLEASHED_RECOMP_MOD_CXX_SOURCES
 set(UNLEASHED_RECOMP_ARCHIPELAGO_CXX_SOURCES
     "archipelago/archipelago.cpp"
     "archipelago/location_hooks.cpp"
+    "archipelago/traps.cpp"
+    "archipelago/bounce.cpp"
 )
 
 set(UNLEASHED_RECOMP_THIRDPARTY_SOURCES

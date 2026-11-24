@@ -11,7 +11,7 @@
 #include <user/paths.h>
 #include <user/registry.h>
 
-#include <archipelago/archipelago.h>
+#include <archipelago/SWAAP.h>
 #include <archipelago/apshared.h>
 
 void App::Restart(std::vector<std::string> restartArgs)
@@ -63,8 +63,8 @@ PPC_FUNC(sub_822C1130)
     }
     
     double realDT = ctx.f1.f64;
-    if (SWAAP::ArchipelagoManager::isTrapActive(SLOW_TRAP)) ctx.f1.f64 /= 3;
-    if (SWAAP::ArchipelagoManager::isTrapActive(FAST_TRAP)) ctx.f1.f64 *= 3;
+    if (SWAAP::TrapManager::IsActive(SLOW_TRAP)) ctx.f1.f64 /= 3;
+    if (SWAAP::TrapManager::IsActive(FAST_TRAP)) ctx.f1.f64 *= 3;
     
     App::s_deltaTime = ctx.f1.f64;
     App::s_time += App::s_deltaTime;

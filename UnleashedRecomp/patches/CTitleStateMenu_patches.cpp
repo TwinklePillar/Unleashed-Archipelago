@@ -11,7 +11,7 @@
 #include <app.h>
 #include <exports.h>
 
-#include <archipelago/archipelago.h>
+#include <archipelago/SWAAP.h>
 
 static bool g_installMessageOpen = false;
 static bool g_installMessageFaderBegun = false;

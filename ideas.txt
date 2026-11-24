@@ -5,6 +5,9 @@ Shoes now disappear after collecting their location
 Fixed UT erroneously saying shops were in logic if `include_day` was off (requires regen)
 Fixed item count validation when changing `medal_items`
 Fixed Eggmanland (Stage) logic requires Stomp instead of Wall Jump
+Added Death Link
+Added Trap Link
+Added Ring Link
 
 Alpha:
 	DLC Toggle
@@ -19,6 +22,26 @@ Alpha:
 	Trap Link
 	Ring Link
 	Better Connection Inputting
+
+bFlag_Reserve3 ->
+bFlag_Reserve4 ->
+bFlag_Reserve5 ->
+bFlag_Reserve6 ->
+bFlag_Reserve7 ->
+bFlag_Reserve8 ->
+bFlag_Reserve9 ->
+bFlag_Reserve10 ->
+iFlag_Reserve0 ->
+iFlag_Reserve1 ->
+iFlag_Reserve2 ->
+iFlag_Reserve3 ->
+iFlag_Reserve4 ->
+iFlag_Reserve5 ->
+iFlag_Reserve6 ->
+iFlag_Reserve7 ->
+iFlag_Reserve8 ->
+iFlag_Reserve9 ->
+iFlag_Reserve10 ->
 
 Level IDs
     Apotos Hub (Day): 60010

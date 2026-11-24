@@ -1,9 +1,10 @@
-#include "archipelago.h"
+#include "SWAAP.h"
 
 #include <filesystem>
 #include <format>
 #include <Archipelago.h>
 #include <cstdio>
+#include <chrono>
 
 #include <ui/achievement_overlay.h>
 #include <api/SWA.h>
@@ -16,21 +17,20 @@
 
 namespace SWAAP {
 
-int ArchipelagoManager::version;
-int ArchipelagoManager::progressionMode;
-int ArchipelagoManager::actItems;
-std::map<std::string, int> ArchipelagoManager::actLevels;
-int ArchipelagoManager::itemState[AP_ITEM_MAX];
+int ArchipelagoManager::version{};
+int ArchipelagoManager::progressionMode{};
+int ArchipelagoManager::actItems{};
+std::map<std::string, int> ArchipelagoManager::actLevels{};
+int ArchipelagoManager::itemState[AP_ITEM_MAX]{};
 std::set<int64_t> ArchipelagoManager::locationState{};
-bool ArchipelagoManager::hasInit;
-std::string ArchipelagoManager::ipport;
-std::string ArchipelagoManager::slot;
-std::string ArchipelagoManager::password;
-std::vector<ActiveTrap> ArchipelagoManager::activeTraps;
+bool ArchipelagoManager::hasInit{};
+bool ArchipelagoManager::connectAttempt{};
+std::string ArchipelagoManager::ipport{};
+std::string ArchipelagoManager::slot{};
+std::string ArchipelagoManager::password{};
 
-std::queue<int> ArchipelagoManager::trapQueue{};
-std::queue<int> ArchipelagoManager::prioTrapQueue{};
-double ArchipelagoManager::trapTimer{};
+int64_t ArchipelagoManager::uuid = 0;
+std::set<std::string> ArchipelagoManager::tags{};
 
 static SaveData g_lastSaveData{};
 static double elapsed = -1;
@@ -182,14 +182,8 @@ static void resetWatchers() {
 	memcpy(&g_lastSaveData, save, sizeof(SaveData));
 }
 
-bool ArchipelagoManager::isTrapActive(int trapID) {
-	for (auto trap : activeTraps) {
-		if (trapID == trap.trapID) return true;
-	}
-	return false;
-}
-
 void ArchipelagoManager::Update(double dt, PPCContext& ctx, uint8_t* base) {
+	hasInit = AP_GetConnectionStatus() == AP_ConnectionStatus::Authenticated;
 	auto dataPath = GetGamePath() / "SWAAP/indices.txt";
 	elapsed += dt;
 	if (elapsed > 1) {
@@ -212,32 +206,8 @@ void ArchipelagoManager::Update(double dt, PPCContext& ctx, uint8_t* base) {
 		} else isDebug = false;
 	}
 
-	trapTimer -= dt;
-	if (trapTimer < 0) {
-		trapTimer = Config::TrapTimer;
-		int item = 0;
-		bool isPrio = false;
-		if (!prioTrapQueue.empty()) {
-			item = prioTrapQueue.front();
-			prioTrapQueue.pop();
-			isPrio = true;
-		} else if (!trapQueue.empty()) {
-			item = trapQueue.front();
-			trapQueue.pop();
-		}
-		if (item) {
-			switch (item) {
-				case REVERSE_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=REVERSE_TRAP, .timer=20}); break;
-				case SLOW_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=SLOW_TRAP, .timer=20}); break;
-				case FAST_TRAP: activeTraps.emplace_back(ActiveTrap{.trapID=FAST_TRAP, .timer=20}); break;
-			}
-		}
-	}
-	
-	for (int i = activeTraps.size()-1; i >= 0; i--) {
-		activeTraps[i].timer -= dt;
-		if (activeTraps[i].timer < 0) activeTraps.erase(activeTraps.begin()+i);
-	}
+	TrapManager::Update(dt, ctx, base);
+	BounceManager::Update(dt);
 	
 	auto appdoc = SWA::CApplicationDocument::GetInstance();
 	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
@@ -339,6 +309,12 @@ void ArchipelagoManager::DisplayMessage(APMessageType type, std::string message,
 		case APMessageType::RECV_ITEM:
 			header = "Received Item";
 			break;
+		case APMessageType::DEATH_LINK:
+			header = "Death Link Received";
+			break;
+		case APMessageType::TRAP_LINK:
+			header = "Trap Link Received";
+			break;
 		case APMessageType::MEMORY_DEBUG:
 			header = "Memory Watch Triggered";
 			break;
@@ -356,16 +332,21 @@ void ArchipelagoManager::ItemClearCallback() {
 	}
 }
 
-static void addRings(int amt) {
+void ArchipelagoManager::AddRings(int amt, bool fromLink) {
 	auto appdoc = SWA::CApplicationDocument::GetInstance();
 	auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
-	save->moneyRing = save->moneyRing + amt;
-	save->totalRing = save->totalRing + amt;
-	if (CPlayerSpeedContext::GetInstance()) {
-		CPlayerSpeedContext::GetInstance()->m_Rings = CPlayerSpeedContext::GetInstance()->m_Rings + amt;
-		CPlayerSpeedContext::GetInstance()->m_ChaosEnergy = CPlayerSpeedContext::GetInstance()->m_ChaosEnergy + 1.3 * amt;
-	} else if (SWAAP::ArchipelagoManager::evilContext) {
-		SWAAP::ArchipelagoManager::evilContext->m_Rings = SWAAP::ArchipelagoManager::evilContext->m_Rings + amt;
+	if (!fromLink) {
+		save->moneyRing = save->moneyRing + amt;
+		save->totalRing = save->totalRing + amt;
+	}
+	auto dayInst = CPlayerSpeedContext::GetInstance();
+	if (dayInst) {
+		dayInst->m_Rings = dayInst->m_Rings + amt;
+		if (dayInst->m_Rings < 0) dayInst->m_Rings = 0;
+		if (amt > 0) dayInst->m_ChaosEnergy = dayInst->m_ChaosEnergy + 1.3 * amt;
+	} else if (evilContext) {
+		evilContext->m_Rings = evilContext->m_Rings + amt;
+		if (evilContext->m_Rings < 0) evilContext->m_Rings = 0;
 	}
 }
 
@@ -375,20 +356,17 @@ void ArchipelagoManager::ItemRecvCallback(int64_t item, bool notify) {
 	if (notify) {
 		auto appdoc = SWA::CApplicationDocument::GetInstance();
 		auto save = (SaveData*)appdoc->m_pMember->m_spGameParameter->m_pSaveData.get();
+		
+		if (TrapManager::IsValidTrap(item)) TrapManager::TrapQueue.push(item);
+		
 		switch (item) {
 			case EXTRA_LIFE: save->lives = save->lives + 1; break;
 			case EXPERIENCE_20: save->experience = save->experience + 20; break;
 			case EXPERIENCE_50: save->experience = save->experience + 50; break;
 			case EXPERIENCE_100: save->experience = save->experience + 100; break;
-			case RINGS_10: addRings(10); break;
-			case RINGS_20: addRings(20); break;
-			case RINGS_50: addRings(50); break;
-
-			case REVERSE_TRAP:
-			case SLOW_TRAP:
-			case FAST_TRAP:
-				trapQueue.emplace(item);
-				break;
+			case RINGS_10: AddRings(10); break;
+			case RINGS_20: AddRings(20); break;
+			case RINGS_50: AddRings(50); break;
 		}
 	}
 	
@@ -435,10 +413,11 @@ void ArchipelagoManager::DisconnectFromArchipelago() {
 	ItemClearCallback();
 	locationState.clear();
 	hasInit = false;
+	connectAttempt = false;
 }
 
 void ArchipelagoManager::ConnectToArchipelago() {
-	if (hasInit) return;
+	if (connectAttempt) return;
 	ItemClearCallback();
 	locationState.clear();
 	
@@ -464,14 +443,17 @@ void ArchipelagoManager::ConnectToArchipelago() {
 	AP_SetItemClearCallback(ItemClearCallback);
 	AP_SetItemRecvCallback(ItemRecvCallback);
 	AP_SetLocationCheckedCallback(LocationCheckCallback);
+	AP_RegisterBouncedCallback(BounceManager::BounceRecvCallback);
 
 	AP_RegisterSlotDataIntCallback("version", SetAPVersionCallback);
 	AP_RegisterSlotDataIntCallback("progression_mode", SetProgressionModeCallback);
 	AP_RegisterSlotDataIntCallback("act_items", SetActItemsCallback);
 	AP_RegisterSlotDataMapIntIntCallback("act_levels", SetActOrderCallback);
 
+	uuid = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+	
 	AP_Start();
-	hasInit = true;
+	connectAttempt = true;
 }
 
 }

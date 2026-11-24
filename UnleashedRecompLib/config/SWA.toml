@@ -1179,3 +1179,18 @@ registers = ["r18"]
 name = "SWA_AP_InventoryLocationMidAsmHook"
 address = 0x8251B834
 registers = ["r4", "r5"]
+
+[[midasm_hook]]
+name = "SWA_AP_PosRingLinkMidAsmHook"
+address = 0x8232165C
+registers = ["r4"]
+
+[[midasm_hook]]
+name = "SWA_AP_NegRingLinkMidAsmHook"
+address = 0x8231FE5C
+registers = ["r26"]
+
+[[midasm_hook]]
+name = "SWA_AP_PosRingLinkMidAsmHook"
+address = 0x823AF938
+registers = ["r30"]

@@ -95,7 +95,7 @@ void PostUnleashMidAsmHook(PPCRegister& r30)
     g_isUnleashCancelled = false;
 }
 
-#include "archipelago/archipelago.h"
+#include "archipelago/SWAAP.h"
 
 // SWA::Player::CEvilSonicContext
 PPC_FUNC_IMPL(__imp__sub_823B49D8);
