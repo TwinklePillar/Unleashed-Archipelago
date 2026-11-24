@@ -41,6 +41,7 @@ class SWAWorld(World):
 	def generate_early(self):
 		self.spoiler_text = ""
 		self.progression_mode = self.options.progression_mode.value
+		self.location_state.goal_stage = self.options.goal_stage.value
 		self.random_act_levels = self.options.random_act_levels.value
 #		self.item_state.no_medal_requirements = self.options.no_medal_requirements.value
 		self.item_state.chaos_emeralds = self.options.chaos_emeralds.value
@@ -48,19 +49,25 @@ class SWAWorld(World):
 		
 		self.medal_items = self.options.medal_items.value
 		
+		if not self.options.include_day.value:
+			self.location_state.removed_groups += ["Day Locations"]
 		self.location_state.include_day = self.options.include_day.value
+		if not self.options.include_night.value:
+			self.location_state.removed_groups += ["Night Locations"]
 		self.location_state.include_night = self.options.include_night.value
-		self.location_state.enable_missions = self.options.enable_missions.value
+		if not self.options.shopsanity.value:
+			self.location_state.removed_groups += ["Shops"]
+		if not self.options.enable_missions.value:
+			self.location_state.removed_groups += ["Missions"]
 		
-		self.location_state.enable_shop = self.options.shopsanity.value
 		self.item_state.shuffle_currencies = self.options.shuffle_currencies.value
 
 		self.item_state.trap_chance = self.options.trap_chance.value
 		
 		if self.options.medalsanity:
-			self.location_state.sanities += ["Sun Medals", "Moon Medals"]
+			self.location_state.sanities += ["Medals"]
 		if self.options.mediasanity:
-			self.location_state.sanities += ["Records", "Tapes", "Books"]
+			self.location_state.sanities += ["Media"]
 		if self.options.shopsanity.value == 2:
 			self.location_state.sanities += ["Shop Items"]
 		
@@ -83,15 +90,15 @@ class SWAWorld(World):
 			self.medal_items = slot_data["medal_items"]
 			self.location_state.sanities = slot_data["sanities"]
 			self.location_state.act_levels = slot_data["act_levels"]
-			self.location_state.enable_shop = 1
-			self.location_state.enable_missions = 1
-			self.location_state.include_day = 1
-			self.location_state.include_night = 1
-
-			if "enable_shop" in slot_data: self.location_state.enable_shop = slot_data["enable_shop"]
-			if "enable_missions" in slot_data: self.location_state.enable_missions = slot_data["enable_missions"]
-			if "include_day" in slot_data: self.location_state.include_day = slot_data["include_day"]
-			if "include_night" in slot_data: self.location_state.include_night = slot_data["include_night"]
+			self.location_state.goal_stage = slot_data["goal_stage"]
+			if "removed_groups" in slot_data:
+				self.location_state.removed_groups = slot_data["removed_groups"]
+				self.location_state.include_day = not "Day Locations" in slot_data["removed_groups"]
+				self.location_state.include_night = not "Night Locations" in slot_data["removed_groups"]
+			else:
+				self.location_state.removed_groups = []
+				self.location_state.include_day = 1
+				self.location_state.include_night = 1
 			
 			self.location_state.regen = True
 			return
@@ -141,14 +148,12 @@ class SWAWorld(World):
 		return {
 			"version": apshared["version"],
 			"sanities": self.location_state.sanities,
+			"removed_groups": self.location_state.removed_groups,
 			"progression_mode": self.progression_mode,
+			"goal_stage": self.location_state.goal_stage,
 			"act_levels": self.location_state.act_levels,
 			"act_items": self.act_items,
-			"medal_items": self.medal_items,
-			"include_day": self.location_state.include_day,
-			"include_night": self.location_state.include_night,
-			"enable_shop": self.location_state.enable_shop,
-			"enable_missions": self.location_state.enable_missions
+			"medal_items": self.medal_items
 		}
 
 	@staticmethod

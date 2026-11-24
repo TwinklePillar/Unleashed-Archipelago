@@ -10,8 +10,11 @@ class LocationState:
 	def __init__(self):
 		self.er_regions = []
 		self.sanities = ["Completions", "Shoes"]
+		self.removed_groups = []
 		self.regen = False
 		self.act_levels = {}
+
+		self.goal_stage = 0
 		
 		self.include_day = 1
 		self.include_night = 1
@@ -28,12 +31,46 @@ class LocationState:
 			if stage["evil"] == 0 and not self.include_day: continue
 			if stage["evil"] == 1 and not self.include_night: continue
 			for check in stage["checks"]:
-				if check["evil"] == 0 and not self.include_day: continue
-				if check["evil"] == 1 and not self.include_night: continue
-				if check["sanity"] in self.sanities and (self.enable_shop or not check["shop"]) and (self.enable_missions or not check["mission"]):
+				if self.is_location_allowed(stage, check):
 					num_locations += 1
 
 		return num_locations
+
+	def is_location_allowed(self, stage, check):
+		if stage["evil"] == 0 and not self.include_day: return False
+		if stage["evil"] == 1 and not self.include_night: return False
+		if check["evil"] == 0 and not self.include_day: return False
+		if check["evil"] == 1 and not self.include_night: return False
+		check_name = f"{stage['name']} - {check['name']}"
+		allowed = False
+		for sanity in self.sanities:
+			if check_name in location_name_groups[sanity]:
+				allowed = True
+				break
+		for removed in self.removed_groups:
+			if check_name in location_name_groups[removed]:
+				allowed = False
+				break
+		if check_name in location_name_groups["Shops"] and not self.enable_shop:
+			allowed = False
+		if check_name in location_name_groups["Missions"] and not self.enable_missions:
+			allowed = False
+		return allowed
+	
+	def get_stage_groups(self, stage):
+		if not "type" in stage: return []
+		stage_groups = [stage["type"]]
+		old_len = 0
+		new_len = len(stage_groups)
+		while old_len != new_len:
+			for group in stage_groups.copy():
+				if group in apshared["stagegroups"]:
+					for meta in apshared["stagegroups"][group]:
+						if not meta in stage_groups:
+							stage_groups.append(meta)
+			old_len = new_len
+			new_len = len(stage_groups)
+		return stage_groups
 	
 	def setup_regions(self, world):
 		menu_region = Region("Menu", world.player, world.multiworld)
@@ -46,33 +83,32 @@ class LocationState:
 		all_stages_unshuffled = []
 		unshuffled_stages = []
 		for stage in apshared["stages"]:
-			if stage["type"] == "stage":
+			stage_groups = self.get_stage_groups(stage)
+			if "Goal Stage" in stage_groups:
+				unshuffled_stages.append(stage["name"])
+			elif "Stages" in stage_groups:
 				all_stages.append(stage["name"])
 				all_stages_unshuffled.append(stage["name"])
-			elif stage["type"] == "unshuffled_stage":
-				unshuffled_stages.append(stage["name"])
 			
 			if stage["evil"] == 0 and not self.include_day: continue
 			if stage["evil"] == 1 and not self.include_night: continue
 			stage_region = Region(stage["name"], world.player, world.multiworld)
 			world.multiworld.regions.append(stage_region)
 			for check in stage["checks"]:
-				if check["evil"] == 0 and not self.include_day: continue
-				if check["evil"] == 1 and not self.include_night: continue
 				check_name = f"{stage['name']} - {check['name']}"
-				if check["sanity"] in self.sanities and (self.enable_shop or not check["shop"]) and (self.enable_missions or not check["mission"]):
+				if self.is_location_allowed(stage, check):
 					stage_region.add_locations({check_name: location_name_to_id[check_name]}, SWALocation)
 					rule = True_()
 					for req in check["req"]:
 						rule = rule & Has(req)
-					if check["shop"]:
+					if check_name in location_name_groups["Shops"]:
 						rule = rule & Has("Shop Access")
 						if stage['name'] == "World Map": rule = rule & HasGroupUnique("Currencies", 1)
 					world.set_rule(world.get_location(check_name), rule)
 					if check["name"] == "Completion" and len(check["req"]) == 0:
 						sphere_zero_stages.append(stage["name"])
 			
-			if stage["type"] == "hub":
+			if "Hub" in stage_groups:
 				hubs.append((stage, stage_region))
 				if stage["name"] == "Apotos Hub" and world.free_hub == HUB_UNLOCK_APOTOS: free_hub = (stage, stage_region)
 				if stage["name"] == "Mazuri Hub" and world.free_hub == HUB_UNLOCK_MAZURI: free_hub = (stage, stage_region)
@@ -210,10 +246,21 @@ class LocationState:
 				egg_req = egg_req & Has(PROGRESSIVE_SUN_LEVEL, 6) & Has(PROGRESSIVE_MOON_LEVEL, 5)
 			for i in item_name_groups["Emeralds"]: egg_req = egg_req & Has(i)
 			world.create_entrance(menu_region, world.get_region("Eggmanland Hub"), egg_req)
-		world.get_location("Dark Gaia - Completion").place_locked_item(world.create_item(THE_WORLD_REPAIRED))
+		
+		if self.goal_stage == 0:
+			goal_location = "Dark Gaia - Completion"
+			goal_event = "Defeat Dark Gaia"
+		if self.goal_stage == 1:
+			goal_location = "Egg Dragoon - Completion"
+			goal_event = "Defeat Egg Dragoon"
+		if self.goal_stage == 2:
+			goal_location = "Eggmanland - Completion"
+			goal_event = "Clear Eggmanland"
+		
+		world.get_location(goal_location).place_locked_item(world.create_item(THE_WORLD_REPAIRED))
 		menu_region.add_event(
-			"Defeat Dark Gaia", THE_WORLD_REPAIRED,
+			goal_event, THE_WORLD_REPAIRED,
 			location_type=SWALocation, item_type=SWAItem,
-			rule=CanReachLocation("Dark Gaia - Completion"), show_in_spoiler=False
+			rule=CanReachLocation(goal_location), show_in_spoiler=False
 		)
 		world.set_completion_rule(Has(THE_WORLD_REPAIRED))

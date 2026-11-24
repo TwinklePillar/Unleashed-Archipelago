@@ -8,19 +8,19 @@ Fixed Eggmanland (Stage) logic requires Stomp instead of Wall Jump
 Added Death Link
 Added Trap Link
 Added Ring Link
+Added an option to make goal Eggmanland or Egg Dragoon
+Wentos media are now considered Apotos Hub locations
+Massively expanded the amount of location groups
 
 Alpha:
 	DLC Toggle
 	Act Shuffle
-	Death Link
 	Filler/Traps
 		Claws
 		Gravity Trap
 		Ice Trap
 		Hourglass Trap
 		QTE Trap
-	Trap Link
-	Ring Link
 	Better Connection Inputting
 
 bFlag_Reserve3 ->

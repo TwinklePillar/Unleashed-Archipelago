@@ -40,7 +40,7 @@ class ItemState:
 			else:
 				precollect.append(i)
 		
-		if world.location_state.enable_shop:
+		if world.location_state.removed_groups:
 			for i in item_name_groups["Currencies"]:
 				if self.shuffle_currencies:
 					itempool.append(world.create_item(i))

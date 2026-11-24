@@ -14,6 +14,18 @@ class ProgressionMode(Choice):
 
 	default = option_hub_rando
 
+class GoalStage(Choice):
+	"""
+	Which stage should hold the goal item?
+	"""
+	display_name = "Goal Stage"
+
+	option_dark_gaia = 0
+	option_egg_dragoon = 1
+	option_eggmanland = 2
+
+	default = option_dark_gaia
+
 class ActShuffle(Toggle):
 	"""
 	Should each level entrance shuffle to a different level?
@@ -120,6 +132,7 @@ class TrapChance(Range):
 @dataclass
 class SWAOptions(PerGameCommonOptions):
 	progression_mode: ProgressionMode
+	goal_stage: GoalStage
 	act_items: ActItems
 	include_day: IncludeDay
 	include_night: IncludeNight

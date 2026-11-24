@@ -64,6 +64,7 @@ void BounceManager::SendLink(Json::Value root, std::string tag) {
 	AP_SendBounce(bounce);
 }
 
+// Yes APCpp has a Death Link implementation, but I prefer my deathlink yaml-less
 void BounceManager::SendDeathLink(std::string cause) {
 	if (!Config::DeathLinkEnabled) return;
 	if (fromDeath) {
