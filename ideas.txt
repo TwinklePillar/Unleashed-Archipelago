@@ -11,6 +11,7 @@ Added Ring Link
 Added an option to make goal Eggmanland or Egg Dragoon
 Wentos media are now considered Apotos Hub locations
 Massively expanded the amount of location groups
+Countries on the World Map no longer appear if you don't have access to them
 
 Alpha:
 	DLC Toggle

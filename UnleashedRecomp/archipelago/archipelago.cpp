@@ -516,7 +516,14 @@ void SWA_AP_MedalCountMidAsmHook(PPCRegister& r3, PPCRegister& r10, PPCRegister 
 	PPC_STORE_U32(r10.u32 + r11.u32, getMedalCount(levelItem, medalItem));
 }
 
-void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
+PPC_FUNC_IMPL(__imp__sub_82589F38);
+PPC_FUNC(sub_82589F38) {
+//	printf("r3: %08x\n", ctx.r3.u32);
+	__imp__sub_82589F38(ctx, base);
+}
+
+void SWA_AP_CountryDisappearMidAsmHook(PPCRegister& f28, PPCRegister& r11) {
+	uint8_t* base = g_memory.base;
 	int countryToItem[] = {
 		HUB_UNLOCK_APOTOS,
 		HUB_UNLOCK_SPAGONIA,
@@ -528,10 +535,11 @@ void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
 		HUB_UNLOCK_EMPIRE_CITY,
 		HUB_UNLOCK_EGGMANLAND,
 	};
-	if (r29.s32 != -1 && SWAAP::ArchipelagoManager::itemState[countryToItem[r29.u32]] == 0) r29.s32 = -1;
-	if (r30.s32 != -1 && SWAAP::ArchipelagoManager::itemState[countryToItem[r30.u32]] == 0) r30.s32 = -1;
-	
-	if (r29.s32 == 8 || r30.s32 == 8) {
+
+	int country = PPC_LOAD_U32(r11.u32 + 0x24);
+	if (!(country >= 0 && country < 9)) return;
+	bool canAccess = SWAAP::ArchipelagoManager::itemState[countryToItem[country]];
+	if (country == 8) {
 		int chaosEmeralds[] = {
 			BLUE_CHAOS_EMERALD,
 			RED_CHAOS_EMERALD,
@@ -545,10 +553,24 @@ void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
 		bool hasEmeralds = true;
 		for (int i = 0; i < 7; i++) if (SWAAP::ArchipelagoManager::itemState[chaosEmeralds[i]] == 0) hasEmeralds = false;
 		if (!(hasEmeralds && getMedalCount(PROGRESSIVE_SUN_LEVEL, SUN_MEDAL) >= 120 && getMedalCount(PROGRESSIVE_MOON_LEVEL, MOON_MEDAL) >= 80)) {
-			r29.s32 = -1;
-			r30.s32 = -1;
+			canAccess = false;
 		}
 	}
+	if (!canAccess) f28.f64 = 0;
+}
+
+void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
+	int countryToItem[] = {
+		HUB_UNLOCK_APOTOS,
+		HUB_UNLOCK_SPAGONIA,
+		HUB_UNLOCK_CHUNNAN,
+		HUB_UNLOCK_MAZURI,
+		HUB_UNLOCK_HOLOSKA,
+		HUB_UNLOCK_SHAMAR,
+		HUB_UNLOCK_ADABAT,
+		HUB_UNLOCK_EMPIRE_CITY,
+		HUB_UNLOCK_EGGMANLAND,
+	};
 
 	/*
 		<name>eFlag_Sunafkin_Country

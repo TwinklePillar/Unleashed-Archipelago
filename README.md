@@ -1,10 +1,24 @@
 # Sonic Unleashed Archipelago
 
+<p align="center">
+	<img src="https://raw.githubusercontent.com/twinklepillar/unleashed-archipelago/refs/heads/main/docs/swaap.png" width="512"/>
+</p>
+
 [Archipelago](https://archipelago.gg/) is "a cross-game modification system which randomizes different games, then uses the result to build a single unified multi-player game. Items from one game may be present in another, and you will need your fellow players to find items you need in their games to help you complete your own" (copied from the website)
 
 ## Setup
 
+### Windows and Linux Standalone
 - Extract the contents of the zip into the folder of your installation
+- Edit `SWAAP/connection.ini` with your room's connection info
+- Launch the game. You will connect upon hitting continue or new game
+
+### Linux (Flatpak)
+- Extract the latest release ZIP and install the flatpak inside
+- If installing for the first time, obtain the necessary Sonic Unleashed files by either
+  - Running the installer
+  - symlinking or copying the folders from `~/.var/app/io.github.hedge_dev.unleashedrecomp/data` to `~/.var/app/org.neocities.twinklepillar.swaap/data`
+- Copy the `SWAAP` folder into `~/.var/app/org.neocities.twinklepillar.swaap/data`
 - Edit `SWAAP/connection.ini` with your room's connection info
 - Launch the game. You will connect upon hitting continue or new game
 
@@ -15,7 +29,6 @@ The main developer has not used AI during the development of this implementation
 ## Building
 
 Run the `process_apshared.py` script then follow the recomp building instructions.
-Running via flatpak is untested. You will at minimum need to copy the `SWAAP` folder from the release into the game's data directory
 
 ## Special Thanks
 

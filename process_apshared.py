@@ -143,7 +143,7 @@ with open("UnleashedRecomp/archipelago/apshared.h", "w") as apcpp:
 		apcpp.write(f"#define {item_const} {item['id']}\n")
 	apcpp.write("\nstatic const char* const VANILLA_ACT_ORDER[] = {\n")
 	for stage in shared["stages"]:
-		if stage["type"] != "hub":
+		if stage["type"] != "Hub":
 			apcpp.write(f'\t"{stage['name']}",\n')
 	apcpp.write("};\n")
 	apcpp.write("\nstatic const char* const ITEM_TO_NAME[] = {\n")

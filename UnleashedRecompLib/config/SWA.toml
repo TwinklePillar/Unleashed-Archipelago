@@ -1194,3 +1194,8 @@ registers = ["r26"]
 name = "SWA_AP_PosRingLinkMidAsmHook"
 address = 0x823AF938
 registers = ["r30"]
+
+[[midasm_hook]]
+name = "SWA_AP_CountryDisappearMidAsmHook"
+address = 0x82574FF4
+registers = ["f28", "r11"]

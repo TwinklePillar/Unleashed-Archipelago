@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Unleashed Recompiled
+Name=Unleashed Archipelago
 Exec=/app/bin/UnleashedRecomp
 Type=Application
-Icon=io.github.hedge_dev.unleashedrecomp
+Icon=org.neocities.twinklepillar.swaap
 Categories=Game;
-Comment=Static recompilation of Sonic Unleashed.
+Comment=Unleashed Recompiled - Archipelago Integration
 MimeType=x-scheme-handler/unleashedrecomp
