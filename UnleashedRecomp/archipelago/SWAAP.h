@@ -29,6 +29,78 @@ enum APMessageType {
 	MISC
 };
 
+struct APSharedLocation {
+	int64_t id;
+	virtual bool IsCurrentLocation(std::string type, int stage, int index);
+
+	static void CheckLocation(std::string type, int stage, int index);
+	static bool IsLocationChecked(std::string type, int stage, int index);
+};
+
+struct InventoryLocation : APSharedLocation {
+	int stage;
+	int index;
+	inline InventoryLocation(int64_t id, int stage, int index) {
+		this->id = id;
+		this->stage = stage;
+		this->index = index;
+	}
+	bool IsCurrentLocation(std::string type, int stage, int index) override;
+};
+
+struct ShoeLocation : APSharedLocation {
+	int index;
+	inline ShoeLocation(int64_t id, int index) {
+		this->id = id;
+		this->index = index;
+	}
+	bool IsCurrentLocation(std::string type, int stage, int index) override;
+};
+
+struct CompletionLocation : APSharedLocation {
+	int stage; // Stage ID as in the save file
+	int rank; // i guess?
+	inline CompletionLocation(int64_t id, int stage, int rank) {
+		this->id = id;
+		this->stage = stage;
+		this->rank = rank;
+	}
+	bool IsCurrentLocation(std::string type, int stage, int index) override;
+};
+
+struct MedalLocation : APSharedLocation {
+	int stage; // Stage ID as in the save file
+	int index;
+	bool sun;
+	inline MedalLocation(int64_t id, int stage, int index, bool sun) {
+		this->id = id;
+		this->stage = stage;
+		this->index = index;
+		this->sun = sun;
+	}
+	bool IsCurrentLocation(std::string type, int stage, int index) override;
+};
+
+struct IntFlagLocation : APSharedLocation {
+	std::string flag;
+	int value;
+	inline IntFlagLocation(int64_t id, std::string flag, int value) {
+		this->id = id;
+		this->flag = flag;
+		this->value = value;
+	}
+	bool IsCurrentLocation(std::string type, int stage, int index) override;
+};
+
+struct BoolFlagLocation : APSharedLocation {
+	std::string flag;
+	inline BoolFlagLocation(int64_t id, std::string flag) {
+		this->id = id;
+		this->flag = flag;
+	}
+	bool IsCurrentLocation(std::string type, int stage, int index) override;
+};
+
 class ArchipelagoManager {
 	public:
 		static bool hasInit;

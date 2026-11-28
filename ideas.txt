@@ -1,17 +1,4 @@
-Fixed the black screen bug
-Added AP logo to medals
-Shoes now disappear after collecting their location
-`Tip Top Tea 7 - Videotape #24` now requires Stomp and Air Boost
-Fixed UT erroneously saying shops were in logic if `include_day` was off (requires regen)
-Fixed item count validation when changing `medal_items`
-Fixed Eggmanland (Stage) logic requires Stomp instead of Wall Jump
-Added Death Link
-Added Trap Link
-Added Ring Link
-Added an option to make goal Eggmanland or Egg Dragoon
-Wentos media are now considered Apotos Hub locations
-Massively expanded the amount of location groups
-Countries on the World Map no longer appear if you don't have access to them
+`Arid Sands Day Act 1 - Moon Medal #4` now requires Wall Jump Shoes
 
 Alpha:
 	DLC Toggle
@@ -24,8 +11,8 @@ Alpha:
 		QTE Trap
 	Better Connection Inputting
 
-bFlag_Reserve3 ->
-bFlag_Reserve4 ->
+bFlag_Reserve3 -> "The Hedgehog"
+bFlag_Reserve4 -> "The Werehog"
 bFlag_Reserve5 ->
 bFlag_Reserve6 ->
 bFlag_Reserve7 ->

@@ -109,7 +109,7 @@ class SWAWorld(World):
 		if self.act_items: num_item += len(iname_groups["Acts"])
 		if self.medal_items: num_item += 400 # 200 Sun, 200 Moon
 		else: num_item += 12 # 6 sun levels, 6 moon levels
-		if self.location_state.enable_shop and self.item_state.shuffle_currencies: num_item += len(iname_groups["Currencies"])
+		if (not "Shops" in self.location_state.removed_groups) and self.item_state.shuffle_currencies: num_item += len(iname_groups["Currencies"])
 		if self.location_state.include_day: num_item += len(iname_groups["Shoes"])
 
 		while num_item > num_unfilled:

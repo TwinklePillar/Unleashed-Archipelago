@@ -65,6 +65,7 @@ static void watchFlags(hh::vector<FlagManager::RegisteredFlag> flags) {
 			if (value != lastFlags[cur->flag->name.get()]) {
 				uint32_t oldV = lastFlags[cur->flag->name];
 				uint32_t newV = value;
+				SWAAP::APSharedLocation::CheckLocation(cur->flag->name.get(), 0, newV);
 				char buf[256] = {0};
 				snprintf(buf, 256, "(FLAG) %s: %u -> %u", cur->flag->name.get(), oldV, newV);
 				SWAAP::ArchipelagoManager::DebugLog(buf);
@@ -74,7 +75,7 @@ static void watchFlags(hh::vector<FlagManager::RegisteredFlag> flags) {
 	}
 }
 
-static void setBoolFlag(const char* name, bool value) {
+void FlagManager::SetBoolFlag(const char* name, bool value) {
 	FlagManager* fm = FlagManager::GetInstance();
 	for (auto cur = fm->bFlag.begin(); cur < fm->bFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
@@ -85,7 +86,7 @@ static void setBoolFlag(const char* name, bool value) {
 	}
 }
 
-static void setIntFlag(const char* name, int value) {
+void FlagManager::SetIntFlag(const char* name, int value) {
 	FlagManager* fm = FlagManager::GetInstance();
 	for (auto cur = fm->iFlag.begin(); cur < fm->iFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
@@ -96,18 +97,28 @@ static void setIntFlag(const char* name, int value) {
 	}
 }
 
-static void setListFlag(const char* name, int value) {
+void FlagManager::SetListFlag(const char* name, std::string value) {
 	FlagManager* fm = FlagManager::GetInstance();
+	FlagManager::Flag* flag = nullptr;
 	for (auto cur = fm->eFlag.begin(); cur < fm->eFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
 		if (strcmp(flagName, name) == 0) {
-			cur->flag->eFlag.value = value;
+			flag = cur->flag.get();
 			break;
 		}
 	}
+	if (!flag) return;
+	int i = 0;
+	for (auto cur = flag->eFlag.named.begin(); cur < flag->eFlag.named.end(); cur++) {
+		if (strcmp(value.c_str(), cur->get()) == 0) {
+			flag->eFlag.value = i;
+			break;
+		}
+		i++;
+	}
 }
 
-static const char* getListFlag(const char* name) {
+const char* FlagManager::GetListFlag(const char* name) {
 	FlagManager* fm = FlagManager::GetInstance();
 	for (auto cur = fm->eFlag.begin(); cur < fm->eFlag.end(); cur++) {
 		const char* flagName = cur->flag->name.get();
@@ -119,11 +130,11 @@ static const char* getListFlag(const char* name) {
 }
 
 static void setupFlags(void) {
-	setIntFlag("iFlag_TownSecNo", 270);
-	setIntFlag("iFlag_ProfInfo_State", 101);
-	setIntFlag("iFlag_Tails", 9);
-	setIntFlag("iFlag_Rin", 2);
-	setIntFlag("iFlag_Sunafkin", 50);
+	FlagManager::SetIntFlag("iFlag_TownSecNo", 270);
+	FlagManager::SetIntFlag("iFlag_ProfInfo_State", 101);
+	FlagManager::SetIntFlag("iFlag_Tails", 9);
+	FlagManager::SetIntFlag("iFlag_Rin", 2);
+	FlagManager::SetIntFlag("iFlag_Sunafkin", 50);
 //	setListFlag("eFlag_ReturnPlace", 2);
 	
 	FlagManager* fm = FlagManager::GetInstance();
@@ -148,7 +159,7 @@ static void setupFlags(void) {
 			cur->flag->bFlag.value = false;
 		}
 	}
-	setBoolFlag("bFlag_IsVisitWorldMap", true);
+	FlagManager::SetBoolFlag("bFlag_IsVisitWorldMap", true);
 
 	int emeralds[] = {
 		BLUE_CHAOS_EMERALD,
@@ -164,13 +175,13 @@ static void setupFlags(void) {
 		if (ArchipelagoManager::itemState[emerald]) numEmerald += 1;
 	}
 	switch (numEmerald) {
-		case 7: setBoolFlag("bFlag_IsStageRescue_EggManBase", true); setBoolFlag("bFlag_IsStageRescueEvent_EggManBase", true);
-		case 6: setBoolFlag("bFlag_IsStageRescue_SouthEastAsia", true); setBoolFlag("bFlag_IsStageRescueEvent_SouthEastAsia", true);
-		case 5: setBoolFlag("bFlag_IsStageRescue_PetraCapital", true); setBoolFlag("bFlag_IsStageRescueEvent_PetraCapital", true);
-		case 4: setBoolFlag("bFlag_IsStageRescue_Snow", true); setBoolFlag("bFlag_IsStageRescueEvent_Snow", true);
-		case 3: setBoolFlag("bFlag_IsStageRescue_EuropeanCity", true); setBoolFlag("bFlag_IsStageRescueEvent_EuropeanCity", true);
-		case 2: setBoolFlag("bFlag_IsStageRescue_China", true); setBoolFlag("bFlag_IsStageRescueEvent_China", true);
-		case 1: setBoolFlag("bFlag_IsStageRescue_Africa", true); setBoolFlag("bFlag_IsStageRescueEvent_Africa", true);
+		case 7: FlagManager::SetBoolFlag("bFlag_IsStageRescue_EggManBase", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_EggManBase", true);
+		case 6: FlagManager::SetBoolFlag("bFlag_IsStageRescue_SouthEastAsia", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_SouthEastAsia", true);
+		case 5: FlagManager::SetBoolFlag("bFlag_IsStageRescue_PetraCapital", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_PetraCapital", true);
+		case 4: FlagManager::SetBoolFlag("bFlag_IsStageRescue_Snow", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_Snow", true);
+		case 3: FlagManager::SetBoolFlag("bFlag_IsStageRescue_EuropeanCity", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_EuropeanCity", true);
+		case 2: FlagManager::SetBoolFlag("bFlag_IsStageRescue_China", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_China", true);
+		case 1: FlagManager::SetBoolFlag("bFlag_IsStageRescue_Africa", true); FlagManager::SetBoolFlag("bFlag_IsStageRescueEvent_Africa", true);
 		default: break;
 	}
 }
@@ -219,12 +230,10 @@ void ArchipelagoManager::Update(double dt, PPCContext& ctx, uint8_t* base) {
 //	printf("Day Sonic Instance: %p\n", CPlayerSpeedContext::GetInstance());
 //	printf("Night Sonic Instance: %p\n", evilContext.get());
 	
-	if (isDebug) {
-		FlagManager* flags = FlagManager::GetInstance();
-		watchFlags(flags->eFlag);
-		watchFlags(flags->iFlag);
-		watchFlags(flags->bFlag);
-	}
+	FlagManager* flags = FlagManager::GetInstance();
+	watchFlags(flags->eFlag);
+	watchFlags(flags->iFlag);
+	watchFlags(flags->bFlag);
 	
 	for (int i = 0; i < 512; i++) {
 		auto lastStage = g_lastSaveData.records[i];
@@ -472,7 +481,7 @@ PPC_FUNC(sub_82690D00) {
 PPC_FUNC_IMPL(__imp__sub_82519C08);
 PPC_FUNC(sub_82519C08) {
 	if (isShoeItem) {
-		ctx.r3.u64 = SWAAP::ArchipelagoManager::locationState.contains(32772+ctx.r4.u64);
+		ctx.r3.u64 = SWAAP::APSharedLocation::IsLocationChecked("shoe", 0, ctx.r4.u64);
 	} else {
 		switch (ctx.r4.u64) {
 			case 0: // Stomp
@@ -588,15 +597,15 @@ void SWA_AP_HubRandoMidAsmHook(PPCRegister& r29, PPCRegister& r30) {
 	*/
 	if (r30.u32 != -1) {
 		switch (countryToItem[r30.u32]) {
-			case HUB_UNLOCK_APOTOS: SWAAP::setListFlag("eFlag_Sunafkin_Country", 1); break;
-			case HUB_UNLOCK_SPAGONIA: SWAAP::setListFlag("eFlag_Sunafkin_Country", 4); break;
-			case HUB_UNLOCK_CHUNNAN: SWAAP::setListFlag("eFlag_Sunafkin_Country", 2); break;
-			case HUB_UNLOCK_MAZURI: SWAAP::setListFlag("eFlag_Sunafkin_Country", 7); break;
-			case HUB_UNLOCK_HOLOSKA: SWAAP::setListFlag("eFlag_Sunafkin_Country", 3); break;
-			case HUB_UNLOCK_SHAMAR: SWAAP::setListFlag("eFlag_Sunafkin_Country", 0); break;
-			case HUB_UNLOCK_ADABAT: SWAAP::setListFlag("eFlag_Sunafkin_Country", 5); break;
-			case HUB_UNLOCK_EMPIRE_CITY: SWAAP::setListFlag("eFlag_Sunafkin_Country", 6); break;
-			case HUB_UNLOCK_EGGMANLAND: SWAAP::setListFlag("eFlag_Sunafkin_Country", 8); break;
+			case HUB_UNLOCK_APOTOS: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "Mykonos"); break;
+			case HUB_UNLOCK_SPAGONIA: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "EuropeanCity"); break;
+			case HUB_UNLOCK_CHUNNAN: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "China"); break;
+			case HUB_UNLOCK_MAZURI: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "Africa"); break;
+			case HUB_UNLOCK_HOLOSKA: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "Snow"); break;
+			case HUB_UNLOCK_SHAMAR: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "PetraCapital"); break;
+			case HUB_UNLOCK_ADABAT: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "SouthEastAsia"); break;
+			case HUB_UNLOCK_EMPIRE_CITY: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "NYCity"); break;
+			case HUB_UNLOCK_EGGMANLAND: SWAAP::FlagManager::SetListFlag("eFlag_Sunafkin_Country", "EggManBase"); break;
 		}
 	}
 }
@@ -683,7 +692,7 @@ PPC_FUNC(sub_8273EFC0) {
 
 	if (SWAAP::ArchipelagoManager::actItems) {
 		for (int i = 0; i < AP_ITEM_MAX; i++) {
-			if (ITEM_TO_NAME[i] && !strcmp(ITEM_TO_NAME[i]+12, apStage.c_str())) {
+			if (SWAAP::ITEM_TO_NAME[i] && !strcmp(SWAAP::ITEM_TO_NAME[i]+12, apStage.c_str())) {
 				if (SWAAP::ArchipelagoManager::itemState[i] == 0) stageAllowed = false;
 				break;
 			}
@@ -734,7 +743,7 @@ PPC_FUNC(sub_82585550) {
 
 PPC_FUNC_IMPL(__imp__sub_82519FD0);
 PPC_FUNC(sub_82519FD0) {
-	const char* curHubChar = SWAAP::getListFlag("eFlag_LastTown");
+	const char* curHubChar = SWAAP::FlagManager::GetListFlag("eFlag_LastTown");
 	if (!curHubChar) return;
 	std::string curHub = curHubChar;
 	int currency = 0;

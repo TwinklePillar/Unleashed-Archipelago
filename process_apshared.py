@@ -14,6 +14,20 @@ act_base = 430
 day_group = "Day Locations"
 night_group = "Night Locations"
 
+sanities = {}
+sanity_priority = [
+	"Completions", "Shoes",
+	"Sun Medals", "Mission Sun Medals",
+	"Moon Medals", "Mission Moon Medals",
+	"Records", "Shop Records",
+	"Books", "Shop Books", "Mission Books",
+	"Tapes", "Shop Tapes", "Mission Tapes"
+]
+unimpl_sanities = []
+
+current_item_id = 1
+current_location_id = 1
+
 def get_stage_groups(stage):
 	if not "type" in stage: return []
 	stage_groups = [stage["type"]]
@@ -77,9 +91,16 @@ for stage in shared["stages"]:
 		shared["items"].append({"name": f"Act Unlock: {stage['name']}", "item_classif": "progression", "group": "Acts", "id": act_base})
 		act_base += 1
 	
-	for check in stage["checks"]:
+	for check in stage["checks"].copy():
 		check_name = f"{stage['name']} - {check['name']}"
-		location_name_to_id[check_name] = check["id"]
+		if check["sanity"] in sanity_priority:
+			if not check["sanity"] in sanities:
+				sanities[check["sanity"]] = []
+			sanities[check["sanity"]].append((check_name, check))
+		else:
+			stage["checks"].remove(check)
+			if not check["sanity"] in unimpl_sanities: unimpl_sanities.append(check["sanity"])
+			continue
 		add_location_groups(stage, check, check_name)
 		
 		if not "evil" in check:
@@ -87,10 +108,23 @@ for stage in shared["stages"]:
 
 for souvenir in shared["souvenirs"].values():
 	check_name = f"Souvenir - {souvenir['name']}"
-	location_name_to_id[check_name] = souvenir["id"]
+	if souvenir["sanity"] in sanity_priority:
+		if not souvenir["sanity"] in sanities:
+			sanities[souvenir["sanity"]] = []
+		sanities[souvenir["sanity"]].append((check_name, souvenir))
+	else:
+		if not souvenir["sanity"] in unimpl_sanities: unimpl_sanities.append(souvenir["sanity"])
+#		stage["checks"].remove(check)
+		continue
 	add_location_groups({"name": "Souvenir"}, souvenir, check_name)
 
-current_item_id = 1
+for sanity in sanity_priority:
+	for check in sanities[sanity]:
+		check[1]["id"] = current_location_id
+		location_name_to_id[check[0]] = current_location_id
+		current_location_id += 1
+
+print(unimpl_sanities)
 
 for item in shared["items"]:
 	if not "id" in item:
@@ -132,9 +166,35 @@ with open("world/apshared.py", "w") as appy:
 
 with open("UnleashedRecomp/archipelago/apshared.h", "w") as apcpp:
 	apcpp.write("#ifndef SWA_AP_SHARED\n#define SWA_AP_SHARED\n\n")
+	apcpp.write("#include \"SWAAP.h\"\n")
 	apcpp.write(f"#define SWA_AP_VERSION {shared['version']}\n")
 	apcpp.write(f"#define SWA_AP_MIN_VERSION {shared['min_version']}\n")
 	apcpp.write(f'#define SWA_AP_GAME "{shared['game']}"\n\n')
+	apcpp.write("namespace SWAAP {\n");
+	apcpp.write("static APSharedLocation* locations[] = {\n");
+	for stage in shared["stages"]:
+		if "stage" in stage: stage_id = stage["stage"]
+		else: stage_id = 0
+		for check in stage["checks"]:
+			if "stage" in check: check_stage = check["stage"]
+			else: check_stage = stage_id
+
+			if "rank" in check:
+				apcpp.write(f"\tnew CompletionLocation({check['id']}, {check_stage}, {check['rank']}),\n")
+			if "inventory" in check:
+				apcpp.write(f"\tnew InventoryLocation({check['id']}, {check_stage}, {check['inventory']}),\n")
+			if "sun" in check:
+				apcpp.write(f"\tnew MedalLocation({check['id']}, {check_stage}, {check['sun']}, true),\n")
+			if "moon" in check:
+				apcpp.write(f"\tnew MedalLocation({check['id']}, {check_stage}, {check['moon']}, false),\n")
+			if "shoe" in check:
+				apcpp.write(f"\tnew ShoeLocation({check['id']}, {check['shoe']}),\n")
+			if "bFlag" in check:
+				apcpp.write(f"\tnew BoolFlagLocation({check['id']}, \"{check['bFlag']}\"),\n")
+			for key in check.keys():
+				if key.startswith("iFlag"):
+					apcpp.write(f"\tnew IntFlagLocation({check['id']}, \"{key}\", {check[key]}),\n")
+	apcpp.write("};\n\n");
 	for item in shared["items"]:
 		if "const_name" in item:
 			item_const = item["const_name"]
@@ -150,4 +210,5 @@ with open("UnleashedRecomp/archipelago/apshared.h", "w") as apcpp:
 	for item in shared["items"]:
 		apcpp.write(f"\t[{item['id']}] = \"{item['name']}\",\n")
 	apcpp.write("\t[511] = \"__IDS_END__\"\n};\n")
+	apcpp.write("} // namespace SWAAP\n");
 	apcpp.write("\n#endif")

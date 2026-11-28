@@ -61,6 +61,11 @@ namespace SWAAP {
 		static FlagManager* GetInstance() {
 			return *(xpointer<FlagManager>*)MmGetHostAddress(0x833678F0);
 		}
+
+		static void SetBoolFlag(const char* name, bool value);
+		static void SetIntFlag(const char* name, int value);
+		static void SetListFlag(const char* name, std::string value);
+		static const char* GetListFlag(const char* name);
 	};
 
 	class ShopObject {
